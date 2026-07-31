@@ -115,13 +115,13 @@ const scatterIds = [
 
 	<section class="container scatter-gallery">
 		<h2 class="headline scatter-gallery__heading">Worn, not just sold.</h2>
-		<ul class="scatter-column">
+		<ul class="scatter-column" data-reveal-group>
 			{
 				scatterIds
 					.map((id) => products.find((p) => p.id === id))
 					.filter((p): p is (typeof products)[number] => Boolean(p))
 					.map((product) => (
-						<li class="scatter-item">
+						<li class="scatter-item" data-reveal="left">
 							<a
 								href="/collection"
 								class="scatter-item__link"
@@ -139,7 +139,7 @@ const scatterIds = [
 						</li>
 					))
 			}
-			<li class="scatter-item scatter-item--cta">
+			<li class="scatter-item scatter-item--cta" data-reveal="left">
 				<a href="/collection" class="scatter-item__cta">
 					<span class="headline">View the full Collection</span>
 					<span class="prose scatter-item__cta-sub">
@@ -499,9 +499,17 @@ const scatterIds = [
 		background: var(--color-paper-sunk);
 	}
 
+	/* Where the browser supports scroll-linked animations natively, use the
+	   real thing — it tracks scroll position continuously instead of firing
+	   once. Overrides the [data-reveal] base state from global.css (which
+	   stays the fallback for browsers that don't support animation-timeline,
+	   driven by reveal.ts via IntersectionObserver instead). */
 	@supports (animation-timeline: view()) {
 		@media (prefers-reduced-motion: no-preference) {
-			.scatter-item {
+			.scatter-item[data-reveal] {
+				opacity: 1;
+				transform: none;
+				transition: none;
 				animation: scatter-slide-in backwards;
 				animation-timeline: view();
 				animation-range-start: cover 0%;
