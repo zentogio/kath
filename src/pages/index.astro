@@ -1,0 +1,615 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import { products, unsplashUrl } from '../data/products';
+
+const tickerItems = ['Hand-Cut', 'Small Batch', 'Numbered, Not Mass-Produced', 'Made to Last'];
+
+const scatterIds = [
+	'signature-turtleneck',
+	'tailored-blazer',
+	'long-wool-coat',
+	'essential-shirt',
+	'column-dress',
+];
+---
+
+<Layout
+	title="Home"
+	description="Studio Kath — hand-cut, small-batch clothing made to last, not to trend."
+>
+	<section class="hero">
+		<Image
+			src={unsplashUrl('1758922584983-82ffd5720c6a', 2000)}
+			alt="A model in a fine-knit turtleneck against a minimal studio backdrop"
+			width={1800}
+			height={2200}
+			loading="eager"
+			fetchpriority="high"
+			class="hero__image"
+		/>
+		<div class="hero__scrim" aria-hidden="true"></div>
+		<div class="container hero__content">
+			<p class="eyebrow hero__eyebrow">Studio Kath</p>
+			<h1 class="display hero__headline">Cut by hand.<br />Made in small batches.</h1>
+			<p class="prose hero__sub">
+				Every piece starts as a length of cloth and a chalk line, not a production run.
+				We cut what we can make well, and no more.
+			</p>
+			<div class="hero__ctas">
+				<a href="/collection" class="btn btn-primary" data-magnetic
+					>Explore the Collection</a
+				>
+				<a href="/about" class="btn btn-ghost on-dark" data-magnetic>About the Studio</a>
+			</div>
+		</div>
+	</section>
+
+	<section class="container flanked" data-reveal-group>
+		<Image
+			src={unsplashUrl('1774897795463-e6e4618a4997', 900)}
+			alt="A candid studio portrait"
+			width={700}
+			height={875}
+			loading="lazy"
+			class="flanked__photo"
+			data-reveal="left"
+		/>
+		<div class="flanked__copy" data-reveal>
+			<h2 class="headline">A studio, not a factory.</h2>
+			<p class="prose">
+				Every order is planned around what we can actually make well — not scaled to
+				meet demand. If a piece sells out, the next cut arrives when it's ready, not on
+				a schedule.
+			</p>
+		</div>
+		<Image
+			src={unsplashUrl('1779466801936-e400e314aca1', 900)}
+			alt="A relaxed portrait in the studio"
+			width={700}
+			height={875}
+			loading="lazy"
+			class="flanked__photo"
+			data-reveal="right"
+		/>
+	</section>
+
+	<div class="marquee" aria-hidden="true">
+		<div class="marquee__track">
+			{
+				[...tickerItems, ...tickerItems].map((item, i) => (
+					<span
+						class="marquee__pair"
+						data-marquee-dup={i >= tickerItems.length ? '' : undefined}
+					>
+						<span class="marquee__item">{item}</span>
+						<span class="marquee__dot">&mdash;</span>
+					</span>
+				))
+			}
+		</div>
+	</div>
+
+	<section class="container craft-strip">
+		<div class="craft-strip__quote-wrap">
+			<p class="display craft-strip__quote scroll-scale">
+				"We'd rather make thirty pieces we're proud of than three thousand we're not."
+			</p>
+			<span class="craft-strip__rule" aria-hidden="true"></span>
+		</div>
+		<ul class="craft-strip__list">
+			<li>
+				<p class="title">Cut by hand</p>
+				<p class="prose">Every pattern is laid and cut by a person, not a machine line.</p>
+			</li>
+			<li>
+				<p class="title">Numbered, not mass-produced</p>
+				<p class="prose">Each collection runs in limited quantities, then it's gone.</p>
+			</li>
+			<li>
+				<p class="title">Built to outlast the season</p>
+				<p class="prose">Fabric and construction chosen for years, not one wear.</p>
+			</li>
+		</ul>
+	</section>
+
+	<section class="container scatter-gallery">
+		<h2 class="headline scatter-gallery__heading">Worn, not just sold.</h2>
+		<ul class="scatter-column">
+			{
+				scatterIds
+					.map((id) => products.find((p) => p.id === id))
+					.filter((p): p is (typeof products)[number] => Boolean(p))
+					.map((product) => (
+						<li class="scatter-item">
+							<a
+								href="/collection"
+								class="scatter-item__link"
+								aria-label={`Shop the collection — ${product.name}`}
+							>
+								<Image
+									src={unsplashUrl(product.image, 1600)}
+									alt={product.alt}
+									width={1200}
+									height={1500}
+									loading="lazy"
+									class="scatter-item__photo"
+								/>
+							</a>
+						</li>
+					))
+			}
+			<li class="scatter-item scatter-item--cta">
+				<a href="/collection" class="scatter-item__cta">
+					<span class="headline">View the full Collection</span>
+					<span class="prose scatter-item__cta-sub">
+						Every piece, with real photos and prices.
+					</span>
+					<span class="scatter-item__arrow" aria-hidden="true">&rarr;</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+
+	<section class="closing-band">
+		<div class="container closing-band__inner">
+			<h2 class="headline">See a piece in person before it's spoken for.</h2>
+			<a href="/contact" class="btn btn-ghost on-dark" data-magnetic>Get in Touch</a>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.hero {
+		position: relative;
+		min-height: 92vh;
+		display: flex;
+		align-items: flex-end;
+		overflow: hidden;
+	}
+
+	.hero__image {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: top center;
+		filter: contrast(1.03) saturate(1.05);
+		transform-origin: center;
+		scale: 1.08;
+	}
+
+	@supports (animation-timeline: view()) {
+		@media (prefers-reduced-motion: no-preference) {
+			.hero__image {
+				animation: hero-parallax linear both;
+				animation-timeline: view();
+				animation-range: cover 0% cover 100%;
+			}
+		}
+	}
+
+	@keyframes hero-parallax {
+		from {
+			translate: 0 -3.5%;
+		}
+		to {
+			translate: 0 3.5%;
+		}
+	}
+
+	.hero__scrim {
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(
+			to top,
+			rgba(10, 6, 6, 0.86) 0%,
+			rgba(10, 6, 6, 0.4) 45%,
+			rgba(10, 6, 6, 0.06) 75%
+		);
+	}
+
+	.hero__content {
+		position: relative;
+		padding-bottom: var(--space-3xl);
+		padding-top: var(--space-4xl);
+		max-width: 46rem;
+		transform-origin: left bottom;
+	}
+
+	/* As the hero scrolls past, the whole text block (headline, copy, and
+	   CTA buttons — all live inside .hero__content) drifts up and grows;
+	   because this runs on a view-timeline it's inherently reversible —
+	   scrolling back up returns it to full size in place. Layered on top of
+	   each line's own load-in entrance below, since this lives on the
+	   parent and those live on the children. */
+	@supports (animation-timeline: view()) {
+		@media (prefers-reduced-motion: no-preference) {
+			.hero__content {
+				animation: hero-content-scroll linear both;
+				animation-timeline: view();
+				animation-range: cover 0% cover 100%;
+			}
+		}
+	}
+
+	@keyframes hero-content-scroll {
+		from {
+			translate: 0 0;
+			scale: 1;
+		}
+		to {
+			translate: 0 -14%;
+			scale: 1.16;
+		}
+	}
+
+	.hero__eyebrow,
+	.hero__headline,
+	.hero__sub,
+	.hero__ctas {
+		color: var(--color-paper);
+		opacity: 0;
+		transform: translateY(16px);
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.hero__eyebrow,
+		.hero__headline,
+		.hero__sub,
+		.hero__ctas {
+			animation: hero-in var(--duration-entrance) var(--ease-out-quart) forwards;
+		}
+
+		.hero__eyebrow {
+			animation-delay: 80ms;
+		}
+
+		.hero__headline {
+			animation-delay: 180ms;
+		}
+
+		.hero__sub {
+			animation-delay: 340ms;
+		}
+
+		.hero__ctas {
+			animation-delay: 460ms;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.hero__eyebrow,
+		.hero__headline,
+		.hero__sub,
+		.hero__ctas {
+			opacity: 1;
+			transform: none;
+		}
+	}
+
+	@keyframes hero-in {
+		to {
+			opacity: 1;
+			transform: none;
+		}
+	}
+
+	.hero__eyebrow {
+		color: color-mix(in oklch, var(--color-paper) 80%, transparent);
+	}
+
+	.hero__sub {
+		color: color-mix(in oklch, var(--color-paper) 88%, transparent);
+		margin-top: var(--space-md);
+	}
+
+	.hero__ctas {
+		display: flex;
+		flex-wrap: wrap;
+		gap: var(--space-sm);
+		margin-top: var(--space-lg);
+	}
+
+	/* Flanking pair — a photo on each side slides in from its own edge
+	   (directional data-reveal), text settles in the middle. Follows
+	   straight on from the hero. */
+	.flanked {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: var(--space-xl);
+		align-items: center;
+		padding-block: var(--space-3xl);
+	}
+
+	@media (min-width: 860px) {
+		.flanked {
+			grid-template-columns: 1fr 1.1fr 1fr;
+			gap: var(--space-2xl);
+		}
+	}
+
+	.flanked__photo {
+		width: 100%;
+		aspect-ratio: 4 / 5;
+		object-fit: cover;
+		filter: contrast(1.03) saturate(1.05);
+	}
+
+	.flanked__copy {
+		text-align: center;
+	}
+
+	.flanked__copy .headline {
+		margin: 0 0 var(--space-md);
+	}
+
+	@media (min-width: 860px) {
+		.flanked__copy {
+			padding-inline: var(--space-md);
+		}
+	}
+
+	/* Kinetic ticker — echoes the brand's craft statements in a continuous
+	   loop. Decorative (aria-hidden); the same claims exist as real,
+	   readable copy in the craft-strip section below. */
+	.marquee {
+		overflow: hidden;
+		background: var(--color-ink);
+		border-block: 1px solid color-mix(in oklch, var(--color-paper) 12%, transparent);
+		padding-block: var(--space-sm);
+	}
+
+	.marquee__track {
+		display: flex;
+		align-items: center;
+		width: max-content;
+	}
+
+	.marquee__pair {
+		display: flex;
+		align-items: center;
+		gap: var(--space-lg);
+		padding-right: var(--space-lg);
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.marquee__track {
+			animation: marquee-scroll 26s linear infinite;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		[data-marquee-dup] {
+			display: none;
+		}
+	}
+
+	@keyframes marquee-scroll {
+		from {
+			transform: translateX(0);
+		}
+		to {
+			transform: translateX(-50%);
+		}
+	}
+
+	.marquee__item {
+		font-family: var(--font-display);
+		font-size: clamp(1.1rem, 1rem + 1vw, 1.75rem);
+		color: var(--color-paper);
+		white-space: nowrap;
+		letter-spacing: 0.01em;
+	}
+
+	.marquee__dot {
+		color: var(--color-accent);
+		font-size: 1.1em;
+	}
+
+	.craft-strip {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: var(--space-xl);
+		padding-block: var(--space-3xl);
+	}
+
+	@media (min-width: 860px) {
+		.craft-strip {
+			grid-template-columns: 1.2fr 0.8fr;
+			align-items: start;
+		}
+	}
+
+	.craft-strip__quote-wrap {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-lg);
+	}
+
+	.craft-strip__quote {
+		font-style: normal;
+		font-size: clamp(1.75rem, 1.2rem + 2.6vw, 3.25rem);
+		max-width: 15ch;
+		margin: 0;
+	}
+
+	.craft-strip__rule {
+		display: block;
+		width: 4rem;
+		height: 2px;
+		background: var(--color-accent);
+	}
+
+	.craft-strip__list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-lg);
+	}
+
+	@media (min-width: 860px) {
+		.craft-strip__list {
+			margin-top: var(--space-2xl);
+			padding-left: var(--space-xl);
+			border-left: 1px solid var(--color-border);
+		}
+	}
+
+	.craft-strip__list .title {
+		margin-bottom: 0.35em;
+	}
+
+	.craft-strip__list .prose {
+		font-size: var(--text-body);
+	}
+
+	/* A single straight column of large photos in varied sizes — not a
+	   grid. Each reveals on its own as it scrolls into view (data-reveal
+	   from reveal.ts); no price anywhere. The column ends in a full-size
+	   closing panel into the Collection, which carries the real photos
+	   and prices this section deliberately leaves out. */
+	.scatter-gallery {
+		padding-block: var(--space-2xl) var(--space-3xl);
+	}
+
+	.scatter-gallery__heading {
+		margin: 0 0 var(--space-xl);
+		max-width: 20ch;
+	}
+
+	.scatter-column {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: var(--space-2xl);
+	}
+
+	.scatter-item {
+		width: 100%;
+		max-width: 40rem;
+		aspect-ratio: 4 / 5;
+		overflow: hidden;
+		background: var(--color-paper-sunk);
+	}
+
+	@supports (animation-timeline: view()) {
+		@media (prefers-reduced-motion: no-preference) {
+			.scatter-item {
+				animation: scatter-slide-in backwards;
+				animation-timeline: view();
+				animation-range-start: cover 0%;
+				animation-range-end: cover 50%;
+			}
+		}
+	}
+
+	@keyframes scatter-slide-in {
+		0% {
+			transform: translateX(-100%);
+		}
+		100% {
+			transform: translateX(0%);
+		}
+	}
+
+	/* Cycle of four sizes/ratios so the straight column still reads as
+	   varied, not a repeated template. */
+	.scatter-item:nth-child(4n + 1) {
+		max-width: 56rem;
+		aspect-ratio: 16 / 9;
+	}
+
+	.scatter-item:nth-child(4n + 3) {
+		max-width: 34rem;
+		aspect-ratio: 1 / 1;
+	}
+
+	.scatter-item:nth-child(4n) {
+		max-width: 46rem;
+		aspect-ratio: 3 / 4;
+	}
+
+	.scatter-item__link {
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	.scatter-item__photo {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		filter: contrast(1.03) saturate(1.05);
+		transition: transform var(--duration-slow) var(--ease-out-quart);
+	}
+
+	@media (hover: hover) {
+		.scatter-item__link:hover .scatter-item__photo {
+			transform: scale(1.04);
+		}
+	}
+
+	.scatter-item--cta {
+		max-width: 56rem;
+		aspect-ratio: auto;
+	}
+
+	.scatter-item__cta {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: var(--space-2xs);
+		width: 100%;
+		padding: var(--space-2xl) var(--space-xl);
+		background: var(--color-ink);
+		color: var(--color-paper);
+		text-decoration: none;
+	}
+
+	.scatter-item__cta .headline {
+		margin: 0;
+		font-size: clamp(1.75rem, 1.3rem + 2vw, 2.75rem);
+	}
+
+	.scatter-item__cta-sub {
+		margin: 0;
+		color: color-mix(in oklch, var(--color-paper) 75%, transparent);
+	}
+
+	.scatter-item__arrow {
+		align-self: flex-end;
+		margin-top: var(--space-sm);
+		font-size: 1.75rem;
+		transition: transform var(--duration-base) var(--ease-out-quart);
+	}
+
+	.scatter-item__cta:hover .scatter-item__arrow {
+		transform: translateX(6px);
+	}
+
+	.closing-band {
+		background: var(--color-ink);
+		margin-top: var(--space-2xl);
+	}
+
+	.closing-band__inner {
+		padding-block: var(--space-2xl);
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-lg);
+	}
+
+	.closing-band__inner .headline {
+		color: var(--color-paper);
+		max-width: 26ch;
+	}
+</style>

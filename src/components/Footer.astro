@@ -1,0 +1,132 @@
+---
+import { Image } from 'astro:assets';
+import studioMark from '../assets/brand/studio-mark.png';
+import SocialLinks from './SocialLinks.astro';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+	<div class="container site-footer__grid">
+		<div class="site-footer__brand">
+			<a href="/" class="site-footer__logo" aria-label="Studio Kath, home">
+				<Image
+					src={studioMark}
+					alt="Studio Kath"
+					width={340}
+					height={138}
+					class="brand-mark--invert"
+				/>
+			</a>
+			<p class="site-footer__tagline">
+				Hand-cut, small-batch clothing made to last, not to trend.
+			</p>
+		</div>
+
+		<nav class="site-footer__col" aria-label="Site">
+			<p class="eyebrow site-footer__heading">Site</p>
+			<a href="/">Home</a>
+			<a href="/collection">Collection</a>
+			<a href="/about">About</a>
+			<a href="/contact">Contact</a>
+		</nav>
+
+		<div class="site-footer__col">
+			<p class="eyebrow site-footer__heading">Get in Touch</p>
+			<a href="mailto:hello@studiokath.com">hello@studiokath.com</a>
+			<SocialLinks invert class="site-footer__social" />
+		</div>
+
+		<div class="site-footer__col">
+			<p class="eyebrow site-footer__heading">Studio</p>
+			<p class="site-footer__address">Bangkok, Thailand<br />By appointment</p>
+		</div>
+	</div>
+
+	<div class="container site-footer__base">
+		<p>&copy; {year} Studio Kath. All pieces cut to order.</p>
+	</div>
+</footer>
+
+<style>
+	.site-footer {
+		background: var(--color-ink);
+		color: var(--color-paper);
+		margin-top: var(--space-4xl);
+		padding-block: var(--space-2xl) var(--space-md);
+	}
+
+	.site-footer__grid {
+		display: grid;
+		gap: var(--space-xl);
+		grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+		padding-bottom: var(--space-2xl);
+		border-bottom: 1px solid color-mix(in oklch, var(--color-paper) 16%, transparent);
+	}
+
+	.site-footer__brand {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-sm);
+		max-width: 22rem;
+	}
+
+	.site-footer__logo {
+		display: inline-block;
+		width: fit-content;
+	}
+
+	.site-footer__logo :global(img) {
+		height: 34px;
+		width: auto;
+	}
+
+	.site-footer__tagline {
+		margin: 0;
+		font-size: var(--text-body);
+		color: color-mix(in oklch, var(--color-paper) 72%, transparent);
+	}
+
+	.site-footer__col {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-2xs);
+	}
+
+	.site-footer__col a {
+		color: color-mix(in oklch, var(--color-paper) 80%, transparent);
+		text-decoration: none;
+		width: fit-content;
+		padding-block: 0.15rem;
+		transition: color var(--duration-fast) var(--ease-out-quart);
+	}
+
+	.site-footer__col a:hover {
+		color: var(--color-paper);
+	}
+
+	.site-footer__heading {
+		color: color-mix(in oklch, var(--color-paper) 55%, transparent);
+		margin-bottom: var(--space-2xs);
+	}
+
+	.site-footer :global(.site-footer__social) {
+		margin-top: var(--space-2xs);
+	}
+
+	.site-footer__address {
+		margin: 0;
+		color: color-mix(in oklch, var(--color-paper) 80%, transparent);
+		line-height: var(--leading-relaxed);
+	}
+
+	.site-footer__base {
+		padding-top: var(--space-md);
+		font-size: var(--text-caption);
+		color: color-mix(in oklch, var(--color-paper) 45%, transparent);
+	}
+
+	.site-footer__base p {
+		margin: 0;
+	}
+</style>

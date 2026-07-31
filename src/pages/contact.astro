@@ -1,0 +1,161 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import SocialLinks from '../components/SocialLinks.astro';
+import { unsplashUrl } from '../data/products';
+---
+
+<Layout
+	title="Contact"
+	description="Get in touch with Studio Kath — questions, custom orders, or studio visits."
+>
+	<header class="container contact-header">
+		<p class="eyebrow">Get in Touch</p>
+		<h1 class="display contact-header__title">Let's talk about a piece.</h1>
+		<p class="prose">
+			Whether you have a question about sizing, want to ask about a piece that's sold
+			out, or you'd like to visit the studio — reach out directly, any way below.
+		</p>
+	</header>
+
+	<section class="container contact-grid">
+		<figure class="contact-photo">
+			<Image
+				src={unsplashUrl('1560796952-f1c9b838544c', 900)}
+				alt="Close-up of a sewing machine needle mid-stitch in the studio"
+				width={900}
+				height={1125}
+				loading="lazy"
+				class="contact-photo__image"
+			/>
+			<figcaption class="prose contact-photo__caption">
+				Every message reaches the person who actually makes the clothes.
+			</figcaption>
+		</figure>
+
+		<div class="contact-channels">
+			<div class="contact-channel">
+				<p class="eyebrow">Call</p>
+				<a
+					class="contact-channel__link contact-channel__link--icon title"
+					href="tel:+66812345678"
+				>
+					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+						<path
+							d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.5.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.9 21 3 13.1 3 3.9c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.3 0 .7-.2 1L6.6 10.8Z"
+							stroke="currentColor"
+							stroke-width="1.4"
+							stroke-linejoin="round"
+							stroke-linecap="round"></path>
+					</svg>
+					+66 81 234 5678
+				</a>
+			</div>
+			<div class="contact-channel">
+				<p class="eyebrow">Email</p>
+				<a class="contact-channel__link title" href="mailto:hello@studiokath.com"
+					>hello@studiokath.com</a
+				>
+			</div>
+			<div class="contact-channel">
+				<p class="eyebrow">Follow &amp; Shop</p>
+				<SocialLinks size="lg" class="contact-channel__social" />
+			</div>
+			<div class="contact-channel">
+				<p class="eyebrow">Studio</p>
+				<p class="prose contact-channel__address">
+					Bangkok, Thailand<br />
+					By appointment — message ahead to arrange a visit.
+				</p>
+			</div>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.contact-header {
+		padding-top: var(--space-2xl);
+		max-width: 40rem;
+	}
+
+	.contact-header__title {
+		margin-block: var(--space-sm) var(--space-md);
+	}
+
+	.contact-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: var(--space-2xl);
+		padding-block: var(--space-2xl) var(--space-3xl);
+	}
+
+	@media (min-width: 860px) {
+		.contact-grid {
+			grid-template-columns: 1fr 0.85fr;
+			gap: var(--space-3xl);
+			align-items: start;
+		}
+	}
+
+	.contact-photo {
+		margin: 0;
+	}
+
+	.contact-photo__image {
+		width: 100%;
+		aspect-ratio: 4 / 5;
+		object-fit: cover;
+		filter: contrast(1.03) saturate(1.05);
+	}
+
+	.contact-photo__caption {
+		margin-top: var(--space-sm);
+		font-size: var(--text-body);
+	}
+
+	.contact-channels {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-xl);
+	}
+
+	@media (min-width: 860px) {
+		.contact-channels {
+			padding-top: var(--space-sm);
+		}
+	}
+
+	.contact-channel {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-2xs);
+	}
+
+	.contact-channel__link {
+		text-decoration: none;
+		color: var(--color-ink);
+		width: fit-content;
+		border-bottom: 1px solid var(--color-border-strong);
+		transition: border-color var(--duration-fast) var(--ease-out-quart);
+	}
+
+	.contact-channel__link--icon {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-xs);
+		border-bottom: none;
+		transition: color var(--duration-fast) var(--ease-out-quart);
+	}
+
+	.contact-channel__link--icon:hover {
+		color: var(--color-accent);
+	}
+
+	.contact-channel__link:hover {
+		border-color: var(--color-accent);
+	}
+
+	.contact-channel__address {
+		margin: 0;
+	}
+</style>

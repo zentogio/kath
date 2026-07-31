@@ -1,0 +1,257 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Image } from 'astro:assets';
+import { unsplashUrl } from '../data/products';
+
+const steps = [
+	{
+		n: '01',
+		title: 'Pattern',
+		body: 'Every silhouette starts on paper, adjusted by hand against a dress form until the drape is right — not pulled from a stock block.',
+	},
+	{
+		n: '02',
+		title: 'Cut',
+		body: "A single length of cloth, marked in chalk, cut by one person from start to finish. No two bolts lay quite the same, so no two cuts are either.",
+	},
+	{
+		n: '03',
+		title: 'Sew',
+		body: 'Seams are set, pressed, and set again. Where a machine can\'t reach — a collar, a hem, a buttonhole — it\'s finished by hand.',
+	},
+	{
+		n: '04',
+		title: 'Number',
+		body: "Each finished piece is counted against the run and logged. When the numbers run out, that piece is retired until the next cut.",
+	},
+];
+---
+
+<Layout
+	title="About"
+	description="The story behind Studio Kath — a small studio cutting clothing by hand, in limited numbers."
+>
+	<header class="container about-header">
+		<p class="eyebrow">About the Studio</p>
+		<h1 class="display about-header__title">Slow, on purpose.</h1>
+		<p class="prose about-header__lead">
+			Studio Kath started from a simple frustration: most clothing is designed to be
+			replaced. We wanted to make the opposite — pieces cut with enough care that
+			replacing them never crosses your mind.
+		</p>
+	</header>
+
+	<section class="about-story">
+		<div class="container about-story__grid">
+			<div class="about-story__media" data-reveal>
+				<Image
+					src={unsplashUrl('1739117441029-9f2a8e59e8b2', 1200)}
+					alt="A hand guiding fabric through a stitch by hand in the studio"
+					width={900}
+					height={1125}
+					loading="lazy"
+					class="about-story__image"
+				/>
+			</div>
+			<div class="about-story__copy" data-reveal>
+				<h2 class="headline">One studio, one size of ambition.</h2>
+				<p class="prose">
+					We're not trying to become a big brand. Every piece that leaves the studio has
+					been touched by hand at least three times — cut, sewn, and finished — by
+					someone who'll tell you exactly why it's made the way it is.
+				</p>
+				<p class="prose">
+					That means we can only make so much in a season. We've made peace with that.
+					It's the only way the quality stays honest.
+				</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="container process">
+		<h2 class="headline process__heading">How a piece gets made</h2>
+		<ol class="process__list" data-reveal-group>
+			{
+				steps.map((step, index) => (
+					<li class="process__step" data-reveal style={`--i: ${index}`}>
+						<span class="process__number display">{step.n}</span>
+						<div>
+							<p class="title">{step.title}</p>
+							<p class="prose">{step.body}</p>
+						</div>
+					</li>
+				))
+			}
+		</ol>
+	</section>
+
+	<section class="detail-strip" data-reveal-group>
+		<figure class="detail-strip__item" data-reveal>
+			<Image
+				src={unsplashUrl('1560796952-f1c9b838544c', 900)}
+				alt="Close-up of a sewing machine needle mid-stitch"
+				width={700}
+				height={875}
+				loading="lazy"
+			/>
+		</figure>
+		<figure class="detail-strip__item" data-reveal style="--i: 1">
+			<Image
+				src={unsplashUrl('1578353022142-09264fd64295', 900)}
+				alt="Scissors and a tape measure laid out on the cutting table"
+				width={700}
+				height={875}
+				loading="lazy"
+			/>
+		</figure>
+		<figure class="detail-strip__item" data-reveal style="--i: 2">
+			<Image
+				src={unsplashUrl('1532526674046-5b3f6d7d2ab1', 900)}
+				alt="Close-up of raw wool texture before it's cut"
+				width={700}
+				height={875}
+				loading="lazy"
+			/>
+		</figure>
+	</section>
+
+	<section class="closing-band">
+		<div class="container closing-band__inner">
+			<h2 class="headline">Have a question about a piece, or want to visit the studio?</h2>
+			<a href="/contact" class="btn btn-ghost on-dark">Get in Touch</a>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.about-header {
+		padding-top: var(--space-2xl);
+		max-width: 42rem;
+	}
+
+	.about-header__title {
+		margin-block: var(--space-sm) var(--space-md);
+	}
+
+	.about-header__lead {
+		font-size: var(--text-body-lg);
+	}
+
+	.about-story {
+		padding-block: var(--space-2xl);
+	}
+
+	.about-story__grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: var(--space-xl);
+		align-items: center;
+	}
+
+	@media (min-width: 860px) {
+		.about-story__grid {
+			grid-template-columns: 0.9fr 1fr;
+			gap: var(--space-3xl);
+		}
+	}
+
+	.about-story__media {
+		overflow: hidden;
+	}
+
+	.about-story__image {
+		width: 100%;
+		height: auto;
+		object-fit: cover;
+		filter: contrast(1.03) saturate(1.05);
+	}
+
+	.about-story__copy .headline {
+		margin-bottom: var(--space-md);
+	}
+
+	.about-story__copy .prose + .prose {
+		margin-top: var(--space-md);
+	}
+
+	.process {
+		padding-block: var(--space-3xl);
+		border-top: 1px solid var(--color-border);
+	}
+
+	.process__heading {
+		margin-bottom: var(--space-xl);
+		max-width: 24ch;
+	}
+
+	.process__list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: var(--space-xl) var(--space-2xl);
+	}
+
+	@media (min-width: 700px) {
+		.process__list {
+			grid-template-columns: 1fr 1fr;
+		}
+	}
+
+	.process__step {
+		display: flex;
+		gap: var(--space-md);
+	}
+
+	.process__number {
+		font-size: 1.5rem;
+		color: var(--color-accent);
+		flex-shrink: 0;
+		line-height: 1;
+	}
+
+	.process__step .title {
+		margin-bottom: 0.35em;
+	}
+
+	.detail-strip {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 2px;
+		background: var(--color-border);
+	}
+
+	.detail-strip__item {
+		margin: 0;
+		aspect-ratio: 4 / 5;
+		overflow: hidden;
+		background: var(--color-paper-sunk);
+	}
+
+	.detail-strip__item :global(img) {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		filter: contrast(1.03) saturate(1.05);
+	}
+
+	.closing-band {
+		background: var(--color-ink);
+		margin-top: 0;
+	}
+
+	.closing-band__inner {
+		padding-block: var(--space-2xl);
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-lg);
+	}
+
+	.closing-band__inner .headline {
+		color: var(--color-paper);
+		max-width: 30ch;
+	}
+</style>

@@ -1,0 +1,53 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { products } from '../data/products';
+---
+
+<Layout
+	title="Collection"
+	description="The current Studio Kath collection — hand-cut, small-batch pieces, numbered and limited."
+>
+	<header class="container collection-header">
+		<p class="eyebrow">The Collection</p>
+		<h1 class="display collection-header__title">Cut in limited numbers.</h1>
+		<p class="prose">
+			Everything shown here is made in small runs. Once a size or piece sells out, it's
+			retired until the next cut — we don't restock mid-season.
+		</p>
+	</header>
+
+	<section class="container collection-section">
+		<ul class="product-grid" data-reveal-group>
+			{
+				products.map((product, index) => (
+					<ProductCard product={product} index={index} priority={index < 4} />
+				))
+			}
+		</ul>
+	</section>
+</Layout>
+
+<style>
+	.collection-header {
+		padding-top: var(--space-2xl);
+		max-width: 42rem;
+	}
+
+	.collection-header__title {
+		margin-block: var(--space-sm) var(--space-md);
+	}
+
+	.collection-section {
+		padding-block: var(--space-xl) var(--space-3xl);
+	}
+
+	.product-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr));
+		gap: var(--space-xl) var(--space-lg);
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+</style>

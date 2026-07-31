@@ -1,0 +1,100 @@
+---
+import { Image } from 'astro:assets';
+import instagramMark from '../assets/brand/social/instagram-mark.png';
+import facebookMark from '../assets/brand/social/facebook-mark.png';
+import shopeeMark from '../assets/brand/social/shopee-mark.png';
+
+interface Props {
+	invert?: boolean;
+	size?: 'sm' | 'lg';
+	class?: string;
+}
+
+const { invert = false, size = 'sm', class: className = '' } = Astro.props;
+
+// Each icon keeps its own source aspect ratio (a square outline, a tall
+// glyph, a wider bag shape) — width/height below preserve that ratio at a
+// shared render height; CSS then scales all three down to the same
+// on-screen height without stretching any of them.
+const links = [
+	{
+		href: 'https://www.instagram.com/studio.kath/',
+		label: 'Instagram',
+		icon: instagramMark,
+		width: 120,
+		height: 120,
+	},
+	{
+		href: 'https://www.facebook.com/kathh.studio/',
+		label: 'Facebook',
+		icon: facebookMark,
+		width: 67,
+		height: 120,
+	},
+	{
+		href: 'https://shopee.co.th/studio.kath',
+		label: 'Shopee',
+		icon: shopeeMark,
+		width: 106,
+		height: 120,
+	},
+];
+---
+
+<div class:list={['social-links', `social-links--${size}`, className]}>
+	{
+		links.map((link) => (
+			<a href={link.href} target="_blank" rel="noreferrer" class="social-links__item">
+				<Image
+					src={link.icon}
+					alt=""
+					width={link.width}
+					height={link.height}
+					class:list={['social-links__icon', { 'brand-mark--invert': invert }]}
+				/>
+				<span>{link.label}</span>
+			</a>
+		))
+	}
+</div>
+
+<style>
+	.social-links {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-2xs);
+	}
+
+	.social-links__item {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-xs);
+		width: fit-content;
+		text-decoration: none;
+		color: inherit;
+		opacity: 0.85;
+		transition: opacity var(--duration-fast) var(--ease-out-quart);
+	}
+
+	.social-links__item:hover {
+		opacity: 1;
+	}
+
+	.social-links__icon {
+		height: 15px;
+		width: auto;
+		flex-shrink: 0;
+	}
+
+	.social-links--lg {
+		gap: var(--space-sm);
+	}
+
+	.social-links--lg .social-links__item {
+		font-size: var(--text-body-lg);
+	}
+
+	.social-links--lg .social-links__icon {
+		height: 20px;
+	}
+</style>

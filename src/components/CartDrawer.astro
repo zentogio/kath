@@ -1,0 +1,221 @@
+---
+---
+
+<dialog class="cart-dialog" data-cart-dialog aria-label="Shopping cart">
+	<div class="cart-dialog__panel">
+		<header class="cart-dialog__header">
+			<h2 class="label">Cart</h2>
+			<button type="button" class="icon-btn" data-cart-close aria-label="Close cart">
+				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+					<path
+						d="M5 5l14 14M19 5 5 19"
+						stroke="currentColor"
+						stroke-width="1.4"
+						stroke-linecap="round"></path>
+				</svg>
+			</button>
+		</header>
+
+		<div class="cart-dialog__empty" data-cart-empty>
+			<p class="prose">Your cart is empty.</p>
+			<a href="/collection" class="btn btn-ghost" data-cart-close>Browse the Collection</a>
+		</div>
+
+		<ul class="cart-dialog__list" data-cart-list aria-live="polite"></ul>
+
+		<footer class="cart-dialog__footer" data-cart-footer hidden>
+			<div class="cart-dialog__total-row">
+				<span class="label">Total</span>
+				<span class="title" data-cart-total>฿0</span>
+			</div>
+			<button type="button" class="btn btn-primary cart-dialog__checkout" disabled>
+				Checkout — Coming Soon
+			</button>
+			<p class="cart-dialog__note">
+				We're not taking live orders through the site yet. <a href="/contact"
+					>Get in touch</a
+				> to order a piece directly.
+			</p>
+		</footer>
+	</div>
+</dialog>
+
+<style is:global>
+	/* Right-docked panel via native <dialog> + the modern @starting-style
+	   entry transition (see menu-dialog in Nav.astro for the same pattern). */
+	.cart-dialog {
+		position: fixed;
+		inset: 0 0 0 auto;
+		width: min(30rem, 100vw);
+		height: 100%;
+		max-width: none;
+		max-height: none;
+		margin: 0;
+		padding: 0;
+		border: none;
+		background: var(--color-paper);
+		box-shadow: var(--shadow-overlay);
+		translate: 100% 0;
+		transition:
+			translate var(--duration-slow) var(--ease-out-quart),
+			overlay var(--duration-slow) allow-discrete,
+			display var(--duration-slow) allow-discrete;
+	}
+
+	.cart-dialog[open] {
+		translate: 0 0;
+	}
+
+	@starting-style {
+		.cart-dialog[open] {
+			translate: 100% 0;
+		}
+	}
+
+	.cart-dialog::backdrop {
+		background: rgba(20, 12, 12, 0.32);
+		transition:
+			background var(--duration-slow) var(--ease-out-quart),
+			overlay var(--duration-slow) allow-discrete,
+			display var(--duration-slow) allow-discrete;
+	}
+
+	@starting-style {
+		.cart-dialog[open]::backdrop {
+			background: transparent;
+		}
+	}
+
+	.cart-dialog__panel {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		padding: var(--space-lg);
+	}
+
+	.cart-dialog__header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding-bottom: var(--space-md);
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	.cart-dialog__empty {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: var(--space-md);
+		padding-top: var(--space-2xl);
+	}
+
+	.cart-dialog__list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		flex: 1;
+		overflow-y: auto;
+	}
+
+	.cart-line {
+		display: grid;
+		grid-template-columns: 4.5rem 1fr auto;
+		gap: var(--space-sm);
+		padding-block: var(--space-md);
+		border-bottom: 1px solid var(--color-border);
+		align-items: start;
+	}
+
+	.cart-line__image {
+		width: 4.5rem;
+		height: 5.6rem;
+		object-fit: cover;
+		filter: contrast(1.03) saturate(1.05);
+	}
+
+	.cart-line__name {
+		margin: 0;
+		font-size: var(--text-body);
+		font-weight: 500;
+	}
+
+	.cart-line__price {
+		margin: 0.25rem 0 var(--space-2xs);
+		font-size: var(--text-label);
+		color: var(--color-graphite);
+	}
+
+	.cart-line__qty {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-xs);
+		border: 1px solid var(--color-border-strong);
+		padding: 0.15rem 0.5rem;
+		width: fit-content;
+	}
+
+	.cart-line__step {
+		background: none;
+		border: none;
+		font-size: 1rem;
+		line-height: 1;
+		width: 20px;
+		height: 20px;
+		cursor: pointer;
+		color: var(--color-ink);
+	}
+
+	.cart-line__step:hover {
+		color: var(--color-accent);
+	}
+
+	.cart-line__qty-value {
+		min-width: 1ch;
+		text-align: center;
+		font-size: var(--text-label);
+	}
+
+	.cart-line__remove {
+		background: none;
+		border: none;
+		color: var(--color-graphite);
+		font-size: var(--text-caption);
+		text-decoration: underline;
+		text-underline-offset: 2px;
+		cursor: pointer;
+		padding: 0;
+	}
+
+	.cart-line__remove:hover {
+		color: var(--color-accent);
+	}
+
+	.cart-dialog__footer {
+		border-top: 1px solid var(--color-border);
+		padding-top: var(--space-md);
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-sm);
+	}
+
+	.cart-dialog__total-row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.cart-dialog__checkout {
+		width: 100%;
+	}
+
+	.cart-dialog__note {
+		margin: 0;
+		font-size: var(--text-caption);
+		color: var(--color-graphite);
+		line-height: var(--leading-normal);
+	}
+
+	.cart-dialog__note a {
+		color: var(--color-ink);
+	}
+</style>

@@ -1,0 +1,352 @@
+---
+import { Image } from 'astro:assets';
+import studioMark from '../assets/brand/studio-mark.png';
+import SocialLinks from './SocialLinks.astro';
+
+const leftLinks = [
+	{ href: '/', label: 'Home' },
+	{ href: '/collection', label: 'Collection' },
+];
+const rightLinks = [
+	{ href: '/about', label: 'About' },
+	{ href: '/contact', label: 'Contact' },
+];
+const allLinks = [...leftLinks, ...rightLinks];
+---
+
+<header class="site-nav" data-site-nav>
+	<nav class="container site-nav__inner" aria-label="Primary">
+		<div class="site-nav__side site-nav__side--left">
+			<button
+				type="button"
+				class="icon-btn site-nav__menu-trigger"
+				data-menu-open
+				aria-label="Open menu"
+			>
+				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+					<path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.4"
+					></path>
+				</svg>
+			</button>
+			<div class="site-nav__links">
+				{
+					leftLinks.map((link) => (
+						<a href={link.href} class="site-nav__link label" data-nav-link>
+							{link.label}
+						</a>
+					))
+				}
+			</div>
+		</div>
+
+		<a href="/" class="site-nav__logo" aria-label="Studio Kath, home">
+			<Image src={studioMark} alt="Studio Kath" width={340} height={138} />
+		</a>
+
+		<div class="site-nav__side site-nav__side--right">
+			<div class="site-nav__links">
+				{
+					rightLinks.map((link) => (
+						<a href={link.href} class="site-nav__link label" data-nav-link>
+							{link.label}
+						</a>
+					))
+				}
+			</div>
+			<button type="button" class="icon-btn" data-cart-open aria-label="Open cart">
+				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+					<path
+						d="M6 8h12l-1.2 11.2a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 8Z"
+						stroke="currentColor"
+						stroke-width="1.4"
+						stroke-linejoin="round"></path>
+					<path d="M9 8V6a3 3 0 0 1 6 0v2" stroke="currentColor" stroke-width="1.4"
+					></path>
+				</svg>
+				<span class="cart-badge" data-cart-count hidden>0</span>
+			</button>
+		</div>
+	</nav>
+</header>
+
+<dialog class="menu-dialog" data-menu-dialog aria-label="Site menu">
+	<div class="menu-dialog__top">
+		<Image
+			src={studioMark}
+			alt="Studio Kath"
+			width={300}
+			height={122}
+			class="brand-mark--invert menu-dialog__mark"
+		/>
+		<button type="button" class="icon-btn on-dark" data-menu-close aria-label="Close menu">
+			<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+				<path
+					d="M5 5l14 14M19 5 5 19"
+					stroke="currentColor"
+					stroke-width="1.4"
+					stroke-linecap="round"></path>
+			</svg>
+		</button>
+	</div>
+	<nav class="menu-dialog__links" aria-label="Mobile">
+		{
+			allLinks.map((link) => (
+				<a href={link.href} class="menu-dialog__link display">
+					{link.label}
+				</a>
+			))
+		}
+	</nav>
+	<div class="menu-dialog__footer">
+		<p class="eyebrow" style="color: var(--color-paper); opacity: 0.6;">Get in touch</p>
+		<a href="mailto:hello@studiokath.com" class="menu-dialog__contact-link"
+			>hello@studiokath.com</a
+		>
+		<SocialLinks invert size="lg" class="menu-dialog__social" />
+	</div>
+</dialog>
+
+<style>
+	.site-nav {
+		position: sticky;
+		top: 0;
+		z-index: var(--z-nav);
+		background: color-mix(in oklch, var(--color-paper) 78%, transparent);
+		backdrop-filter: blur(10px);
+		border-bottom: 1px solid transparent;
+		box-shadow: 0 0 0 0 rgba(20, 12, 12, 0);
+		transition:
+			background-color var(--duration-base) var(--ease-out-quart),
+			border-color var(--duration-base) var(--ease-out-quart),
+			box-shadow var(--duration-base) var(--ease-out-quart);
+	}
+
+	/* Once scrolled, the nav solidifies from a light frosted wash (whatever
+	   scrolls underneath shows through, blurred) into a fully opaque bar
+	   with real weight — border + shadow — instead of just a hairline. */
+	.site-nav.is-scrolled {
+		background: var(--color-paper);
+		border-bottom-color: var(--color-border);
+		box-shadow: 0 1px 24px rgba(20, 12, 12, 0.06);
+	}
+
+	/* Logo is taken out of flow and centered on the nav row itself, so it
+	   stays dead-center no matter what the left/right groups contain at any
+	   viewport — the two side groups just split the remaining row via
+	   space-between and never have to negotiate space with the logo. */
+	.site-nav__inner {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: var(--space-md);
+		padding-block: var(--space-md);
+	}
+
+	.site-nav__side {
+		display: flex;
+		align-items: center;
+		gap: var(--space-lg);
+		flex-shrink: 0;
+	}
+
+	.site-nav__logo {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		translate: -50% -50%;
+		display: inline-flex;
+		z-index: 1;
+	}
+
+	.site-nav__logo :global(img) {
+		height: clamp(28px, 3.2vw, 40px);
+		width: auto;
+	}
+
+	.site-nav__links {
+		display: none;
+		align-items: center;
+		gap: var(--space-lg);
+	}
+
+	@media (min-width: 860px) {
+		.site-nav__links {
+			display: flex;
+		}
+	}
+
+	.site-nav__link {
+		position: relative;
+		text-decoration: none;
+		color: var(--color-ink-soft);
+		padding-block: var(--space-2xs);
+		white-space: nowrap;
+		transition: color var(--duration-base) var(--ease-out-quart);
+	}
+
+	.site-nav__link::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		right: 100%;
+		bottom: 0;
+		height: 1px;
+		background: var(--color-accent);
+		transition: right var(--duration-base) var(--ease-out-quart);
+	}
+
+	.site-nav__link:hover {
+		color: var(--color-ink);
+	}
+
+	.site-nav__link:hover::after,
+	.site-nav__link[aria-current='page']::after {
+		right: 0;
+	}
+
+	.site-nav__link[aria-current='page'] {
+		color: var(--color-ink);
+	}
+
+	.icon-btn {
+		position: relative;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 44px;
+		height: 44px;
+		background: transparent;
+		border: none;
+		color: var(--color-ink);
+		cursor: pointer;
+		transition: opacity var(--duration-fast) var(--ease-out-quart);
+		flex-shrink: 0;
+	}
+
+	.icon-btn:hover {
+		opacity: 0.6;
+	}
+
+	.icon-btn.on-dark {
+		color: var(--color-paper);
+	}
+
+	.site-nav__menu-trigger {
+		display: inline-flex;
+	}
+
+	@media (min-width: 860px) {
+		.site-nav__menu-trigger {
+			display: none;
+		}
+	}
+
+	.cart-badge {
+		position: absolute;
+		top: 4px;
+		right: 4px;
+		min-width: 16px;
+		height: 16px;
+		padding-inline: 3px;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 0.625rem;
+		font-weight: 600;
+		color: var(--color-paper);
+		background: var(--color-accent);
+		border-radius: 999px;
+		line-height: 1;
+	}
+
+	/* Mobile menu — native <dialog>, full screen, slides in from the left:
+	   the same side as its hamburger trigger, so the panel visibly emerges
+	   from the icon that opened it (the cart drawer keeps its own trigger's
+	   side — the right — for the same reason). Degrades to an instant open
+	   on browsers without @starting-style support. */
+	.menu-dialog {
+		position: fixed;
+		inset: 0;
+		width: 100vw;
+		height: 100vh;
+		max-width: none;
+		max-height: none;
+		margin: 0;
+		padding: var(--space-lg) clamp(1.25rem, 4vw, 3rem);
+		border: none;
+		background: var(--color-ink);
+		color: var(--color-paper);
+		display: flex;
+		flex-direction: column;
+		translate: -100% 0;
+		transition:
+			translate var(--duration-slow) var(--ease-out-quart),
+			overlay var(--duration-slow) allow-discrete,
+			display var(--duration-slow) allow-discrete;
+	}
+
+	.menu-dialog[open] {
+		translate: 0 0;
+	}
+
+	@starting-style {
+		.menu-dialog[open] {
+			translate: -100% 0;
+		}
+	}
+
+	.menu-dialog::backdrop {
+		background: transparent;
+	}
+
+	.menu-dialog__top {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+	}
+
+	.menu-dialog__mark {
+		height: 26px;
+		width: auto;
+	}
+
+	.menu-dialog__links {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-sm);
+		margin-top: var(--space-2xl);
+	}
+
+	.menu-dialog__link {
+		text-decoration: none;
+		color: var(--color-paper);
+		font-size: clamp(2rem, 8vw, 3rem);
+		width: fit-content;
+		transition: opacity var(--duration-fast) var(--ease-out-quart);
+	}
+
+	.menu-dialog__link:hover {
+		opacity: 0.6;
+	}
+
+	.menu-dialog__footer {
+		margin-top: auto;
+		padding-top: var(--space-xl);
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-2xs);
+	}
+
+	.menu-dialog__contact-link {
+		color: var(--color-paper);
+		font-size: var(--text-body-lg);
+		text-decoration: none;
+		width: fit-content;
+		border-bottom: 1px solid color-mix(in oklch, var(--color-paper) 30%, transparent);
+	}
+
+	.menu-dialog :global(.menu-dialog__social) {
+		margin-top: var(--space-xs);
+	}
+</style>

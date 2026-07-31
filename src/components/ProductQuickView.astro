@@ -1,0 +1,283 @@
+---
+---
+
+<dialog class="quickview-dialog" data-quickview-dialog aria-label="Product quick view">
+	<div class="quickview-dialog__panel">
+		<button
+			type="button"
+			class="icon-btn quickview-dialog__close"
+			data-quickview-close
+			aria-label="Close"
+		>
+			<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+				<path
+					d="M5 5l14 14M19 5 5 19"
+					stroke="currentColor"
+					stroke-width="1.4"
+					stroke-linecap="round"></path>
+			</svg>
+		</button>
+
+		<div class="quickview-dialog__gallery">
+			<div class="quickview-dialog__viewport" data-quickview-viewport aria-live="polite">
+			</div>
+
+			<button
+				type="button"
+				class="quickview-dialog__arrow quickview-dialog__arrow--prev"
+				data-quickview-prev
+				aria-label="Previous photo"
+			>
+				<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+					<path
+						d="M15 5l-7 7 7 7"
+						stroke="currentColor"
+						stroke-width="1.6"
+						stroke-linecap="round"
+						stroke-linejoin="round"></path>
+				</svg>
+			</button>
+			<button
+				type="button"
+				class="quickview-dialog__arrow quickview-dialog__arrow--next"
+				data-quickview-next
+				aria-label="Next photo"
+			>
+				<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+					<path
+						d="M9 5l7 7-7 7"
+						stroke="currentColor"
+						stroke-width="1.6"
+						stroke-linecap="round"
+						stroke-linejoin="round"></path>
+				</svg>
+			</button>
+
+			<div class="quickview-dialog__dots" data-quickview-dots></div>
+		</div>
+
+		<div class="quickview-dialog__info">
+			<div>
+				<p class="eyebrow" data-quickview-badge hidden>Sold Out</p>
+				<h2 class="headline quickview-dialog__name" data-quickview-name></h2>
+				<p class="quickview-dialog__price" data-quickview-price></p>
+			</div>
+			<p class="prose quickview-dialog__details" data-quickview-details></p>
+			<button type="button" class="btn btn-primary quickview-dialog__add" data-quickview-add>
+				<span data-add-label>Add to Cart</span>
+			</button>
+			<p class="quickview-dialog__note">
+				All pieces cut to order, in limited numbers. <a href="/collection"
+					>See the full collection</a
+				>.
+			</p>
+		</div>
+	</div>
+</dialog>
+
+<style is:global>
+	/* Centered modal (not a docked drawer, unlike cart/menu) — scales and
+	   fades in via @starting-style, with a blurred backdrop per the brief. */
+	.quickview-dialog {
+		position: fixed;
+		inset: 0;
+		margin: auto;
+		width: min(56rem, calc(100vw - 2rem));
+		max-height: min(44rem, calc(100vh - 3rem));
+		padding: 0;
+		border: none;
+		background: var(--color-paper);
+		box-shadow: var(--shadow-overlay);
+		overflow: hidden;
+		scale: 0.96;
+		opacity: 0;
+		transition:
+			scale var(--duration-base) var(--ease-out-quart),
+			opacity var(--duration-base) var(--ease-out-quart),
+			overlay var(--duration-base) allow-discrete,
+			display var(--duration-base) allow-discrete;
+	}
+
+	.quickview-dialog[open] {
+		scale: 1;
+		opacity: 1;
+	}
+
+	@starting-style {
+		.quickview-dialog[open] {
+			scale: 0.96;
+			opacity: 0;
+		}
+	}
+
+	.quickview-dialog::backdrop {
+		background: rgba(20, 12, 12, 0.4);
+		backdrop-filter: blur(0px);
+		transition:
+			background var(--duration-base) var(--ease-out-quart),
+			backdrop-filter var(--duration-base) var(--ease-out-quart),
+			overlay var(--duration-base) allow-discrete,
+			display var(--duration-base) allow-discrete;
+	}
+
+	.quickview-dialog[open]::backdrop {
+		backdrop-filter: blur(10px);
+	}
+
+	@starting-style {
+		.quickview-dialog[open]::backdrop {
+			background: rgba(20, 12, 12, 0);
+			backdrop-filter: blur(0px);
+		}
+	}
+
+	.quickview-dialog__panel {
+		display: grid;
+		grid-template-columns: 1.1fr 1fr;
+		height: 100%;
+		max-height: min(44rem, calc(100vh - 3rem));
+	}
+
+	@media (max-width: 720px) {
+		.quickview-dialog__panel {
+			grid-template-columns: 1fr;
+			overflow-y: auto;
+		}
+	}
+
+	.quickview-dialog__close {
+		position: absolute;
+		top: var(--space-sm);
+		right: var(--space-sm);
+		z-index: 2;
+		background: color-mix(in oklch, var(--color-paper) 85%, transparent);
+	}
+
+	.quickview-dialog__gallery {
+		position: relative;
+		background: var(--color-paper-sunk);
+		overflow: hidden;
+	}
+
+	@media (max-width: 720px) {
+		.quickview-dialog__gallery {
+			aspect-ratio: 4 / 5;
+		}
+	}
+
+	.quickview-dialog__viewport {
+		position: relative;
+		height: 100%;
+	}
+
+	.quickview-dialog__viewport img {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		filter: contrast(1.03) saturate(1.05);
+		opacity: 0;
+		transition: opacity var(--duration-base) var(--ease-out-quart);
+	}
+
+	.quickview-dialog__viewport img.is-active {
+		opacity: 1;
+	}
+
+	.quickview-dialog__arrow {
+		position: absolute;
+		top: 50%;
+		translate: 0 -50%;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 36px;
+		height: 36px;
+		background: color-mix(in oklch, var(--color-paper) 85%, transparent);
+		border: none;
+		color: var(--color-ink);
+		cursor: pointer;
+		transition: opacity var(--duration-fast) var(--ease-out-quart);
+	}
+
+	.quickview-dialog__arrow:hover {
+		opacity: 0.7;
+	}
+
+	.quickview-dialog__arrow--prev {
+		left: var(--space-sm);
+	}
+
+	.quickview-dialog__arrow--next {
+		right: var(--space-sm);
+	}
+
+	.quickview-dialog__arrow[hidden] {
+		display: none;
+	}
+
+	.quickview-dialog__dots {
+		position: absolute;
+		bottom: var(--space-sm);
+		left: 50%;
+		translate: -50% 0;
+		display: flex;
+		gap: var(--space-2xs);
+	}
+
+	.quickview-dialog__dot {
+		width: 6px;
+		height: 6px;
+		border-radius: 999px;
+		background: color-mix(in oklch, var(--color-paper) 70%, transparent);
+		border: none;
+		padding: 0;
+		cursor: pointer;
+	}
+
+	.quickview-dialog__dot.is-active {
+		background: var(--color-paper);
+	}
+
+	.quickview-dialog__info {
+		padding: var(--space-xl);
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-md);
+		overflow-y: auto;
+	}
+
+	.quickview-dialog__name {
+		margin: 0.2em 0 0.3em;
+	}
+
+	.quickview-dialog__price {
+		margin: 0;
+		font-size: var(--text-body-lg);
+		color: var(--color-graphite);
+	}
+
+	.quickview-dialog__details {
+		font-size: var(--text-body);
+	}
+
+	.quickview-dialog__add {
+		width: 100%;
+		margin-top: auto;
+	}
+
+	.quickview-dialog__note {
+		margin: 0;
+		font-size: var(--text-caption);
+		color: var(--color-graphite);
+	}
+
+	.quickview-dialog__note a {
+		color: var(--color-ink);
+	}
+
+	[data-quickview-badge]:not([hidden]) {
+		color: var(--color-accent);
+	}
+</style>
