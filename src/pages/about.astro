@@ -41,6 +41,40 @@ const steps = [
 		</p>
 	</header>
 
+	<section class="about-founding">
+		<div class="container about-founding__grid">
+			<div class="about-founding__copy" data-reveal>
+				<p class="eyebrow">About Studio Kath</p>
+				<p class="prose">
+					Founded in 2019, Studio Kath was born from a lifelong passion for bespoke
+					tailoring. Inspired by our founder's mother, a skilled dressmaker, the brand was
+					created to preserve the beauty and craftsmanship of made-to-measure clothing.
+				</p>
+				<p class="prose">
+					We believe there is something truly special about designing your own
+					garment—choosing the fabric, creating a style that reflects your personality, and
+					wearing clothing that is tailored to fit you perfectly. Every custom-made piece is
+					unique, made exclusively for you.
+				</p>
+				<p class="prose">
+					At Studio Kath, every design can be made to order, allowing each customer to
+					experience the elegance, confidence, and individuality that only bespoke clothing
+					can offer.
+				</p>
+			</div>
+			<div class="about-founding__media" data-reveal="right">
+				<Image
+					src={unsplashUrl('1626784579980-db39c1a13aa9', 1200)}
+					alt="A dressmaker sewing by hand at her worktable"
+					width={900}
+					height={1125}
+					loading="lazy"
+					class="about-founding__image"
+				/>
+			</div>
+		</div>
+	</section>
+
 	<section class="about-story">
 		<div class="container about-story__grid">
 			<div class="about-story__media" data-reveal>
@@ -135,6 +169,43 @@ const steps = [
 
 	.about-header__lead {
 		font-size: var(--text-body-lg);
+	}
+
+	.about-founding {
+		padding-block: var(--space-2xl) 0;
+	}
+
+	.about-founding__grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: var(--space-xl);
+		align-items: center;
+	}
+
+	@media (min-width: 860px) {
+		.about-founding__grid {
+			grid-template-columns: 1fr 0.9fr;
+			gap: var(--space-3xl);
+		}
+	}
+
+	.about-founding__media {
+		overflow: hidden;
+	}
+
+	.about-founding__image {
+		width: 100%;
+		height: auto;
+		object-fit: cover;
+		filter: contrast(1.03) saturate(1.05);
+	}
+
+	.about-founding__copy .eyebrow {
+		margin-bottom: var(--space-md);
+	}
+
+	.about-founding__copy .prose + .prose {
+		margin-top: var(--space-md);
 	}
 
 	.about-story {

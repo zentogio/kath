@@ -3,7 +3,6 @@ import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import SocialLinks from '../components/SocialLinks.astro';
 import lineMark from '../assets/brand/social/line-mark.png';
-import lazadaMark from '../assets/brand/social/lazada-mark.png';
 ---
 
 <Layout
@@ -39,45 +38,40 @@ import lazadaMark from '../assets/brand/social/lazada-mark.png';
 				</a>
 			</div>
 			<div class="contact-channel">
-				<p class="eyebrow">Line</p>
-				<a
-					class="contact-channel__link contact-channel__link--icon title"
-					href="https://lin.ee/9TUJj1q"
-					target="_blank"
-					rel="noreferrer"
-				>
-					<Image src={lineMark} alt="" width={22} height={21} class="contact-channel__icon" />
-					@studiokath
-				</a>
-			</div>
-			<div class="contact-channel">
 				<p class="eyebrow">Email</p>
 				<a class="contact-channel__link title" href="mailto:info.studiokath@gmail.com"
 					>info.studiokath@gmail.com</a
 				>
 			</div>
-			<div class="contact-channel">
-				<p class="eyebrow">Shop</p>
-				<a
-					class="contact-channel__link contact-channel__link--icon title"
-					href="https://s.lazada.co.th/s.ZR0XvK?c=x"
-					target="_blank"
-					rel="noreferrer"
-				>
-					<Image src={lazadaMark} alt="" width={22} height={18} class="contact-channel__icon" />
-					Shop on Lazada
-				</a>
-			</div>
-			<div class="contact-channel">
-				<p class="eyebrow">Follow &amp; Shop</p>
-				<SocialLinks size="lg" class="contact-channel__social" />
-			</div>
-			<div class="contact-channel">
+			<div class="contact-channel contact-channel--full">
 				<p class="eyebrow">Studio</p>
 				<p class="prose contact-channel__address">
 					Bangkok, Thailand<br />
 					By appointment — message ahead to arrange a visit.
 				</p>
+			</div>
+
+			<div class="contact-channel contact-channel--full">
+				<p class="eyebrow">Chat on Line</p>
+				<a
+					class="btn btn-primary contact-channel__cta"
+					href="https://lin.ee/9TUJj1q"
+					target="_blank"
+					rel="noreferrer"
+				>
+					<Image
+						src={lineMark}
+						alt=""
+						width={20}
+						height={19}
+						class="contact-channel__icon brand-mark--invert"
+					/>
+					@studiokath
+				</a>
+			</div>
+			<div class="contact-channel contact-channel--full">
+				<p class="eyebrow">Follow &amp; Shop</p>
+				<SocialLinks size="lg" class="contact-channel__social" />
 			</div>
 		</div>
 	</section>
@@ -114,6 +108,10 @@ import lazadaMark from '../assets/brand/social/lazada-mark.png';
 		display: flex;
 		flex-direction: column;
 		gap: var(--space-xs);
+	}
+
+	.contact-channel--full {
+		grid-column: 1 / -1;
 	}
 
 	.contact-channel .eyebrow {
@@ -154,6 +152,10 @@ import lazadaMark from '../assets/brand/social/lazada-mark.png';
 	.contact-channel__address {
 		margin: 0;
 		font-size: var(--text-body-lg);
+	}
+
+	.contact-channel__cta {
+		font-size: 1.1rem;
 	}
 
 	.contact-channel__social :global(.social-links__item) {
