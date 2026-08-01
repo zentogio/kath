@@ -46,8 +46,8 @@ import lineMark from '../assets/brand/social/line-mark.png';
 			<div class="contact-channel contact-channel--full">
 				<p class="eyebrow">Studio</p>
 				<p class="prose contact-channel__address">
-					Bangkok, Thailand<br />
-					By appointment — message ahead to arrange a visit.
+					39/1 Soi Thonglor 2, Chomphon, Chatuchak<br />
+					Bangkok Metropolis 10900
 				</p>
 			</div>
 
@@ -69,7 +69,7 @@ import lineMark from '../assets/brand/social/line-mark.png';
 					@studiokath
 				</a>
 			</div>
-			<div class="contact-channel contact-channel--full">
+			<div class="contact-channel contact-channel--full contact-channel--centered">
 				<p class="eyebrow">Follow &amp; Shop</p>
 				<SocialLinks size="lg" class="contact-channel__social" />
 			</div>
@@ -114,6 +114,11 @@ import lineMark from '../assets/brand/social/line-mark.png';
 		grid-column: 1 / -1;
 	}
 
+	.contact-channel--centered {
+		align-items: center;
+		text-align: center;
+	}
+
 	.contact-channel .eyebrow {
 		font-size: var(--text-label);
 	}
@@ -156,13 +161,5 @@ import lineMark from '../assets/brand/social/line-mark.png';
 
 	.contact-channel__cta {
 		font-size: 1.1rem;
-	}
-
-	.contact-channel__social :global(.social-links__item) {
-		font-size: 1.375rem;
-	}
-
-	.contact-channel__social :global(.social-links__icon) {
-		height: 22px;
 	}
 </style>

@@ -52,32 +52,44 @@ const links = [
 <div class:list={['social-links', `social-links--${size}`, className]}>
 	{
 		links.map((link) => (
-			<a href={link.href} target="_blank" rel="noreferrer" class="social-links__item">
-				<Image
-					src={link.icon}
-					alt=""
-					width={link.width}
-					height={link.height}
-					class:list={['social-links__icon', { 'brand-mark--invert': invert }]}
-				/>
-				<span>{link.label}</span>
+			<a
+				href={link.href}
+				target="_blank"
+				rel="noreferrer"
+				class="social-links__item"
+				aria-label={link.label}
+			>
+				<span class="social-links__icon-box">
+					<Image
+						src={link.icon}
+						alt=""
+						width={link.width}
+						height={link.height}
+						class:list={['social-links__icon', { 'brand-mark--invert': invert }]}
+					/>
+				</span>
+				<span class="visually-hidden">{link.label}</span>
 			</a>
 		))
 	}
 </div>
 
 <style>
+	/* A horizontal row of equal-footprint icon boxes — each source icon has
+	   its own aspect ratio (a square outline, a tall glyph, a wider bag
+	   shape), so a vertical list of icon+label pairs left-ragged the labels
+	   against each other. A row of fixed-size boxes keeps every icon on the
+	   same baseline and the same footprint regardless of its own shape. */
 	.social-links {
 		display: flex;
-		flex-direction: column;
-		gap: var(--space-2xs);
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: var(--space-md);
 	}
 
 	.social-links__item {
 		display: inline-flex;
-		align-items: center;
-		gap: var(--space-xs);
-		width: fit-content;
 		text-decoration: none;
 		color: inherit;
 		opacity: 0.85;
@@ -88,21 +100,28 @@ const links = [
 		opacity: 1;
 	}
 
+	.social-links__icon-box {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 24px;
+		height: 24px;
+	}
+
 	.social-links__icon {
-		height: 15px;
+		max-height: 100%;
+		max-width: 100%;
 		width: auto;
+		height: auto;
 		flex-shrink: 0;
 	}
 
 	.social-links--lg {
-		gap: var(--space-sm);
+		gap: var(--space-lg);
 	}
 
-	.social-links--lg .social-links__item {
-		font-size: var(--text-body-lg);
-	}
-
-	.social-links--lg .social-links__icon {
-		height: 20px;
+	.social-links--lg .social-links__icon-box {
+		width: 32px;
+		height: 32px;
 	}
 </style>

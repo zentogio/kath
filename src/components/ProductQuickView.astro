@@ -131,6 +131,24 @@
 		}
 	}
 
+	/* Mobile Safari has a rendering bug where a blurred ::backdrop bleeds
+	   onto the dialog's own content instead of staying behind it — the
+	   product photo reads as blurred instead of sharp. A plain dim overlay
+	   avoids the bug entirely; the darker opacity keeps similar contrast
+	   without relying on blur. */
+	@media (max-width: 720px) {
+		.quickview-dialog[open]::backdrop {
+			background: rgba(20, 12, 12, 0.6);
+			backdrop-filter: none;
+		}
+
+		@starting-style {
+			.quickview-dialog[open]::backdrop {
+				background: rgba(20, 12, 12, 0);
+			}
+		}
+	}
+
 	.quickview-dialog__panel {
 		display: grid;
 		grid-template-columns: 1.1fr 1fr;
