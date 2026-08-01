@@ -115,13 +115,13 @@ const scatterIds = [
 
 	<section class="container scatter-gallery">
 		<h2 class="headline scatter-gallery__heading">Worn, not just sold.</h2>
-		<ul class="scatter-column" data-reveal-group>
+		<ul class="scatter-column">
 			{
 				scatterIds
 					.map((id) => products.find((p) => p.id === id))
 					.filter((p): p is (typeof products)[number] => Boolean(p))
 					.map((product) => (
-						<li class="scatter-item" data-reveal="left">
+						<li class="scatter-item" data-scroll-progress>
 							<a
 								href="/collection"
 								class="scatter-item__link"
@@ -139,7 +139,7 @@ const scatterIds = [
 						</li>
 					))
 			}
-			<li class="scatter-item scatter-item--cta" data-reveal="left">
+			<li class="scatter-item scatter-item--cta" data-scroll-progress>
 				<a href="/collection" class="scatter-item__cta">
 					<span class="headline">View the full Collection</span>
 					<span class="prose scatter-item__cta-sub">
@@ -157,6 +157,8 @@ const scatterIds = [
 			<a href="/contact" class="btn btn-ghost on-dark" data-magnetic>Get in Touch</a>
 		</div>
 	</section>
+
+	<script src="../scripts/scroll-progress.ts"></script>
 </Layout>
 
 <style>
@@ -492,6 +494,7 @@ const scatterIds = [
 	}
 
 	.scatter-item {
+		--progress: 1;
 		width: 100%;
 		max-width: 40rem;
 		aspect-ratio: 4 / 5;
@@ -499,31 +502,14 @@ const scatterIds = [
 		background: var(--color-paper-sunk);
 	}
 
-	/* Where the browser supports scroll-linked animations natively, use the
-	   real thing — it tracks scroll position continuously instead of firing
-	   once. Overrides the [data-reveal] base state from global.css (which
-	   stays the fallback for browsers that don't support animation-timeline,
-	   driven by reveal.ts via IntersectionObserver instead). */
-	@supports (animation-timeline: view()) {
-		@media (prefers-reduced-motion: no-preference) {
-			.scatter-item[data-reveal] {
-				opacity: 1;
-				transform: none;
-				transition: none;
-				animation: scatter-slide-in backwards;
-				animation-timeline: view();
-				animation-range-start: cover 0%;
-				animation-range-end: cover 50%;
-			}
-		}
-	}
-
-	@keyframes scatter-slide-in {
-		0% {
-			transform: translateX(-100%);
-		}
-		100% {
-			transform: translateX(0%);
+	/* Continuous scroll-linked slide, driven by scroll-progress.ts setting
+	   --progress (0→1) on every scroll frame — works in every browser,
+	   unlike native animation-timeline. --progress defaults to 1 (fully in
+	   place) so the column reads correctly with JS disabled or before the
+	   script runs. */
+	@media (prefers-reduced-motion: no-preference) {
+		.scatter-item {
+			transform: translateX(calc((1 - var(--progress)) * -100%));
 		}
 	}
 
