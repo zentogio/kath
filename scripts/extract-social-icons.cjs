@@ -45,6 +45,44 @@ async function extractGlyph(inputPath, outputPath, mode, crop, thresholds) {
 	console.log('wrote', outputPath, width, 'x', height);
 }
 
+// Lazada's mark is a warm (orange/pink/red) shape on a navy background, with
+// a white wordmark cut into it — neither mode above fits (both assume a
+// white/light background). Classify by red-minus-blue instead: the navy
+// background is blue-dominant (r-b very negative), the warm shape is
+// red-dominant (r-b strongly positive), and the white wordmark is neutral
+// (r-b ~ 0), so it falls out as a transparent hole exactly like Shopee's
+// white "S".
+async function extractWarmGlyph(inputPath, outputPath, thresholds) {
+	const img = sharp(inputPath).ensureAlpha();
+	const { data, info } = await img.raw().toBuffer({ resolveWithObject: true });
+	const { width, height, channels } = info;
+	const out = Buffer.alloc(width * height * 4);
+
+	const lo = thresholds?.lo ?? 0;
+	const hi = thresholds?.hi ?? 60;
+
+	for (let i = 0; i < width * height; i++) {
+		const idx = i * channels;
+		const r = data[idx];
+		const b = data[idx + 2];
+		const a = channels === 4 ? data[idx + 3] : 255;
+		let t = (r - b - lo) / (hi - lo);
+		t = Math.max(0, Math.min(1, t));
+
+		const outIdx = i * 4;
+		out[outIdx] = 0;
+		out[outIdx + 1] = 0;
+		out[outIdx + 2] = 0;
+		out[outIdx + 3] = Math.round(a * t);
+	}
+
+	await sharp(out, { raw: { width, height, channels: 4 } })
+		.trim()
+		.png()
+		.toFile(outputPath);
+	console.log('wrote', outputPath);
+}
+
 (async () => {
 	await extractGlyph(
 		path.join(SRC, 'Instagram_logo_2022.svg.webp'),
@@ -64,4 +102,12 @@ async function extractGlyph(inputPath, outputPath, mode, crop, thresholds) {
 		'dark-glyph',
 		{ left: 35, top: 0, width: 890, height: 995 },
 	);
+	await extractGlyph(
+		path.join(SRC, 'LINE_logo.svg.webp'),
+		path.join(OUT, 'line-mark.png'),
+		'white-glyph',
+		null,
+		{ lo: 210, hi: 248 },
+	);
+	await extractWarmGlyph(path.join(SRC, 'lazada.png'), path.join(OUT, 'lazada-mark.png'));
 })();

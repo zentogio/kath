@@ -2,7 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
 import SocialLinks from '../components/SocialLinks.astro';
-import { unsplashUrl } from '../data/products';
+import lineMark from '../assets/brand/social/line-mark.png';
+import lazadaMark from '../assets/brand/social/lazada-mark.png';
 ---
 
 <Layout
@@ -19,28 +20,14 @@ import { unsplashUrl } from '../data/products';
 	</header>
 
 	<section class="container contact-grid">
-		<figure class="contact-photo">
-			<Image
-				src={unsplashUrl('1560796952-f1c9b838544c', 900)}
-				alt="Close-up of a sewing machine needle mid-stitch in the studio"
-				width={900}
-				height={1125}
-				loading="lazy"
-				class="contact-photo__image"
-			/>
-			<figcaption class="prose contact-photo__caption">
-				Every message reaches the person who actually makes the clothes.
-			</figcaption>
-		</figure>
-
 		<div class="contact-channels">
 			<div class="contact-channel">
 				<p class="eyebrow">Call</p>
 				<a
 					class="contact-channel__link contact-channel__link--icon title"
-					href="tel:+66812345678"
+					href="tel:+66815638883"
 				>
-					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
 						<path
 							d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.5.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.9 21 3 13.1 3 3.9c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.5.1.3 0 .7-.2 1L6.6 10.8Z"
 							stroke="currentColor"
@@ -48,14 +35,38 @@ import { unsplashUrl } from '../data/products';
 							stroke-linejoin="round"
 							stroke-linecap="round"></path>
 					</svg>
-					+66 81 234 5678
+					+66 8 1563 8883
+				</a>
+			</div>
+			<div class="contact-channel">
+				<p class="eyebrow">Line</p>
+				<a
+					class="contact-channel__link contact-channel__link--icon title"
+					href="https://lin.ee/9TUJj1q"
+					target="_blank"
+					rel="noreferrer"
+				>
+					<Image src={lineMark} alt="" width={22} height={21} class="contact-channel__icon" />
+					@studiokath
 				</a>
 			</div>
 			<div class="contact-channel">
 				<p class="eyebrow">Email</p>
-				<a class="contact-channel__link title" href="mailto:hello@studiokath.com"
-					>hello@studiokath.com</a
+				<a class="contact-channel__link title" href="mailto:info.studiokath@gmail.com"
+					>info.studiokath@gmail.com</a
 				>
+			</div>
+			<div class="contact-channel">
+				<p class="eyebrow">Shop</p>
+				<a
+					class="contact-channel__link contact-channel__link--icon title"
+					href="https://s.lazada.co.th/s.ZR0XvK?c=x"
+					target="_blank"
+					rel="noreferrer"
+				>
+					<Image src={lazadaMark} alt="" width={22} height={18} class="contact-channel__icon" />
+					Shop on Lazada
+				</a>
 			</div>
 			<div class="contact-channel">
 				<p class="eyebrow">Follow &amp; Shop</p>
@@ -83,58 +94,37 @@ import { unsplashUrl } from '../data/products';
 	}
 
 	.contact-grid {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: var(--space-2xl);
 		padding-block: var(--space-2xl) var(--space-3xl);
 	}
 
-	@media (min-width: 860px) {
-		.contact-grid {
-			grid-template-columns: 1fr 0.85fr;
-			gap: var(--space-3xl);
-			align-items: start;
-		}
-	}
-
-	.contact-photo {
-		margin: 0;
-	}
-
-	.contact-photo__image {
-		width: 100%;
-		aspect-ratio: 4 / 5;
-		object-fit: cover;
-		filter: contrast(1.03) saturate(1.05);
-	}
-
-	.contact-photo__caption {
-		margin-top: var(--space-sm);
-		font-size: var(--text-body);
-	}
-
 	.contact-channels {
-		display: flex;
-		flex-direction: column;
-		gap: var(--space-xl);
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: var(--space-2xl) var(--space-3xl);
+		max-width: 44rem;
 	}
 
-	@media (min-width: 860px) {
+	@media (min-width: 640px) {
 		.contact-channels {
-			padding-top: var(--space-sm);
+			grid-template-columns: 1fr 1fr;
 		}
 	}
 
 	.contact-channel {
 		display: flex;
 		flex-direction: column;
-		gap: var(--space-2xs);
+		gap: var(--space-xs);
+	}
+
+	.contact-channel .eyebrow {
+		font-size: var(--text-label);
 	}
 
 	.contact-channel__link {
 		text-decoration: none;
 		color: var(--color-ink);
 		width: fit-content;
+		font-size: 1.375rem;
 		border-bottom: 1px solid var(--color-border-strong);
 		transition: border-color var(--duration-fast) var(--ease-out-quart);
 	}
@@ -147,6 +137,12 @@ import { unsplashUrl } from '../data/products';
 		transition: color var(--duration-fast) var(--ease-out-quart);
 	}
 
+	.contact-channel__icon {
+		height: 22px;
+		width: auto;
+		flex-shrink: 0;
+	}
+
 	.contact-channel__link--icon:hover {
 		color: var(--color-accent);
 	}
@@ -157,5 +153,14 @@ import { unsplashUrl } from '../data/products';
 
 	.contact-channel__address {
 		margin: 0;
+		font-size: var(--text-body-lg);
+	}
+
+	.contact-channel__social :global(.social-links__item) {
+		font-size: 1.375rem;
+	}
+
+	.contact-channel__social :global(.social-links__icon) {
+		height: 22px;
 	}
 </style>
