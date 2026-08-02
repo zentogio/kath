@@ -1,0 +1,55 @@
+---
+interface Props {
+	class?: string;
+	onDark?: boolean;
+}
+
+const { class: className, onDark = false } = Astro.props;
+---
+
+<div class:list={['lang-toggle', { 'lang-toggle--on-dark': onDark }, className]} data-i18n-attr="aria-label:lang.toggle" aria-label="Change language">
+	<button type="button" class="lang-toggle__btn" data-lang-set="en">EN</button>
+	<button type="button" class="lang-toggle__btn" data-lang-set="th">ไทย</button>
+</div>
+
+<style>
+	.lang-toggle {
+		display: inline-flex;
+		align-items: center;
+		border: 1px solid var(--color-border-strong);
+		flex-shrink: 0;
+	}
+
+	.lang-toggle--on-dark {
+		border-color: color-mix(in oklch, var(--color-paper) 35%, transparent);
+	}
+
+	.lang-toggle__btn {
+		background: none;
+		border: none;
+		padding: 0.3em 0.65em;
+		font-family: var(--font-body);
+		font-size: 0.75rem;
+		font-weight: 600;
+		letter-spacing: var(--tracking-label);
+		color: var(--color-graphite);
+		cursor: pointer;
+		transition:
+			background-color var(--duration-fast) var(--ease-out-quart),
+			color var(--duration-fast) var(--ease-out-quart);
+	}
+
+	.lang-toggle--on-dark .lang-toggle__btn {
+		color: color-mix(in oklch, var(--color-paper) 65%, transparent);
+	}
+
+	.lang-toggle__btn.is-active {
+		background: var(--color-ink);
+		color: var(--color-paper);
+	}
+
+	.lang-toggle--on-dark .lang-toggle__btn.is-active {
+		background: var(--color-paper);
+		color: var(--color-ink);
+	}
+</style>

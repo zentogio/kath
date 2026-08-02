@@ -1,4 +1,6 @@
-import { products, productImage, formatPrice } from '../data/products';
+import { products, productImage, productName, formatPrice } from '../data/products';
+import { getLang, onLangChange } from '../i18n/state';
+import { t } from '../i18n/dict';
 
 export interface CartLine {
 	id: string;
@@ -94,24 +96,31 @@ function renderDrawer(cart: CartLine[]) {
 	footer.hidden = false;
 	totalEl.textContent = formatPrice(cartTotal(cart));
 
+	const lang = getLang();
+	const sizeLabel = t('cart.size', lang);
+	const removeLabel = t('cart.remove', lang);
+	const decreaseLabel = t('sizeDialog.decreaseAria', lang);
+	const increaseLabel = t('sizeDialog.increaseAria', lang);
+
 	for (const line of cart) {
 		const product = products.find((p) => p.id === line.id);
 		if (!product) continue;
+		const name = productName(product, lang);
 
 		const item = document.createElement('li');
 		item.className = 'cart-line';
 		item.innerHTML = `
 			<img class="cart-line__image" src="${productImage(product.image)}" alt="" width="72" height="90" loading="lazy" />
 			<div class="cart-line__body">
-				<p class="cart-line__name">${product.name}</p>
-				<p class="cart-line__price">${formatPrice(product.price)} &middot; Size ${line.size}</p>
-				<div class="cart-line__qty" role="group" aria-label="Quantity for ${product.name}, size ${line.size}">
-					<button type="button" class="cart-line__step" data-qty-decrease="${product.id}" data-qty-size="${line.size}" aria-label="Decrease quantity">&minus;</button>
+				<p class="cart-line__name">${name}</p>
+				<p class="cart-line__price">${formatPrice(product.price)} &middot; ${sizeLabel} ${line.size}</p>
+				<div class="cart-line__qty" role="group" aria-label="${name}, ${sizeLabel} ${line.size}">
+					<button type="button" class="cart-line__step" data-qty-decrease="${product.id}" data-qty-size="${line.size}" aria-label="${decreaseLabel}">&minus;</button>
 					<span class="cart-line__qty-value" aria-live="polite">${line.qty}</span>
-					<button type="button" class="cart-line__step" data-qty-increase="${product.id}" data-qty-size="${line.size}" aria-label="Increase quantity">&plus;</button>
+					<button type="button" class="cart-line__step" data-qty-increase="${product.id}" data-qty-size="${line.size}" aria-label="${increaseLabel}">&plus;</button>
 				</div>
 			</div>
-			<button type="button" class="cart-line__remove" data-remove="${product.id}" data-remove-size="${line.size}" aria-label="Remove ${product.name} (size ${line.size}) from cart">Remove</button>
+			<button type="button" class="cart-line__remove" data-remove="${product.id}" data-remove-size="${line.size}" aria-label="${removeLabel}">${removeLabel}</button>
 		`;
 		list.appendChild(item);
 	}
@@ -214,3 +223,4 @@ function initCartDrawer() {
 render();
 initCartInteractions();
 initCartDrawer();
+onLangChange(render);

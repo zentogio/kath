@@ -4,23 +4,18 @@ import Layout from '../../../layouts/Layout.astro';
 
 <Layout title="Thank You" description="Your order has been received.">
 	<section class="container complete" data-complete-content hidden>
-		<p class="eyebrow">Thank You</p>
-		<h1 class="display complete__title">Order received, <span data-complete-name></span>.</h1>
-		<p class="prose complete__lead">
-			We'll confirm your payment shortly and be in touch about shipping. Your order
-			number is <strong data-complete-order-id></strong> — total <strong
-				data-complete-total></strong
-			>.
-		</p>
+		<p class="eyebrow" data-i18n="complete.eyebrow">Thank You</p>
+		<h1 class="display complete__title" data-complete-title></h1>
+		<p class="prose complete__lead" data-complete-lead></p>
 		<div class="complete__ctas">
-			<a href="/collection" class="btn btn-primary">Continue Shopping</a>
-			<a href="/contact" class="btn btn-ghost">Get in Touch</a>
+			<a href="/collection" class="btn btn-primary" data-i18n="complete.continueShopping">Continue Shopping</a>
+			<a href="/contact" class="btn btn-ghost" data-i18n="common.getInTouch">Get in Touch</a>
 		</div>
 	</section>
 
 	<div class="container checkout-empty" data-checkout-empty hidden>
-		<p class="prose">No recent order found.</p>
-		<a href="/collection" class="btn btn-ghost">Browse the Collection</a>
+		<p class="prose" data-i18n="complete.empty">No recent order found.</p>
+		<a href="/collection" class="btn btn-ghost" data-i18n="common.browseCollection">Browse the Collection</a>
 	</div>
 
 	<script src="../../../scripts/checkout-complete.ts"></script>

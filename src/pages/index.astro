@@ -2,7 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 import { products, productImage } from '../data/products';
 
-const tickerItems = ['Hand-Cut', 'Small Batch', 'Numbered, Not Mass-Produced', 'Made to Last'];
+const tickerItems = [
+	{ label: 'Hand-Cut', key: 'home.ticker1' },
+	{ label: 'Small Batch', key: 'home.ticker2' },
+	{ label: 'Numbered, Not Mass-Produced', key: 'home.ticker3' },
+	{ label: 'Made to Last', key: 'home.ticker4' },
+];
 
 const scatterIds = [
 	'trousers-papaya',
@@ -62,16 +67,16 @@ const scatterIds = [
 		<div class="hero__scrim" aria-hidden="true"></div>
 		<div class="container hero__content">
 			<p class="eyebrow hero__eyebrow">Studio Kath</p>
-			<h1 class="display hero__headline">Cut by hand.<br />Made in small batches.</h1>
-			<p class="prose hero__sub">
+			<h1 class="display hero__headline" data-i18n="home.heroHeadline">Cut by hand.<br />Made in small batches.</h1>
+			<p class="prose hero__sub" data-i18n="home.heroSub">
 				Every piece starts as a length of cloth and a chalk line, not a production run.
 				We cut what we can make well, and no more.
 			</p>
 			<div class="hero__ctas">
-				<a href="/collection" class="btn btn-primary" data-magnetic
+				<a href="/collection" class="btn btn-primary" data-magnetic data-i18n="home.ctaCollection"
 					>Explore the Collection</a
 				>
-				<a href="/about" class="btn btn-ghost on-dark" data-magnetic>About the Studio</a>
+				<a href="/about" class="btn btn-ghost on-dark" data-magnetic data-i18n="home.ctaAbout">About the Studio</a>
 			</div>
 		</div>
 	</section>
@@ -87,8 +92,8 @@ const scatterIds = [
 			data-reveal="left"
 		/>
 		<div class="flanked__copy" data-reveal>
-			<h2 class="headline">A studio, not a factory.</h2>
-			<p class="prose">
+			<h2 class="headline" data-i18n="home.studioHeadline">A studio, not a factory.</h2>
+			<p class="prose" data-i18n="home.studioBody">
 				Every order is planned around what we can actually make well — not scaled to
 				meet demand. If a piece sells out, the next cut arrives when it's ready, not on
 				a schedule.
@@ -113,7 +118,7 @@ const scatterIds = [
 						class="marquee__pair"
 						data-marquee-dup={i >= tickerItems.length ? '' : undefined}
 					>
-						<span class="marquee__item">{item}</span>
+						<span class="marquee__item" data-i18n={item.key}>{item.label}</span>
 						<span class="marquee__dot">&mdash;</span>
 					</span>
 				))
@@ -123,29 +128,29 @@ const scatterIds = [
 
 	<section class="container craft-strip">
 		<div class="craft-strip__quote-wrap">
-			<p class="display craft-strip__quote scroll-scale">
+			<p class="display craft-strip__quote scroll-scale" data-i18n="home.quote">
 				"We'd rather make thirty pieces we're proud of than three thousand we're not."
 			</p>
 			<span class="craft-strip__rule" aria-hidden="true"></span>
 		</div>
 		<ul class="craft-strip__list">
 			<li>
-				<p class="title">Cut by hand</p>
-				<p class="prose">Every pattern is laid and cut by a person, not a machine line.</p>
+				<p class="title" data-i18n="home.craft1Title">Cut by hand</p>
+				<p class="prose" data-i18n="home.craft1Body">Every pattern is laid and cut by a person, not a machine line.</p>
 			</li>
 			<li>
-				<p class="title">Numbered, not mass-produced</p>
-				<p class="prose">Each collection runs in limited quantities, then it's gone.</p>
+				<p class="title" data-i18n="home.craft2Title">Numbered, not mass-produced</p>
+				<p class="prose" data-i18n="home.craft2Body">Each collection runs in limited quantities, then it's gone.</p>
 			</li>
 			<li>
-				<p class="title">Built to outlast the season</p>
-				<p class="prose">Fabric and construction chosen for years, not one wear.</p>
+				<p class="title" data-i18n="home.craft3Title">Built to outlast the season</p>
+				<p class="prose" data-i18n="home.craft3Body">Fabric and construction chosen for years, not one wear.</p>
 			</li>
 		</ul>
 	</section>
 
 	<section class="container scatter-gallery">
-		<h2 class="headline scatter-gallery__heading">Worn, not just sold.</h2>
+		<h2 class="headline scatter-gallery__heading" data-i18n="home.scatterHeading">Worn, not just sold.</h2>
 		<ul class="scatter-column">
 			{
 				scatterIds
@@ -169,18 +174,18 @@ const scatterIds = [
 								/>
 							</a>
 							<div class="scatter-item__copy" data-scroll-reveal>
-								<p class="eyebrow">Now in the Studio</p>
-								<h3 class="headline scatter-item__name">{product.name}</h3>
-								<p class="prose">{product.blurb}</p>
-								<a href="/collection" class="scatter-item__shop">Shop the Collection &rarr;</a>
+								<p class="eyebrow" data-i18n="home.scatterEyebrow">Now in the Studio</p>
+								<h3 class="headline scatter-item__name" data-i18n-name={product.id}>{product.name}</h3>
+								<p class="prose" data-i18n-blurb={product.id}>{product.blurb}</p>
+								<a href="/collection" class="scatter-item__shop" data-i18n="home.scatterShop">Shop the Collection &rarr;</a>
 							</div>
 						</li>
 					))
 			}
 			<li class="scatter-item scatter-item--cta" data-reveal>
 				<a href="/collection" class="scatter-item__cta">
-					<span class="headline">View the full Collection</span>
-					<span class="prose scatter-item__cta-sub">
+					<span class="headline" data-i18n="home.scatterCtaTitle">View the full Collection</span>
+					<span class="prose scatter-item__cta-sub" data-i18n="home.scatterCtaSub">
 						Every piece, with real photos and prices.
 					</span>
 					<span class="scatter-item__arrow" aria-hidden="true">&rarr;</span>
@@ -191,8 +196,8 @@ const scatterIds = [
 
 	<section class="closing-band">
 		<div class="container closing-band__inner">
-			<h2 class="headline">See a piece in person before it's spoken for.</h2>
-			<a href="/contact" class="btn btn-ghost on-dark" data-magnetic>Get in Touch</a>
+			<h2 class="headline" data-i18n="home.closingHeadline">See a piece in person before it's spoken for.</h2>
+			<a href="/contact" class="btn btn-ghost on-dark" data-magnetic data-i18n="common.getInTouch">Get in Touch</a>
 		</div>
 	</section>
 

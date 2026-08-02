@@ -1,7 +1,10 @@
-import { products, productImage, formatPrice } from '../data/products';
+import { products, productImage, productName, productDetails, formatPrice } from '../data/products';
+import { getLang, onLangChange } from '../i18n/state';
+import { t } from '../i18n/dict';
 
 let activeImages: string[] = [];
 let activeIndex = 0;
+let activeProductId: string | null = null;
 
 function renderImages(dialog: HTMLDialogElement) {
 	const viewport = dialog.querySelector<HTMLElement>('[data-quickview-viewport]');
@@ -17,10 +20,11 @@ function renderImages(dialog: HTMLDialogElement) {
 		)
 		.join('');
 
+	const photoLabel = t('quickview.viewPhoto', getLang());
 	dots.innerHTML = activeImages
 		.map(
 			(_, i) =>
-				`<button type="button" class="quickview-dialog__dot${i === activeIndex ? ' is-active' : ''}" data-quickview-dot="${i}" aria-label="View photo ${i + 1}"></button>`,
+				`<button type="button" class="quickview-dialog__dot${i === activeIndex ? ' is-active' : ''}" data-quickview-dot="${i}" aria-label="${photoLabel} ${i + 1}"></button>`,
 		)
 		.join('');
 
@@ -39,32 +43,45 @@ function setActiveIndex(dialog: HTMLDialogElement, index: number) {
 	});
 }
 
-function openQuickView(dialog: HTMLDialogElement, productId: string) {
-	const product = products.find((p) => p.id === productId);
-	if (!product) return;
-
-	activeImages = [product.image, ...product.gallery];
-	activeIndex = 0;
-	renderImages(dialog);
-
+// Re-fills the text content for whichever product is currently open, in the
+// current language — used both when opening and when the language toggles
+// while the dialog is already showing.
+function renderText(dialog: HTMLDialogElement, product: (typeof products)[number]) {
+	const lang = getLang();
 	const name = dialog.querySelector<HTMLElement>('[data-quickview-name]');
 	const price = dialog.querySelector<HTMLElement>('[data-quickview-price]');
 	const details = dialog.querySelector<HTMLElement>('[data-quickview-details]');
-	const detailsWrap = dialog.querySelector<HTMLDetailsElement>('.quickview-dialog__details-wrap');
 	const badge = dialog.querySelector<HTMLElement>('[data-quickview-badge]');
 	const addButton = dialog.querySelector<HTMLButtonElement>('[data-quickview-add]');
 	const addLabel = addButton?.querySelector<HTMLElement>('[data-add-label]');
 
-	if (name) name.textContent = product.name;
+	if (name) name.textContent = productName(product, lang);
 	if (price) price.textContent = formatPrice(product.price);
-	if (details) details.textContent = product.details;
+	if (details) details.textContent = productDetails(product, lang);
+	if (badge) badge.textContent = t('common.soldOut', lang);
+	if (addLabel) addLabel.textContent = t(product.soldOut ? 'common.soldOut' : 'common.addToCart', lang);
+}
+
+function openQuickView(dialog: HTMLDialogElement, productId: string) {
+	const product = products.find((p) => p.id === productId);
+	if (!product) return;
+
+	activeProductId = productId;
+	activeImages = [product.image, ...product.gallery];
+	activeIndex = 0;
+	renderImages(dialog);
+	renderText(dialog, product);
+
+	const detailsWrap = dialog.querySelector<HTMLDetailsElement>('.quickview-dialog__details-wrap');
+	const badge = dialog.querySelector<HTMLElement>('[data-quickview-badge]');
+	const addButton = dialog.querySelector<HTMLButtonElement>('[data-quickview-add]');
+
 	if (detailsWrap) detailsWrap.open = false;
 	if (badge) badge.hidden = !product.soldOut;
 	if (addButton) {
 		addButton.dataset.addToCart = product.id;
 		addButton.disabled = product.soldOut;
 	}
-	if (addLabel) addLabel.textContent = product.soldOut ? 'Sold Out' : 'Add to Cart';
 
 	dialog.showModal();
 }
@@ -110,6 +127,15 @@ function initQuickView() {
 		}
 	});
 	observer.observe(dialog, { attributes: true, attributeFilter: ['open'] });
+
+	onLangChange(() => {
+		if (!dialog.open || !activeProductId) return;
+		const product = products.find((p) => p.id === activeProductId);
+		if (product) {
+			renderText(dialog, product);
+			renderImages(dialog);
+		}
+	});
 }
 
 initQuickView();

@@ -36,7 +36,7 @@ const { product, priority = false, index = 0, featured = false } = Astro.props;
 	</button>
 	<div class="product-card__body">
 		<button type="button" class="product-card__info" data-quickview-open={product.id}>
-			<h3 class="title product-card__name">{product.name}</h3>
+			<h3 class="title product-card__name" data-i18n-name={product.id}>{product.name}</h3>
 			<p class="product-card__price">{formatPrice(product.price)}</p>
 		</button>
 		<button
@@ -46,7 +46,9 @@ const { product, priority = false, index = 0, featured = false } = Astro.props;
 			data-magnetic={featured ? '' : undefined}
 			disabled={product.soldOut}
 		>
-			<span data-add-label>{product.soldOut ? 'Sold Out' : 'Add to Cart'}</span>
+			<span data-add-label data-i18n={product.soldOut ? 'common.soldOut' : 'common.addToCart'}
+				>{product.soldOut ? 'Sold Out' : 'Add to Cart'}</span
+			>
 		</button>
 	</div>
 </li>

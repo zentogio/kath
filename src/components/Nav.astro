@@ -3,14 +3,15 @@ import { Image } from 'astro:assets';
 import studioMark from '../assets/brand/studio-mark.webp';
 import lineMark from '../assets/brand/social/line-mark.png';
 import SocialLinks from './SocialLinks.astro';
+import LanguageToggle from './LanguageToggle.astro';
 
 const leftLinks = [
-	{ href: '/', label: 'Home' },
-	{ href: '/collection', label: 'Collection' },
+	{ href: '/', label: 'Home', key: 'nav.home' },
+	{ href: '/collection', label: 'Collection', key: 'nav.collection' },
 ];
 const rightLinks = [
-	{ href: '/about', label: 'About' },
-	{ href: '/contact', label: 'Contact' },
+	{ href: '/about', label: 'About', key: 'nav.about' },
+	{ href: '/contact', label: 'Contact', key: 'nav.contact' },
 ];
 const allLinks = [...leftLinks, ...rightLinks];
 ---
@@ -22,6 +23,7 @@ const allLinks = [...leftLinks, ...rightLinks];
 				type="button"
 				class="icon-btn site-nav__menu-trigger"
 				data-menu-open
+				data-i18n-attr="aria-label:nav.openMenu"
 				aria-label="Open menu"
 			>
 				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -32,7 +34,7 @@ const allLinks = [...leftLinks, ...rightLinks];
 			<div class="site-nav__links">
 				{
 					leftLinks.map((link) => (
-						<a href={link.href} class="site-nav__link label" data-nav-link>
+						<a href={link.href} class="site-nav__link label" data-nav-link data-i18n={link.key}>
 							{link.label}
 						</a>
 					))
@@ -48,13 +50,20 @@ const allLinks = [...leftLinks, ...rightLinks];
 			<div class="site-nav__links">
 				{
 					rightLinks.map((link) => (
-						<a href={link.href} class="site-nav__link label" data-nav-link>
+						<a href={link.href} class="site-nav__link label" data-nav-link data-i18n={link.key}>
 							{link.label}
 						</a>
 					))
 				}
 			</div>
-			<button type="button" class="icon-btn" data-cart-open aria-label="Open cart">
+			<LanguageToggle class="site-nav__lang" />
+			<button
+				type="button"
+				class="icon-btn"
+				data-cart-open
+				data-i18n-attr="aria-label:nav.openCart"
+				aria-label="Open cart"
+			>
 				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
 					<path
 						d="M6 8h12l-1.2 11.2a2 2 0 0 1-2 1.8H9.2a2 2 0 0 1-2-1.8L6 8Z"
@@ -79,7 +88,13 @@ const allLinks = [...leftLinks, ...rightLinks];
 			height={483}
 			class="brand-mark--invert menu-dialog__mark"
 		/>
-		<button type="button" class="icon-btn on-dark" data-menu-close aria-label="Close menu">
+		<button
+			type="button"
+			class="icon-btn on-dark"
+			data-menu-close
+			data-i18n-attr="aria-label:nav.closeMenu"
+			aria-label="Close menu"
+		>
 			<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
 				<path
 					d="M5 5l14 14M19 5 5 19"
@@ -89,17 +104,18 @@ const allLinks = [...leftLinks, ...rightLinks];
 			</svg>
 		</button>
 	</div>
+	<LanguageToggle onDark class="menu-dialog__lang" />
 	<nav class="menu-dialog__links" aria-label="Mobile">
 		{
 			allLinks.map((link) => (
-				<a href={link.href} class="menu-dialog__link display">
+				<a href={link.href} class="menu-dialog__link display" data-i18n={link.key}>
 					{link.label}
 				</a>
 			))
 		}
 	</nav>
 	<div class="menu-dialog__footer">
-		<p class="eyebrow" style="color: var(--color-paper); opacity: 0.6;">Get in touch</p>
+		<p class="eyebrow" style="color: var(--color-paper); opacity: 0.6;" data-i18n="menu.getInTouch">Get in touch</p>
 		<a href="mailto:info.studiokath@gmail.com" class="menu-dialog__contact-link"
 			>info.studiokath@gmail.com</a
 		>
@@ -191,6 +207,18 @@ const allLinks = [...leftLinks, ...rightLinks];
 	@media (min-width: 860px) {
 		.site-nav__links {
 			display: flex;
+		}
+	}
+
+	/* Desktop-only — the mobile equivalent lives inside the hamburger menu
+	   (.menu-dialog__lang below) instead of cluttering the top bar. */
+	.site-nav :global(.site-nav__lang) {
+		display: none;
+	}
+
+	@media (min-width: 860px) {
+		.site-nav :global(.site-nav__lang) {
+			display: inline-flex;
 		}
 	}
 
@@ -329,11 +357,16 @@ const allLinks = [...leftLinks, ...rightLinks];
 		width: auto;
 	}
 
+	.menu-dialog :global(.menu-dialog__lang) {
+		margin-top: var(--space-lg);
+		width: fit-content;
+	}
+
 	.menu-dialog__links {
 		display: flex;
 		flex-direction: column;
 		gap: var(--space-sm);
-		margin-top: var(--space-2xl);
+		margin-top: var(--space-xl);
 	}
 
 	.menu-dialog__link {

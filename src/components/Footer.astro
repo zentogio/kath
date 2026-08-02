@@ -18,52 +18,40 @@ const year = new Date().getFullYear();
 					class="brand-mark--invert"
 				/>
 			</a>
-			<p class="site-footer__tagline">
+			<p class="site-footer__tagline" data-i18n="footer.tagline">
 				Hand-cut, small-batch clothing made to last, not to trend.
 			</p>
 		</div>
 
 		<nav class="site-footer__col" aria-label="Site">
-			<p class="eyebrow site-footer__heading">Site</p>
-			<a href="/">Home</a>
-			<a href="/collection">Collection</a>
-			<a href="/about">About</a>
-			<a href="/contact">Contact</a>
+			<p class="eyebrow site-footer__heading" data-i18n="footer.site">Site</p>
+			<a href="/" data-i18n="nav.home">Home</a>
+			<a href="/collection" data-i18n="nav.collection">Collection</a>
+			<a href="/about" data-i18n="nav.about">About</a>
+			<a href="/contact" data-i18n="nav.contact">Contact</a>
 		</nav>
 
 		<div class="site-footer__col">
-			<p class="eyebrow site-footer__heading">Get in Touch</p>
+			<p class="eyebrow site-footer__heading" data-i18n="footer.getInTouch">Get in Touch</p>
 			<a href="mailto:info.studiokath@gmail.com">info.studiokath@gmail.com</a>
 			<SocialLinks invert class="site-footer__social" />
 		</div>
 
 		<div class="site-footer__col">
-			<p class="eyebrow site-footer__heading">Studio</p>
-			<p class="site-footer__address">
-				39/1 Soi Thonglor 2, Chomphon, Chatuchak<br />
-				Bangkok Metropolis 10900
+			<p class="eyebrow site-footer__heading" data-i18n="footer.studio">Studio</p>
+			<p class="site-footer__address" data-i18n="common.address">
+				39/1 Soi Thonglor 2, Chomphon, Chatuchak, Bangkok Metropolis 10900
 			</p>
 		</div>
 	</div>
 
 	<div class="container site-footer__base">
-		<ul class="site-footer__policy">
-			<li>
-				กรุณาตรวจสอบที่อยู่จัดส่งให้ถูกต้องก่อนกดชำระเงิน เนื่องจากไม่สามารถแก้ไขภายหลังได้
-			</li>
-			<li>
-				กรุณาตรวจสอบขนาดของสินค้าให้เรียบร้อย หรือหากไม่แน่ใจ สามารถสอบถามแอดมินได้ตลอดเวลา
-			</li>
-			<li>ทางร้านขอสงวนสิทธิ์การคืน หรือเปลี่ยนสินค้า เนื่องจากเหตุผลใส่แล้วไม่เหมาะกับลูกค้า</li>
-			<li>
-				สามารถเปลี่ยนไซส์ได้ภายใน 7 วัน โดยสินค้าและป้าย TAG ต้องอยู่ในสภาพเดิม
-				ทางร้านจะจัดส่งไปเปลี่ยนภายใน 7-10 วันทำการ
-			</li>
-			<li>
-				สั่งตัดกางเกงตามไซส์ และสอบถามรายละเอียดอื่นๆ เพิ่มเติม สามารถแอด LINE OFFICIAL: @studiokath
-			</li>
-		</ul>
-		<p>&copy; {year} Studio Kath. All pieces cut to order.</p>
+		<div class="site-footer__base-row">
+			<p>&copy; {year} Studio Kath. <span data-i18n="footer.copyright">All pieces cut to order.</span></p>
+			<a href="/privacy" class="site-footer__privacy-link" data-i18n="footer.privacyLink"
+				>Privacy Notice</a
+			>
+		</div>
 	</div>
 </footer>
 
@@ -149,16 +137,21 @@ const year = new Date().getFullYear();
 		margin: 0;
 	}
 
-	.site-footer__policy {
-		list-style: none;
-		margin: 0 0 var(--space-md);
-		padding: 0;
+	.site-footer__base-row {
 		display: flex;
-		flex-direction: column;
-		gap: 0.3em;
-		max-width: 46rem;
-		font-size: 0.7rem;
-		line-height: var(--leading-normal);
-		color: color-mix(in oklch, var(--color-paper) 32%, transparent);
+		flex-wrap: wrap;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: var(--space-sm);
+	}
+
+	.site-footer__privacy-link {
+		color: inherit;
+		text-decoration: underline;
+		text-underline-offset: 0.2em;
+	}
+
+	.site-footer__privacy-link:hover {
+		color: color-mix(in oklch, var(--color-paper) 80%, transparent);
 	}
 </style>

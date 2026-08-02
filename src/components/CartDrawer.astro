@@ -4,8 +4,14 @@
 <dialog class="cart-dialog" data-cart-dialog aria-label="Shopping cart">
 	<div class="cart-dialog__panel">
 		<header class="cart-dialog__header">
-			<h2 class="label">Cart</h2>
-			<button type="button" class="icon-btn" data-cart-close aria-label="Close cart">
+			<h2 class="label" data-i18n="cart.title">Cart</h2>
+			<button
+				type="button"
+				class="icon-btn"
+				data-cart-close
+				data-i18n-attr="aria-label:cart.closeAria"
+				aria-label="Close cart"
+			>
 				<svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
 					<path
 						d="M5 5l14 14M19 5 5 19"
@@ -17,18 +23,22 @@
 		</header>
 
 		<div class="cart-dialog__empty" data-cart-empty>
-			<p class="prose">Your cart is empty.</p>
-			<a href="/collection" class="btn btn-ghost" data-cart-close>Browse the Collection</a>
+			<p class="prose" data-i18n="cart.empty">Your cart is empty.</p>
+			<a href="/collection" class="btn btn-ghost" data-cart-close data-i18n="common.browseCollection"
+				>Browse the Collection</a
+			>
 		</div>
 
 		<ul class="cart-dialog__list" data-cart-list aria-live="polite"></ul>
 
 		<footer class="cart-dialog__footer" data-cart-footer hidden>
 			<div class="cart-dialog__total-row">
-				<span class="label">Total</span>
+				<span class="label" data-i18n="common.total">Total</span>
 				<span class="title" data-cart-total>฿0</span>
 			</div>
-			<a href="/checkout" class="btn btn-primary cart-dialog__checkout"> Checkout </a>
+			<a href="/checkout" class="btn btn-primary cart-dialog__checkout" data-i18n="cart.checkout">
+				Checkout
+			</a>
 		</footer>
 	</div>
 </dialog>

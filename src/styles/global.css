@@ -6,8 +6,12 @@
    ============================================================ */
 
 /* Fonts are loaded via <link> in Layout.astro (Google Fonts CSS2 API for
-   Libre Caslon Display, Fontshare CSS API for Switzer) rather than hardcoded
-   @font-face src URLs, since those hashed file paths aren't stable to guess. */
+   Libre Caslon Display + Taviraj + Noto Sans Thai, Fontshare CSS API for
+   Switzer) rather than hardcoded @font-face src URLs, since those hashed
+   file paths aren't stable to guess. Taviraj/Noto Sans Thai are Thai-script
+   fallbacks in the same font stack — Libre Caslon/Switzer have no Thai
+   glyphs, so browsers fall through to them automatically wherever Thai text
+   appears (no separate lang-specific classes needed). */
 
 :root {
 	/* ---- Color: Primary ---- */
@@ -27,8 +31,9 @@
 	--color-border-strong: oklch(78% 0.007 25);
 
 	/* ---- Typography ---- */
-	--font-display: 'Libre Caslon Display', Georgia, 'Times New Roman', serif;
-	--font-body: 'Switzer', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+	--font-display: 'Libre Caslon Display', 'Taviraj', Georgia, 'Times New Roman', serif;
+	--font-body: 'Switzer', 'Noto Sans Thai', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+		system-ui, sans-serif;
 
 	--text-display: clamp(2.75rem, 1.6rem + 4.5vw, 5.5rem);
 	--text-headline: clamp(1.75rem, 1.35rem + 1.8vw, 2.75rem);

@@ -1,0 +1,156 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const sections = [
+	{
+		key: 'privacy.h1',
+		heading: '1. Information We Collect',
+		body: [
+			{
+				key: 'privacy.h1.p1',
+				text: 'When you place an order, we ask for your name, shipping address, and phone number through the checkout form — nothing more.',
+			},
+			{
+				key: 'privacy.h1.p2',
+				text: "We don't use cookies or marketing trackers on this site. Your cart and order details are stored only in your own browser (local storage), so your information fills back in the next time you order.",
+			},
+		],
+	},
+	{
+		key: 'privacy.h2',
+		heading: '2. Purpose & Legal Basis',
+		body: [
+			{
+				key: 'privacy.h2.p1',
+				text: 'We use the information above only to ship your order and to contact you about that order or delivery issues — never for marketing or any other purpose.',
+			},
+			{
+				key: 'privacy.h2.p2',
+				text: 'The legal basis is necessity for performing our contract of sale with you (Section 24(3) of the Personal Data Protection Act B.E. 2562).',
+			},
+		],
+	},
+	{
+		key: 'privacy.h3',
+		heading: '3. Sharing With Third Parties',
+		body: [
+			{
+				key: 'privacy.h3.p1',
+				text: 'We share your name, address, and phone number only with the courier delivering your order. We never sell, rent, or share your data for marketing purposes.',
+			},
+		],
+	},
+	{
+		key: 'privacy.h4',
+		heading: '4. Retention Period',
+		body: [
+			{
+				key: 'privacy.h4.p1',
+				text: 'We keep your information only as long as needed to fulfil your order and handle after-sales requests (such as a size exchange within 7 days). After that, you may request deletion as described in Section 5.',
+			},
+		],
+	},
+	{
+		key: 'privacy.h5',
+		heading: '5. Your Rights',
+		body: [
+			{
+				key: 'privacy.h5.p1',
+				text: 'You may request to access, correct, or delete your personal data at any time by contacting us at info.studiokath@gmail.com or LINE OFFICIAL: @studiokath.',
+			},
+			{
+				key: 'privacy.h5.p2',
+				text: 'If you believe we have processed your data unlawfully, you may file a complaint with the Personal Data Protection Committee (PDPC) at pdpc.or.th.',
+			},
+		],
+	},
+	{
+		key: 'privacy.h6',
+		heading: '6. Contact Us',
+		body: [
+			{
+				key: 'privacy.h6.p1',
+				text: 'Studio Kath — 39/1 Soi Thonglor 2, Chomphon, Chatuchak, Bangkok Metropolis 10900',
+			},
+			{ key: 'privacy.h6.p2', text: 'Email: info.studiokath@gmail.com' },
+		],
+	},
+];
+---
+
+<Layout
+	title="Privacy Notice"
+	description="How Studio Kath collects, uses, and protects your personal data."
+>
+	<header class="container privacy-header">
+		<p class="eyebrow" data-i18n="privacy.eyebrow">Privacy Notice</p>
+		<h1 class="display privacy-header__title" data-i18n="privacy.title">Privacy Notice</h1>
+		<p class="prose privacy-header__lead" data-i18n="privacy.lead">
+			This notice explains how Studio Kath collects, uses, and protects your personal
+			data, in line with the Personal Data Protection Act B.E. 2562 (PDPA).
+		</p>
+	</header>
+
+	<section class="container privacy-body">
+		{
+			sections.map((section) => (
+				<div class="privacy-section">
+					<h2 class="title privacy-section__heading" data-i18n={section.key}>
+						{section.heading}
+					</h2>
+					{section.body.map((paragraph) => (
+						<p class="prose" data-i18n={paragraph.key}>
+							{paragraph.text}
+						</p>
+					))}
+				</div>
+			))
+		}
+		<p class="privacy-updated" data-i18n="privacy.updated">Last updated: August 2026</p>
+	</section>
+</Layout>
+
+<style>
+	.privacy-header {
+		padding-top: var(--space-2xl);
+		max-width: 42rem;
+	}
+
+	.privacy-header__title {
+		margin-block: var(--space-sm) var(--space-md);
+	}
+
+	.privacy-header__lead {
+		font-size: var(--text-body-lg);
+	}
+
+	.privacy-body {
+		padding-block: var(--space-xl) var(--space-3xl);
+		max-width: 42rem;
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-xl);
+	}
+
+	.privacy-section {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-sm);
+	}
+
+	.privacy-section__heading {
+		margin: 0;
+	}
+
+	.privacy-section .prose + .prose {
+		margin-top: 0;
+	}
+
+	.privacy-updated {
+		margin: 0;
+		padding-top: var(--space-lg);
+		border-top: 1px solid var(--color-border);
+		font-size: var(--text-caption);
+		color: var(--color-graphite);
+	}
+</style>

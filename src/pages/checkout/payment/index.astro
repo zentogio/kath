@@ -4,29 +4,33 @@ import Layout from '../../../layouts/Layout.astro';
 
 <Layout title="Payment" description="Complete your payment for Studio Kath.">
 	<header class="container checkout-header">
-		<p class="eyebrow">Checkout</p>
-		<h1 class="display checkout-header__title">Choose how to pay.</h1>
+		<p class="eyebrow" data-i18n="checkout.eyebrow">Checkout</p>
+		<h1 class="display checkout-header__title" data-i18n="payment.title">Choose how to pay.</h1>
 	</header>
 
 	<section class="container payment-grid" data-payment-grid hidden>
 		<div class="payment-summary">
-			<p class="label payment-summary__order">Order <span data-payment-order-id></span></p>
+			<p class="label payment-summary__order"
+				><span data-i18n="payment.order">Order</span> <span data-payment-order-id></span></p
+			>
 			<p class="payment-summary__total" data-payment-total></p>
 		</div>
 
 		<div class="payment-methods">
 			<div class="payment-tabs" role="tablist">
-				<button type="button" class="payment-tab is-active" data-payment-tab="qr"
+				<button type="button" class="payment-tab is-active" data-payment-tab="qr" data-i18n="payment.tabQr"
 					>PromptPay QR</button
 				>
-				<button type="button" class="payment-tab" data-payment-tab="bank">Bank Transfer</button>
+				<button type="button" class="payment-tab" data-payment-tab="bank" data-i18n="payment.tabBank"
+					>Bank Transfer</button
+				>
 			</div>
 
 			<div class="payment-panel" data-payment-panel="qr">
 				<div class="payment-qr" data-payment-qr>
 					<div class="payment-qr__placeholder" aria-hidden="true"></div>
 				</div>
-				<p class="prose payment-panel__note">
+				<p class="prose payment-panel__note" data-i18n="payment.qrNote">
 					Scan with your banking app — the amount is filled in automatically.
 				</p>
 			</div>
@@ -34,35 +38,35 @@ import Layout from '../../../layouts/Layout.astro';
 			<div class="payment-panel" data-payment-panel="bank" hidden>
 				<dl class="payment-bank">
 					<div>
-						<dt>Bank</dt>
+						<dt data-i18n="payment.bankLabel">Bank</dt>
 						<dd>Kasikornbank (K PLUS)</dd>
 					</div>
 					<div>
-						<dt>Account name</dt>
+						<dt data-i18n="payment.accountNameLabel">Account name</dt>
 						<dd>Studio Kath</dd>
 					</div>
 					<div>
-						<dt>Account number</dt>
+						<dt data-i18n="payment.accountNumberLabel">Account number</dt>
 						<dd>XXX-X-XXXXX-X</dd>
 					</div>
 				</dl>
-				<p class="prose payment-panel__note">
+				<p class="prose payment-panel__note" data-i18n="payment.bankNote">
 					Transfer the exact total above, then confirm below.
 				</p>
 			</div>
 
-			<button type="button" class="btn btn-primary payment-confirm" data-payment-confirm
+			<button type="button" class="btn btn-primary payment-confirm" data-payment-confirm data-i18n="payment.confirm"
 				>I've Completed Payment</button
 			>
-			<p class="payment-note">
+			<p class="payment-note" data-i18n="payment.confirmNote">
 				We'll confirm your payment shortly — no need to send a slip separately.
 			</p>
 		</div>
 	</section>
 
 	<div class="container checkout-empty" data-checkout-empty hidden>
-		<p class="prose">No order in progress.</p>
-		<a href="/collection" class="btn btn-ghost">Browse the Collection</a>
+		<p class="prose" data-i18n="payment.empty">No order in progress.</p>
+		<a href="/collection" class="btn btn-ghost" data-i18n="common.browseCollection">Browse the Collection</a>
 	</div>
 
 	<script src="../../../scripts/checkout-payment.ts"></script>

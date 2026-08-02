@@ -9,7 +9,10 @@ import {
 	type ContactInfo,
 	type OrderItem,
 } from '../data/order';
-import { productImage } from '../data/products';
+import { products, productImage, productName } from '../data/products';
+import { isValidThaiPostcode } from '../data/thai-postcode';
+import { getLang, onLangChange } from '../i18n/state';
+import { t } from '../i18n/dict';
 
 const ADDRESS_FIELDS = [
 	'houseNo',
@@ -38,18 +41,23 @@ function renderSummary(): OrderItem[] {
 	if (emptyState) emptyState.hidden = true;
 
 	if (list) {
+		const lang = getLang();
+		const sizeLabel = t('cart.size', lang);
+		const qtyLabel = t('common.qty', lang);
 		list.innerHTML = items
-			.map(
-				(item) => `
+			.map((item) => {
+				const product = products.find((p) => p.id === item.id);
+				const name = product ? productName(product, lang) : item.name;
+				return `
 				<li class="checkout-item">
 					<img src="${productImage(item.image)}" alt="" width="72" height="90" loading="lazy" />
 					<div class="checkout-item__body">
-						<p class="checkout-item__name">${item.name}</p>
-						<p class="checkout-item__meta">Size ${item.size} &middot; Qty ${item.qty}</p>
+						<p class="checkout-item__name">${name}</p>
+						<p class="checkout-item__meta">${sizeLabel} ${item.size} &middot; ${qtyLabel} ${item.qty}</p>
 					</div>
 					<p class="checkout-item__price">${formatPrice(item.price * item.qty)}</p>
-				</li>`,
-			)
+				</li>`;
+			})
 			.join('');
 	}
 
@@ -90,6 +98,34 @@ function initPhoneMask() {
 	input.addEventListener('input', () => {
 		input.value = formatPhone(input.value);
 	});
+}
+
+// Postcode is optional, but if the customer entered one it must be a real
+// Thai postcode (5 digits, valid province prefix) — see src/data/thai-postcode.ts.
+function initPostcodeValidation() {
+	const input = document.querySelector<HTMLInputElement>('[data-postcode-input]');
+	const error = document.querySelector<HTMLElement>('[data-postcode-error]');
+	if (!input || !error) return;
+	input.addEventListener('input', () => {
+		input.value = input.value.replace(/\D/g, '').slice(0, 5);
+		error.hidden = true;
+		input.setCustomValidity('');
+	});
+}
+
+function validatePostcodeField(): boolean {
+	const input = document.querySelector<HTMLInputElement>('[data-postcode-input]');
+	const error = document.querySelector<HTMLElement>('[data-postcode-error]');
+	if (!input || !error) return true;
+	const value = input.value.trim();
+	if (value === '' || isValidThaiPostcode(value)) {
+		error.hidden = true;
+		input.setCustomValidity('');
+		return true;
+	}
+	error.hidden = false;
+	input.setCustomValidity(t('checkout.postcodeError', getLang()));
+	return false;
 }
 
 function readContactFromForm(form: HTMLFormElement): ContactInfo {
@@ -150,7 +186,8 @@ function initForm(items: OrderItem[]) {
 	form.addEventListener('submit', (event) => {
 		event.preventDefault();
 		if (items.length === 0) return;
-		if (!form.reportValidity()) return;
+		const postcodeOk = validatePostcodeField();
+		if (!form.reportValidity() || !postcodeOk) return;
 
 		pending = { items, contact: readContactFromForm(form) };
 		dialog?.showModal();
@@ -160,4 +197,6 @@ function initForm(items: OrderItem[]) {
 const items = renderSummary();
 prefillForm();
 initPhoneMask();
+initPostcodeValidation();
 initForm(items);
+onLangChange(() => renderSummary());

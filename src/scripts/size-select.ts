@@ -1,4 +1,6 @@
-import { products, productImage, formatPrice } from '../data/products';
+import { products, productImage, productName, formatPrice } from '../data/products';
+import { getLang, onLangChange } from '../i18n/state';
+import { t } from '../i18n/dict';
 
 let activeProductId: string | null = null;
 let activeSize: string | null = null;
@@ -7,8 +9,11 @@ let qty = 1;
 function updateConfirmState() {
 	const confirmBtn = document.querySelector<HTMLButtonElement>('[data-size-confirm]');
 	if (!confirmBtn) return;
+	const lang = getLang();
 	confirmBtn.disabled = !activeSize;
-	confirmBtn.textContent = activeSize ? `Add to Cart — Qty ${qty}` : 'Select a Size';
+	confirmBtn.textContent = activeSize
+		? `${t('sizeDialog.confirmWithQty', lang)} ${qty}`
+		: t('sizeDialog.selectPrompt', lang);
 }
 
 function updateQtyDisplay() {
@@ -42,7 +47,7 @@ function openSizeSelect(productId: string) {
 		image.src = productImage(product.image);
 		image.alt = product.alt;
 	}
-	if (name) name.textContent = product.name;
+	if (name) name.textContent = productName(product, getLang());
 	if (price) price.textContent = formatPrice(product.price);
 
 	dialog?.showModal();
@@ -110,6 +115,14 @@ function initSizeSelect() {
 		}
 	});
 	observer.observe(dialog, { attributes: true, attributeFilter: ['open'] });
+
+	onLangChange(() => {
+		if (!dialog.open || !activeProductId) return;
+		const product = products.find((p) => p.id === activeProductId);
+		const name = dialog.querySelector<HTMLElement>('[data-size-name]');
+		if (product && name) name.textContent = productName(product, getLang());
+		updateConfirmState();
+	});
 }
 
 initSizeSelect();

@@ -7,6 +7,7 @@
 			type="button"
 			class="icon-btn confirm-dialog__close"
 			data-confirm-close
+			data-i18n-attr="aria-label:common.close"
 			aria-label="Close"
 		>
 			<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -18,22 +19,38 @@
 			</svg>
 		</button>
 
-		<p class="title confirm-dialog__title">กรุณาอ่านก่อนดำเนินการต่อ</p>
+		<p class="title confirm-dialog__title" data-i18n="checkoutConfirm.title">
+			Please read before continuing
+		</p>
 
 		<ul class="confirm-dialog__list">
-			<li>กรุณาตรวจสอบที่อยู่จัดส่งให้ถูกต้องก่อนกดชำระเงิน เนื่องจากไม่สามารถแก้ไขภายหลังได้</li>
-			<li>กรุณาตรวจสอบขนาดของสินค้าให้เรียบร้อย หรือหากไม่แน่ใจ สามารถสอบถามแอดมินได้ตลอดเวลา</li>
-			<li>ทางร้านขอสงวนสิทธิ์การคืน หรือเปลี่ยนสินค้า เนื่องจากเหตุผลใส่แล้วไม่เหมาะกับลูกค้า</li>
-			<li>
-				สามารถเปลี่ยนไซส์ได้ภายใน 7 วัน โดยสินค้าและป้าย TAG ต้องอยู่ในสภาพเดิม
-				ทางร้านจะจัดส่งไปเปลี่ยนภายใน 7-10 วันทำการ
+			<li data-i18n="checkoutConfirm.bullet1">
+				Please double-check your shipping address before paying — it cannot be changed
+				afterward.
 			</li>
-			<li>สั่งตัดกางเกงตามไซส์ และสอบถามรายละเอียดอื่นๆ เพิ่มเติม สามารถแอด LINE OFFICIAL: @studiokath</li>
+			<li data-i18n="checkoutConfirm.bullet2">
+				Please double-check your size — if you're unsure, feel free to ask our admin
+				anytime.
+			</li>
+			<li data-i18n="checkoutConfirm.bullet3">
+				We do not accept returns or exchanges for reasons of personal fit or preference
+				after wearing.
+			</li>
+			<li data-i18n="checkoutConfirm.bullet4">
+				Size exchanges are accepted within 7 days, with the item and tags in original
+				condition — we'll ship the replacement within 7–10 business days.
+			</li>
+			<li data-i18n="checkoutConfirm.bullet5">
+				For made-to-order trousers or any other questions, add us on LINE OFFICIAL:
+				@studiokath
+			</li>
 		</ul>
 
 		<div class="confirm-dialog__actions">
-			<button type="button" class="btn btn-ghost" data-confirm-close>ปิด</button>
-			<button type="button" class="btn btn-primary" data-confirm-proceed>ไปหน้าชำระเงิน</button>
+			<button type="button" class="btn btn-ghost" data-confirm-close data-i18n="common.close">Close</button>
+			<button type="button" class="btn btn-primary" data-confirm-proceed data-i18n="checkoutConfirm.proceed"
+				>Go to Payment</button
+			>
 		</div>
 	</div>
 </dialog>
