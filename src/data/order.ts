@@ -17,8 +17,25 @@ export interface OrderItem {
 
 export interface ContactInfo {
 	name: string;
-	address: string;
+	houseNo: string;
+	village: string;
+	soi: string;
+	road: string;
+	subdistrict: string;
+	district: string;
+	province: string;
+	postalCode: string;
 	phone: string;
+}
+
+// Joins the structured address fields into one display line, skipping
+// whichever ones the customer left blank.
+export function formatAddress(info: ContactInfo): string {
+	const houseLine = [info.houseNo, info.village, info.soi, info.road].filter(Boolean).join(' ');
+	const areaLine = [info.subdistrict, info.district, info.province, info.postalCode]
+		.filter(Boolean)
+		.join(' ');
+	return [houseLine, areaLine].filter(Boolean).join(', ');
 }
 
 export interface Order {

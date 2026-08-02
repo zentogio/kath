@@ -1,5 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import CheckoutConfirmDialog from '../../components/CheckoutConfirmDialog.astro';
 ---
 
 <Layout title="Checkout" description="Review your order and enter shipping details.">
@@ -25,13 +26,64 @@ import Layout from '../../layouts/Layout.astro';
 				<span class="label">Full name</span>
 				<input type="text" name="name" required autocomplete="name" />
 			</label>
-			<label class="checkout-field">
+
+			<div class="checkout-field">
 				<span class="label">Address</span>
-				<textarea name="address" required autocomplete="street-address" rows="3"></textarea>
-			</label>
+				<div class="checkout-address-grid">
+					<label class="checkout-field">
+						<span class="checkout-field__sublabel">House No.</span>
+						<input type="text" name="houseNo" autocomplete="address-line1" />
+					</label>
+					<label class="checkout-field">
+						<span class="checkout-field__sublabel">Village / Building</span>
+						<input type="text" name="village" />
+					</label>
+					<label class="checkout-field">
+						<span class="checkout-field__sublabel">Soi</span>
+						<input type="text" name="soi" />
+					</label>
+					<label class="checkout-field">
+						<span class="checkout-field__sublabel">Road</span>
+						<input type="text" name="road" />
+					</label>
+					<label class="checkout-field">
+						<span class="checkout-field__sublabel">Subdistrict</span>
+						<input type="text" name="subdistrict" />
+					</label>
+					<label class="checkout-field">
+						<span class="checkout-field__sublabel">District</span>
+						<input type="text" name="district" />
+					</label>
+					<label class="checkout-field">
+						<span class="checkout-field__sublabel">Province</span>
+						<input type="text" name="province" autocomplete="address-level1" />
+					</label>
+					<label class="checkout-field">
+						<span class="checkout-field__sublabel">Postal Code</span>
+						<input
+							type="text"
+							name="postalCode"
+							inputmode="numeric"
+							autocomplete="postal-code"
+							maxlength="5"
+						/>
+					</label>
+				</div>
+				<p class="checkout-form__note">Leave any field blank if it doesn't apply.</p>
+			</div>
+
 			<label class="checkout-field">
 				<span class="label">Phone</span>
-				<input type="tel" name="phone" required autocomplete="tel" />
+				<input
+					type="tel"
+					name="phone"
+					required
+					autocomplete="tel"
+					inputmode="numeric"
+					placeholder="095-245-2424"
+					maxlength="12"
+					data-phone-input
+				/>
 			</label>
 			<p class="checkout-form__note">
 				Saved on this device — it'll fill in automatically next time you order.
@@ -46,6 +98,8 @@ import Layout from '../../layouts/Layout.astro';
 		<p class="prose">Your cart is empty.</p>
 		<a href="/collection" class="btn btn-ghost">Browse the Collection</a>
 	</div>
+
+	<CheckoutConfirmDialog />
 
 	<script src="../../scripts/checkout.ts"></script>
 </Layout>
@@ -149,6 +203,23 @@ import Layout from '../../layouts/Layout.astro';
 		display: flex;
 		flex-direction: column;
 		gap: var(--space-2xs);
+	}
+
+	.checkout-field__sublabel {
+		font-size: var(--text-caption);
+		color: var(--color-graphite);
+	}
+
+	.checkout-address-grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: var(--space-sm);
+	}
+
+	@media (max-width: 480px) {
+		.checkout-address-grid {
+			grid-template-columns: 1fr;
+		}
 	}
 
 	.checkout-field input,
