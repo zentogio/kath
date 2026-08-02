@@ -79,10 +79,10 @@ const scatterIds = [
 
 	<section class="container flanked" data-reveal-group>
 		<img
-			src={productImage('trousers-taupe-plaid')}
-			alt="A model in the taupe plaid wide-leg trousers on a city street"
-			width={1206}
-			height={1608}
+			src={productImage('trousers-indigo-gingham')}
+			alt="A model in the indigo gingham wide-leg trousers"
+			width={1080}
+			height={1080}
 			loading="lazy"
 			class="flanked__photo"
 			data-reveal="left"
@@ -147,7 +147,7 @@ const scatterIds = [
 
 	<section class="container scatter-gallery">
 		<h2 class="headline scatter-gallery__heading">Worn, not just sold.</h2>
-		<ul class="scatter-column" data-reveal-group>
+		<ul class="scatter-column">
 			{
 				scatterIds
 					.map((id) => products.find((p) => p.id === id))
@@ -158,7 +158,7 @@ const scatterIds = [
 								href="/collection"
 								class="scatter-item__link"
 								aria-label={`Shop the collection — ${product.name}`}
-								data-reveal="left"
+								data-scroll-reveal
 							>
 								<img
 									src={productImage(product.image)}
@@ -169,7 +169,7 @@ const scatterIds = [
 									class="scatter-item__photo"
 								/>
 							</a>
-							<div class="scatter-item__copy" data-reveal="right">
+							<div class="scatter-item__copy" data-scroll-reveal>
 								<p class="eyebrow">Now in the Studio</p>
 								<h3 class="headline scatter-item__name">{product.name}</h3>
 								<p class="prose">{product.blurb}</p>
@@ -198,6 +198,7 @@ const scatterIds = [
 	</section>
 
 	<script src="../scripts/hero-cycle.ts"></script>
+	<script src="../scripts/scatter-reveal.ts"></script>
 </Layout>
 
 <style>
@@ -635,34 +636,25 @@ const scatterIds = [
 		border-color: var(--color-accent);
 	}
 
-	/* Where the browser supports native scroll-linked animation, use the
-	   real thing — photo and copy rise into place continuously as the item
-	   scrolls through view, instead of firing once. Overrides the
-	   [data-reveal] base state from global.css, which stays the fallback
-	   (IntersectionObserver, one-shot) for browsers that don't support
-	   animation-timeline. */
-	@supports (animation-timeline: view()) {
-		@media (prefers-reduced-motion: no-preference) {
-			.scatter-item__link[data-reveal],
-			.scatter-item__copy[data-reveal] {
-				opacity: 1;
-				transform: none;
-				transition: none;
-				animation: scatter-rise-in backwards;
-				animation-timeline: view();
-				animation-range: cover 0% cover 40%;
-			}
-		}
+	/* Continuous scroll-linked reveal, driven by scatter-reveal.ts setting
+	   --progress (0→1) on every scroll frame — works in every browser,
+	   unlike native animation-timeline. --progress defaults to 1 (fully in
+	   place) so the row reads correctly with JS disabled or before the
+	   script runs. */
+	.scatter-item__link,
+	.scatter-item__copy {
+		--progress: 1;
 	}
 
-	@keyframes scatter-rise-in {
-		from {
-			opacity: 0;
-			transform: translateY(40px);
+	@media (prefers-reduced-motion: no-preference) {
+		.scatter-item__link {
+			opacity: var(--progress);
+			transform: translate3d(calc((1 - var(--progress)) * -32px), calc((1 - var(--progress)) * 24px), 0);
 		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
+
+		.scatter-item__copy {
+			opacity: var(--progress);
+			transform: translate3d(calc((1 - var(--progress)) * 32px), calc((1 - var(--progress)) * 24px), 0);
 		}
 	}
 
