@@ -1,7 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { Image } from 'astro:assets';
-import { products, unsplashUrl, productImage } from '../data/products';
+import { products, productImage } from '../data/products';
 
 const tickerItems = ['Hand-Cut', 'Small Batch', 'Numbered, Not Mass-Produced', 'Made to Last'];
 
@@ -19,11 +18,11 @@ const scatterIds = [
 	description="Studio Kath — hand-cut, small-batch clothing made to last, not to trend."
 >
 	<section class="hero">
-		<Image
-			src={unsplashUrl('1758922584983-82ffd5720c6a', 2000)}
-			alt="A model in a fine-knit turtleneck against a minimal studio backdrop"
-			width={1800}
-			height={2200}
+		<img
+			src={productImage('collar-set-peach')}
+			alt="A model in the peach collared shirt set on a sunlit tiled staircase"
+			width={1206}
+			height={1508}
 			loading="eager"
 			fetchpriority="high"
 			class="hero__image"
@@ -46,11 +45,11 @@ const scatterIds = [
 	</section>
 
 	<section class="container flanked" data-reveal-group>
-		<Image
-			src={unsplashUrl('1774897795463-e6e4618a4997', 900)}
-			alt="A candid studio portrait"
-			width={700}
-			height={875}
+		<img
+			src={productImage('trousers-taupe-plaid')}
+			alt="A model in the taupe plaid wide-leg trousers on a city street"
+			width={1206}
+			height={1608}
 			loading="lazy"
 			class="flanked__photo"
 			data-reveal="left"
@@ -63,11 +62,11 @@ const scatterIds = [
 				a schedule.
 			</p>
 		</div>
-		<Image
-			src={unsplashUrl('1779466801936-e400e314aca1', 900)}
-			alt="A relaxed portrait in the studio"
-			width={700}
-			height={875}
+		<img
+			src={productImage('satin-set-powder-blue')}
+			alt="A model in the powder blue satin shirt and trouser set"
+			width={1080}
+			height={1080}
 			loading="lazy"
 			class="flanked__photo"
 			data-reveal="right"
@@ -115,31 +114,38 @@ const scatterIds = [
 
 	<section class="container scatter-gallery">
 		<h2 class="headline scatter-gallery__heading">Worn, not just sold.</h2>
-		<ul class="scatter-column">
+		<ul class="scatter-column" data-reveal-group>
 			{
 				scatterIds
 					.map((id) => products.find((p) => p.id === id))
 					.filter((p): p is (typeof products)[number] => Boolean(p))
 					.map((product) => (
-						<li class="scatter-item" data-scroll-progress>
+						<li class="scatter-item">
 							<a
 								href="/collection"
 								class="scatter-item__link"
 								aria-label={`Shop the collection — ${product.name}`}
+								data-reveal="left"
 							>
 								<img
 									src={productImage(product.image)}
 									alt={product.alt}
-									width={1200}
-									height={1500}
+									width={1206}
+									height={1508}
 									loading="lazy"
 									class="scatter-item__photo"
 								/>
 							</a>
+							<div class="scatter-item__copy" data-reveal="right">
+								<p class="eyebrow">Now in the Studio</p>
+								<h3 class="headline scatter-item__name">{product.name}</h3>
+								<p class="prose">{product.blurb}</p>
+								<a href="/collection" class="scatter-item__shop">Shop the Collection &rarr;</a>
+							</div>
 						</li>
 					))
 			}
-			<li class="scatter-item scatter-item--cta" data-scroll-progress>
+			<li class="scatter-item scatter-item--cta" data-reveal>
 				<a href="/collection" class="scatter-item__cta">
 					<span class="headline">View the full Collection</span>
 					<span class="prose scatter-item__cta-sub">
@@ -158,7 +164,6 @@ const scatterIds = [
 		</div>
 	</section>
 
-	<script src="../scripts/scroll-progress.ts"></script>
 </Layout>
 
 <style>
@@ -467,11 +472,12 @@ const scatterIds = [
 		font-size: var(--text-body);
 	}
 
-	/* A single straight column of large photos in varied sizes — not a
-	   grid. Each reveals on its own as it scrolls into view (data-reveal
-	   from reveal.ts); no price anywhere. The column ends in a full-size
-	   closing panel into the Collection, which carries the real photos
-	   and prices this section deliberately leaves out. */
+	/* A column of real product shots, each paired with its own copy — the
+	   photo sits fixed at the left, the copy reveals in from the right as
+	   it scrolls into view. Each image keeps its own true aspect ratio
+	   (no forced crop) since these are real product photos, not a curated
+	   stock set. The column ends in a full-size closing panel into the
+	   Collection, which carries the real photos and prices in full. */
 	.scatter-gallery {
 		padding-block: var(--space-2xl) var(--space-3xl);
 	}
@@ -487,57 +493,42 @@ const scatterIds = [
 		padding: 0;
 		display: flex;
 		flex-direction: column;
-		align-items: center;
 		gap: var(--space-2xl);
 	}
 
 	.scatter-item {
-		--progress: 1;
-		width: 100%;
-		max-width: 40rem;
-		aspect-ratio: 4 / 5;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: var(--space-xl);
+	}
+
+	@media (max-width: 700px) {
+		.scatter-item {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+	}
+
+	.scatter-item__link {
+		flex: 0 0 auto;
+		display: block;
+		width: min(24rem, 46%);
 		overflow: hidden;
 		background: var(--color-paper-sunk);
 	}
 
-	/* Continuous scroll-linked slide, driven by scroll-progress.ts setting
-	   --progress (0→1) on every scroll frame — works in every browser,
-	   unlike native animation-timeline. --progress defaults to 1 (fully in
-	   place) so the column reads correctly with JS disabled or before the
-	   script runs. */
-	@media (prefers-reduced-motion: no-preference) {
-		.scatter-item {
-			transform: translateX(calc((1 - var(--progress)) * -100%));
+	@media (max-width: 700px) {
+		.scatter-item__link {
+			width: 100%;
+			max-width: 22rem;
 		}
 	}
 
-	/* Cycle of four sizes/ratios so the straight column still reads as
-	   varied, not a repeated template. */
-	.scatter-item:nth-child(4n + 1) {
-		max-width: 56rem;
-		aspect-ratio: 16 / 9;
-	}
-
-	.scatter-item:nth-child(4n + 3) {
-		max-width: 34rem;
-		aspect-ratio: 1 / 1;
-	}
-
-	.scatter-item:nth-child(4n) {
-		max-width: 46rem;
-		aspect-ratio: 3 / 4;
-	}
-
-	.scatter-item__link {
+	.scatter-item__photo {
 		display: block;
 		width: 100%;
-		height: 100%;
-	}
-
-	.scatter-item__photo {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
+		height: auto;
 		filter: contrast(1.03) saturate(1.05);
 		transition: transform var(--duration-slow) var(--ease-out-quart);
 	}
@@ -548,9 +539,32 @@ const scatterIds = [
 		}
 	}
 
+	.scatter-item__copy {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-2xs);
+	}
+
+	.scatter-item__name {
+		margin: 0.2em 0 0.1em;
+	}
+
+	.scatter-item__shop {
+		margin-top: var(--space-xs);
+		color: var(--color-ink);
+		width: fit-content;
+		border-bottom: 1px solid var(--color-border-strong);
+		text-decoration: none;
+		transition: border-color var(--duration-fast) var(--ease-out-quart);
+	}
+
+	.scatter-item__shop:hover {
+		border-color: var(--color-accent);
+	}
+
 	.scatter-item--cta {
-		max-width: 56rem;
-		aspect-ratio: auto;
+		display: block;
 	}
 
 	.scatter-item__cta {

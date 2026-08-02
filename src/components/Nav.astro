@@ -115,10 +115,12 @@ const allLinks = [...leftLinks, ...rightLinks];
 		backdrop-filter: blur(10px);
 		border-bottom: 1px solid transparent;
 		box-shadow: 0 0 0 0 rgba(20, 12, 12, 0);
+		transform: translateY(0);
 		transition:
 			background-color var(--duration-base) var(--ease-out-quart),
 			border-color var(--duration-base) var(--ease-out-quart),
-			box-shadow var(--duration-base) var(--ease-out-quart);
+			box-shadow var(--duration-base) var(--ease-out-quart),
+			transform var(--duration-base) var(--ease-out-quart);
 	}
 
 	/* Once scrolled, the nav solidifies from a light frosted wash (whatever
@@ -128,6 +130,12 @@ const allLinks = [...leftLinks, ...rightLinks];
 		background: var(--color-paper);
 		border-bottom-color: var(--color-border);
 		box-shadow: 0 1px 24px rgba(20, 12, 12, 0.06);
+	}
+
+	/* Tucks the whole bar up out of view on the way down, and slides it
+	   back the moment the user scrolls up — set by nav.ts. */
+	.site-nav.is-hidden {
+		transform: translateY(-100%);
 	}
 
 	/* Logo is taken out of flow and centered on the nav row itself, so it
@@ -140,7 +148,7 @@ const allLinks = [...leftLinks, ...rightLinks];
 		align-items: center;
 		justify-content: space-between;
 		gap: var(--space-md);
-		padding-block: var(--space-md);
+		padding-block: var(--space-lg);
 	}
 
 	.site-nav__side {
@@ -160,7 +168,7 @@ const allLinks = [...leftLinks, ...rightLinks];
 	}
 
 	.site-nav__logo :global(img) {
-		height: clamp(28px, 3.2vw, 40px);
+		height: clamp(36px, 4.2vw, 52px);
 		width: auto;
 	}
 

@@ -235,10 +235,6 @@ export function productImage(slug: string): string {
 	return `/products/${slug}.webp`;
 }
 
-export function unsplashUrl(id: string, width = 1200, quality = 80): string {
-	return `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${width}&q=${quality}`;
-}
-
 export function formatPrice(price: number): string {
 	return `฿${price.toLocaleString('en-US')}`;
 }

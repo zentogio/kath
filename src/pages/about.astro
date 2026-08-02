@@ -1,7 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { Image } from 'astro:assets';
-import { unsplashUrl } from '../data/products';
+import { productImage } from '../data/products';
 
 const steps = [
 	{
@@ -63,11 +62,11 @@ const steps = [
 				</p>
 			</div>
 			<div class="about-founding__media" data-reveal="right">
-				<Image
-					src={unsplashUrl('1626784579980-db39c1a13aa9', 1200)}
-					alt="A dressmaker sewing by hand at her worktable"
-					width={900}
-					height={1125}
+				<img
+					src={productImage('blouse-lavender-puff')}
+					alt="A model in the lavender puff-sleeve blouse"
+					width={1206}
+					height={1809}
 					loading="lazy"
 					class="about-founding__image"
 				/>
@@ -78,11 +77,11 @@ const steps = [
 	<section class="about-story">
 		<div class="container about-story__grid">
 			<div class="about-story__media" data-reveal>
-				<Image
-					src={unsplashUrl('1739117441029-9f2a8e59e8b2', 1200)}
-					alt="A hand guiding fabric through a stitch by hand in the studio"
-					width={900}
-					height={1125}
+				<img
+					src={productImage('halter-top-ivory')}
+					alt="A model in the ivory linen halter top"
+					width={1206}
+					height={1508}
 					loading="lazy"
 					class="about-story__image"
 				/>
@@ -121,29 +120,29 @@ const steps = [
 
 	<section class="detail-strip" data-reveal-group>
 		<figure class="detail-strip__item" data-reveal>
-			<Image
-				src={unsplashUrl('1560796952-f1c9b838544c', 900)}
-				alt="Close-up of a sewing machine needle mid-stitch"
-				width={700}
-				height={875}
+			<img
+				src={productImage('trousers-indigo-gingham')}
+				alt="A model in the indigo gingham wide-leg trousers"
+				width={1080}
+				height={1080}
 				loading="lazy"
 			/>
 		</figure>
 		<figure class="detail-strip__item" data-reveal style="--i: 1">
-			<Image
-				src={unsplashUrl('1578353022142-09264fd64295', 900)}
-				alt="Scissors and a tape measure laid out on the cutting table"
-				width={700}
-				height={875}
+			<img
+				src={productImage('crop-top-lime')}
+				alt="A model in the lime cropped satin top"
+				width={1144}
+				height={1430}
 				loading="lazy"
 			/>
 		</figure>
 		<figure class="detail-strip__item" data-reveal style="--i: 2">
-			<Image
-				src={unsplashUrl('1532526674046-5b3f6d7d2ab1', 900)}
-				alt="Close-up of raw wool texture before it's cut"
-				width={700}
-				height={875}
+			<img
+				src={productImage('trousers-mint')}
+				alt="A model in the mint pleated wide-leg trousers"
+				width={828}
+				height={1104}
 				loading="lazy"
 			/>
 		</figure>

@@ -30,8 +30,22 @@ function initScrollState() {
 	const nav = document.querySelector<HTMLElement>('[data-site-nav]');
 	if (!nav) return;
 
+	// Hide on the way down, reveal on the way up — but only once scrolled
+	// far enough that the nav's own height is out of the way, so it never
+	// hides itself out from under a user who's still right at the top.
+	const hideThreshold = 72;
+	let lastY = window.scrollY;
+
 	const setState = () => {
-		nav.classList.toggle('is-scrolled', window.scrollY > 8);
+		const y = window.scrollY;
+		nav.classList.toggle('is-scrolled', y > 8);
+
+		if (y > lastY && y > hideThreshold) {
+			nav.classList.add('is-hidden');
+		} else if (y < lastY) {
+			nav.classList.remove('is-hidden');
+		}
+		lastY = y;
 	};
 
 	setState();
