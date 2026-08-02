@@ -18,15 +18,48 @@ const scatterIds = [
 	description="Studio Kath — hand-cut, small-batch clothing made to last, not to trend."
 >
 	<section class="hero">
-		<img
-			src={productImage('collar-set-peach')}
-			alt="A model in the peach collared shirt set on a sunlit tiled staircase"
-			width={1206}
-			height={1508}
-			loading="eager"
-			fetchpriority="high"
-			class="hero__image"
-		/>
+		<div class="hero__strip" aria-hidden="true">
+			<div class="hero__col" data-hero-col>
+				<img
+					src={productImage('trousers-sand')}
+					alt=""
+					width={843}
+					height={1123}
+					loading="eager"
+					fetchpriority="high"
+					class="hero__slide is-active"
+				/>
+				<img src={productImage('crop-top-yellow-gingham')} alt="" width={1206} height={1809} loading="lazy" class="hero__slide" />
+				<img src={productImage('trousers-azure')} alt="" width={1206} height={1809} loading="lazy" class="hero__slide" />
+			</div>
+			<div class="hero__col" data-hero-col>
+				<img
+					src={productImage('collar-set-peach')}
+					alt=""
+					width={1206}
+					height={1508}
+					loading="eager"
+					fetchpriority="high"
+					class="hero__slide is-active"
+				/>
+				<img src={productImage('blouse-papaya-puff')} alt="" width={1206} height={1508} loading="lazy" class="hero__slide" />
+				<img src={productImage('trousers-sage')} alt="" width={828} height={1104} loading="lazy" class="hero__slide" />
+			</div>
+			<div class="hero__col" data-hero-col>
+				<img
+					src={productImage('vest-set-dusty-blue-2')}
+					alt=""
+					width={1206}
+					height={1608}
+					loading="eager"
+					fetchpriority="high"
+					class="hero__slide is-active"
+				/>
+				<img src={productImage('satin-set-powder-blue')} alt="" width={1080} height={1080} loading="lazy" class="hero__slide" />
+				<img src={productImage('trousers-taupe-plaid')} alt="" width={1206} height={1608} loading="lazy" class="hero__slide" />
+			</div>
+		</div>
+		<div class="hero__blur" aria-hidden="true"></div>
 		<div class="hero__scrim" aria-hidden="true"></div>
 		<div class="container hero__content">
 			<p class="eyebrow hero__eyebrow">Studio Kath</p>
@@ -164,6 +197,7 @@ const scatterIds = [
 		</div>
 	</section>
 
+	<script src="../scripts/hero-cycle.ts"></script>
 </Layout>
 
 <style>
@@ -175,7 +209,28 @@ const scatterIds = [
 		overflow: hidden;
 	}
 
-	.hero__image {
+	/* Three columns, each cycling its own set of photos independently
+	   (hero-cycle.ts crossfades between stacked slides on a timer) — reads
+	   as one wide, ever-changing image rather than three separate ones. */
+	.hero__strip {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		transform-origin: center;
+		scale: 1.08;
+	}
+
+	.hero__col {
+		position: relative;
+		flex: 1 1 0;
+		overflow: hidden;
+	}
+
+	.hero__col + .hero__col {
+		border-left: 1px solid color-mix(in oklch, var(--color-paper) 14%, transparent);
+	}
+
+	.hero__slide {
 		position: absolute;
 		inset: 0;
 		width: 100%;
@@ -183,13 +238,30 @@ const scatterIds = [
 		object-fit: cover;
 		object-position: top center;
 		filter: contrast(1.03) saturate(1.05);
-		transform-origin: center;
-		scale: 1.08;
+		opacity: 0;
+		transition: opacity 1.4s var(--ease-out-quart);
+	}
+
+	.hero__slide.is-active {
+		opacity: 1;
+	}
+
+	/* A soft blur along the very bottom edge, fading to none going up —
+	   backdrop-filter blurs whichever slide sits underneath, the mask just
+	   confines it to a band instead of the whole strip. */
+	.hero__blur {
+		position: absolute;
+		inset: auto 0 0 0;
+		height: 14%;
+		backdrop-filter: blur(6px);
+		-webkit-backdrop-filter: blur(6px);
+		mask-image: linear-gradient(to top, black, transparent);
+		-webkit-mask-image: linear-gradient(to top, black, transparent);
 	}
 
 	@supports (animation-timeline: view()) {
 		@media (prefers-reduced-motion: no-preference) {
-			.hero__image {
+			.hero__strip {
 				animation: hero-parallax linear both;
 				animation-timeline: view();
 				animation-range: cover 0% cover 100%;
@@ -337,8 +409,8 @@ const scatterIds = [
 
 	.flanked__photo {
 		width: 100%;
-		aspect-ratio: 4 / 5;
-		object-fit: cover;
+		height: auto;
+		display: block;
 		filter: contrast(1.03) saturate(1.05);
 	}
 
@@ -561,6 +633,37 @@ const scatterIds = [
 
 	.scatter-item__shop:hover {
 		border-color: var(--color-accent);
+	}
+
+	/* Where the browser supports native scroll-linked animation, use the
+	   real thing — photo and copy rise into place continuously as the item
+	   scrolls through view, instead of firing once. Overrides the
+	   [data-reveal] base state from global.css, which stays the fallback
+	   (IntersectionObserver, one-shot) for browsers that don't support
+	   animation-timeline. */
+	@supports (animation-timeline: view()) {
+		@media (prefers-reduced-motion: no-preference) {
+			.scatter-item__link[data-reveal],
+			.scatter-item__copy[data-reveal] {
+				opacity: 1;
+				transform: none;
+				transition: none;
+				animation: scatter-rise-in backwards;
+				animation-timeline: view();
+				animation-range: cover 0% cover 40%;
+			}
+		}
+	}
+
+	@keyframes scatter-rise-in {
+		from {
+			opacity: 0;
+			transform: translateY(40px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
 	}
 
 	.scatter-item--cta {
