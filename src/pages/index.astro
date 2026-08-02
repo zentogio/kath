@@ -332,6 +332,22 @@ const scatterIds = [
 		transform: translateY(16px);
 	}
 
+	/* A soft shadow keeps the text legible when it lands on a light patch
+	   of a busy, colorful photo — cheap on the eye, doesn't touch the image
+	   itself. Two layers: a tight one for edge definition, a wider one for
+	   general lift off the background. */
+	.hero__eyebrow,
+	.hero__headline,
+	.hero__sub {
+		text-shadow:
+			0 1px 3px rgba(0, 0, 0, 0.35),
+			0 4px 20px rgba(0, 0, 0, 0.35);
+	}
+
+	.hero__ctas .btn-ghost {
+		text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+	}
+
 	@media (prefers-reduced-motion: no-preference) {
 		.hero__eyebrow,
 		.hero__headline,

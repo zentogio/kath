@@ -5,11 +5,20 @@
 // animations. --progress defaults to 1 (fully in place) so content is
 // correct before the script runs or if it's disabled.
 
+// Below this width the scroll-tied fade feels sluggish on a short phone
+// viewport — items just snap straight to visible instead.
+const MOBILE_WIDTH = 700;
+
 function initScatterReveal() {
 	if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
 	const items = document.querySelectorAll<HTMLElement>('[data-scroll-reveal]');
 	if (items.length === 0) return;
+
+	if (window.innerWidth < MOBILE_WIDTH) {
+		items.forEach((item) => item.style.setProperty('--progress', '1'));
+		return;
+	}
 
 	let ticking = false;
 

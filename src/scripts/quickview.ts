@@ -50,6 +50,7 @@ function openQuickView(dialog: HTMLDialogElement, productId: string) {
 	const name = dialog.querySelector<HTMLElement>('[data-quickview-name]');
 	const price = dialog.querySelector<HTMLElement>('[data-quickview-price]');
 	const details = dialog.querySelector<HTMLElement>('[data-quickview-details]');
+	const detailsWrap = dialog.querySelector<HTMLDetailsElement>('.quickview-dialog__details-wrap');
 	const badge = dialog.querySelector<HTMLElement>('[data-quickview-badge]');
 	const addButton = dialog.querySelector<HTMLButtonElement>('[data-quickview-add]');
 	const addLabel = addButton?.querySelector<HTMLElement>('[data-add-label]');
@@ -57,6 +58,7 @@ function openQuickView(dialog: HTMLDialogElement, productId: string) {
 	if (name) name.textContent = product.name;
 	if (price) price.textContent = formatPrice(product.price);
 	if (details) details.textContent = product.details;
+	if (detailsWrap) detailsWrap.open = false;
 	if (badge) badge.hidden = !product.soldOut;
 	if (addButton) {
 		addButton.dataset.addToCart = product.id;

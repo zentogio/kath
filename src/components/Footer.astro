@@ -33,7 +33,7 @@ const year = new Date().getFullYear();
 
 		<div class="site-footer__col">
 			<p class="eyebrow site-footer__heading">Get in Touch</p>
-			<a href="mailto:hello@studiokath.com">hello@studiokath.com</a>
+			<a href="mailto:info.studiokath@gmail.com">info.studiokath@gmail.com</a>
 			<SocialLinks invert class="site-footer__social" />
 		</div>
 
@@ -47,6 +47,22 @@ const year = new Date().getFullYear();
 	</div>
 
 	<div class="container site-footer__base">
+		<ul class="site-footer__policy">
+			<li>
+				กรุณาตรวจสอบที่อยู่จัดส่งให้ถูกต้องก่อนกดชำระเงิน เนื่องจากไม่สามารถแก้ไขภายหลังได้
+			</li>
+			<li>
+				กรุณาตรวจสอบขนาดของสินค้าให้เรียบร้อย หรือหากไม่แน่ใจ สามารถสอบถามแอดมินได้ตลอดเวลา
+			</li>
+			<li>ทางร้านขอสงวนสิทธิ์การคืน หรือเปลี่ยนสินค้า เนื่องจากเหตุผลใส่แล้วไม่เหมาะกับลูกค้า</li>
+			<li>
+				สามารถเปลี่ยนไซส์ได้ภายใน 7 วัน โดยสินค้าและป้าย TAG ต้องอยู่ในสภาพเดิม
+				ทางร้านจะจัดส่งไปเปลี่ยนภายใน 7-10 วันทำการ
+			</li>
+			<li>
+				สั่งตัดกางเกงตามไซส์ และสอบถามรายละเอียดอื่นๆ เพิ่มเติม สามารถแอด LINE OFFICIAL: @studiokath
+			</li>
+		</ul>
 		<p>&copy; {year} Studio Kath. All pieces cut to order.</p>
 	</div>
 </footer>
@@ -131,5 +147,18 @@ const year = new Date().getFullYear();
 
 	.site-footer__base p {
 		margin: 0;
+	}
+
+	.site-footer__policy {
+		list-style: none;
+		margin: 0 0 var(--space-md);
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.3em;
+		max-width: 46rem;
+		font-size: 0.7rem;
+		line-height: var(--leading-normal);
+		color: color-mix(in oklch, var(--color-paper) 32%, transparent);
 	}
 </style>
