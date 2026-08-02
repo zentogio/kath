@@ -41,12 +41,8 @@ function renderSummary(): OrderItem[] {
 			.join('');
 	}
 
-	const { subtotal, vat, total } = calculateTotals(items);
-	const subtotalEl = document.querySelector('[data-checkout-subtotal]');
-	const vatEl = document.querySelector('[data-checkout-vat]');
+	const { total } = calculateTotals(items);
 	const totalEl = document.querySelector('[data-checkout-total]');
-	if (subtotalEl) subtotalEl.textContent = formatPrice(subtotal);
-	if (vatEl) vatEl.textContent = formatPrice(vat);
 	if (totalEl) totalEl.textContent = formatPrice(total);
 
 	return items;

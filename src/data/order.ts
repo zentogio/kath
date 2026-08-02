@@ -22,8 +22,6 @@ export interface ContactInfo {
 export interface Order {
 	orderId: string;
 	items: OrderItem[];
-	subtotal: number;
-	vat: number;
 	total: number;
 	contact: ContactInfo;
 	createdAt: string;
@@ -35,11 +33,6 @@ const CONTACT_KEY = 'studio-kath-checkout-info';
 const CURRENT_ORDER_KEY = 'studio-kath-current-order';
 const LAST_ORDER_KEY = 'studio-kath-last-order';
 const ORDERS_KEY = 'studio-kath-orders';
-
-// Displayed product prices are VAT-inclusive (standard for Thai retail) —
-// this breaks the already-included 7% out for the receipt line, it does
-// not add to the total the customer already sees in their cart.
-const VAT_RATE = 0.07;
 
 export function readCart(): CartLine[] {
 	try {
@@ -74,9 +67,7 @@ export function cartToOrderItems(cart: CartLine[]): OrderItem[] {
 
 export function calculateTotals(items: OrderItem[]) {
 	const total = items.reduce((sum, item) => sum + item.price * item.qty, 0);
-	const subtotal = total / (1 + VAT_RATE);
-	const vat = total - subtotal;
-	return { subtotal, vat, total };
+	return { total };
 }
 
 export function readContactInfo(): ContactInfo | null {
@@ -100,12 +91,10 @@ function generateOrderId(): string {
 }
 
 export function createOrder(items: OrderItem[], contact: ContactInfo): Order {
-	const { subtotal, vat, total } = calculateTotals(items);
+	const { total } = calculateTotals(items);
 	const order: Order = {
 		orderId: generateOrderId(),
 		items,
-		subtotal,
-		vat,
 		total,
 		contact,
 		createdAt: new Date().toISOString(),
