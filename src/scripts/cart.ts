@@ -1,4 +1,4 @@
-import { products, unsplashUrl, formatPrice } from '../data/products';
+import { products, productImage, formatPrice } from '../data/products';
 
 interface CartLine {
 	id: string;
@@ -95,7 +95,7 @@ function renderDrawer(cart: CartLine[]) {
 		const item = document.createElement('li');
 		item.className = 'cart-line';
 		item.innerHTML = `
-			<img class="cart-line__image" src="${unsplashUrl(product.image, 200)}" alt="" width="72" height="90" loading="lazy" />
+			<img class="cart-line__image" src="${productImage(product.image)}" alt="" width="72" height="90" loading="lazy" />
 			<div class="cart-line__body">
 				<p class="cart-line__name">${product.name}</p>
 				<p class="cart-line__price">${formatPrice(product.price)}</p>

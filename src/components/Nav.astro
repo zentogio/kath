@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import studioMark from '../assets/brand/studio-mark.png';
+import studioMark from '../assets/brand/studio-mark.webp';
 import SocialLinks from './SocialLinks.astro';
 
 const leftLinks = [
@@ -40,7 +40,7 @@ const allLinks = [...leftLinks, ...rightLinks];
 		</div>
 
 		<a href="/" class="site-nav__logo" aria-label="Studio Kath, home">
-			<Image src={studioMark} alt="Studio Kath" width={340} height={138} />
+			<Image src={studioMark} alt="Studio Kath" width={498} height={483} />
 		</a>
 
 		<div class="site-nav__side site-nav__side--right">
@@ -74,8 +74,8 @@ const allLinks = [...leftLinks, ...rightLinks];
 		<Image
 			src={studioMark}
 			alt="Studio Kath"
-			width={300}
-			height={122}
+			width={498}
+			height={483}
 			class="brand-mark--invert menu-dialog__mark"
 		/>
 		<button type="button" class="icon-btn on-dark" data-menu-close aria-label="Close menu">

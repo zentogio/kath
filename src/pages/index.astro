@@ -1,16 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { Image } from 'astro:assets';
-import { products, unsplashUrl } from '../data/products';
+import { products, unsplashUrl, productImage } from '../data/products';
 
 const tickerItems = ['Hand-Cut', 'Small Batch', 'Numbered, Not Mass-Produced', 'Made to Last'];
 
 const scatterIds = [
-	'signature-turtleneck',
-	'tailored-blazer',
-	'long-wool-coat',
-	'essential-shirt',
-	'column-dress',
+	'trousers-papaya',
+	'collar-set-sky',
+	'trousers-floral-meadow',
+	'blouse-green-mandarin',
+	'vest-set-dusty-blue',
 ];
 ---
 
@@ -127,8 +127,8 @@ const scatterIds = [
 								class="scatter-item__link"
 								aria-label={`Shop the collection — ${product.name}`}
 							>
-								<Image
-									src={unsplashUrl(product.image, 1600)}
+								<img
+									src={productImage(product.image)}
 									alt={product.alt}
 									width={1200}
 									height={1500}

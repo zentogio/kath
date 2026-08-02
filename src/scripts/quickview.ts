@@ -1,4 +1,4 @@
-import { products, unsplashUrl, formatPrice } from '../data/products';
+import { products, productImage, formatPrice } from '../data/products';
 
 let activeImages: string[] = [];
 let activeIndex = 0;
@@ -13,7 +13,7 @@ function renderImages(dialog: HTMLDialogElement) {
 	viewport.innerHTML = activeImages
 		.map(
 			(id, i) =>
-				`<img src="${unsplashUrl(id, 900)}" alt="" class="${i === activeIndex ? 'is-active' : ''}" loading="${i === 0 ? 'eager' : 'lazy'}" />`,
+				`<img src="${productImage(id)}" alt="" class="${i === activeIndex ? 'is-active' : ''}" loading="${i === 0 ? 'eager' : 'lazy'}" />`,
 		)
 		.join('');
 

@@ -1,6 +1,5 @@
 ---
-import { Image } from 'astro:assets';
-import { unsplashUrl, formatPrice, type Product } from '../data/products';
+import { productImage, formatPrice, type Product } from '../data/products';
 
 interface Props {
 	product: Product;
@@ -23,8 +22,8 @@ const { product, priority = false, index = 0, featured = false } = Astro.props;
 		data-quickview-open={product.id}
 		aria-label={`View ${product.name}`}
 	>
-		<Image
-			src={unsplashUrl(product.image, featured ? 1400 : 1000)}
+		<img
+			src={productImage(product.image)}
 			alt={product.alt}
 			width={featured ? 1200 : 760}
 			height={featured ? 1000 : 950}
