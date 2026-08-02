@@ -28,14 +28,7 @@
 				<span class="label">Total</span>
 				<span class="title" data-cart-total>฿0</span>
 			</div>
-			<button type="button" class="btn btn-primary cart-dialog__checkout" disabled>
-				Checkout — Coming Soon
-			</button>
-			<p class="cart-dialog__note">
-				We're not taking live orders through the site yet. <a href="/contact"
-					>Get in touch</a
-				> to order a piece directly.
-			</p>
+			<a href="/checkout" class="btn btn-primary cart-dialog__checkout"> Checkout </a>
 		</footer>
 	</div>
 </dialog>
@@ -206,16 +199,6 @@
 
 	.cart-dialog__checkout {
 		width: 100%;
-	}
-
-	.cart-dialog__note {
-		margin: 0;
-		font-size: var(--text-caption);
-		color: var(--color-graphite);
-		line-height: var(--leading-normal);
-	}
-
-	.cart-dialog__note a {
-		color: var(--color-ink);
+		text-decoration: none;
 	}
 </style>
