@@ -3,6 +3,7 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import CartDrawer from '../components/CartDrawer.astro';
 import ProductQuickView from '../components/ProductQuickView.astro';
+import SizeSelectDialog from '../components/SizeSelectDialog.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -46,11 +47,13 @@ const { title, description } = Astro.props;
 		<Footer />
 		<CartDrawer />
 		<ProductQuickView />
+		<SizeSelectDialog />
 		<script src="../scripts/smooth-scroll.ts"></script>
 		<script src="../scripts/nav.ts"></script>
 		<script src="../scripts/cart.ts"></script>
 		<script src="../scripts/reveal.ts"></script>
 		<script src="../scripts/magnetic.ts"></script>
 		<script src="../scripts/quickview.ts"></script>
+		<script src="../scripts/size-select.ts"></script>
 	</body>
 </html>

@@ -238,3 +238,23 @@ export function productImage(slug: string): string {
 export function formatPrice(price: number): string {
 	return `฿${price.toLocaleString('en-US')}`;
 }
+
+// One shared size run across the catalog (trousers, tops, and sets alike).
+// Measurements are placeholders — TODO: swap for the studio's real
+// measurements per size before this goes live.
+export const SIZES = ['S', 'M', 'L', 'XL'] as const;
+export type Size = (typeof SIZES)[number];
+
+export interface SizeChartRow {
+	size: Size;
+	waist: string;
+	hip: string;
+	length: string;
+}
+
+export const SIZE_CHART: SizeChartRow[] = [
+	{ size: 'S', waist: '26–28"', hip: '36–38"', length: '39"' },
+	{ size: 'M', waist: '28–30"', hip: '38–40"', length: '40"' },
+	{ size: 'L', waist: '30–32"', hip: '40–42"', length: '41"' },
+	{ size: 'XL', waist: '32–34"', hip: '42–44"', length: '42"' },
+];

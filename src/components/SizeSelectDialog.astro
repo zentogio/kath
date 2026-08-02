@@ -1,0 +1,290 @@
+---
+import { SIZES, SIZE_CHART } from '../data/products';
+---
+
+<dialog class="size-dialog" data-size-dialog aria-label="Choose a size">
+	<div class="size-dialog__panel">
+		<button
+			type="button"
+			class="icon-btn size-dialog__close"
+			data-size-close
+			aria-label="Close"
+		>
+			<svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+				<path
+					d="M5 5l14 14M19 5 5 19"
+					stroke="currentColor"
+					stroke-width="1.4"
+					stroke-linecap="round"></path>
+			</svg>
+		</button>
+
+		<div class="size-dialog__product">
+			<img data-size-image alt="" class="size-dialog__image" />
+			<div>
+				<p class="title size-dialog__name" data-size-name></p>
+				<p class="size-dialog__price" data-size-price></p>
+			</div>
+		</div>
+
+		<div class="size-dialog__chart">
+			<p class="label">Size Guide (in)</p>
+			<table>
+				<thead>
+					<tr>
+						<th>Size</th>
+						<th>Waist</th>
+						<th>Hip</th>
+						<th>Length</th>
+					</tr>
+				</thead>
+				<tbody>
+					{
+						SIZE_CHART.map((row) => (
+							<tr>
+								<td>{row.size}</td>
+								<td>{row.waist}</td>
+								<td>{row.hip}</td>
+								<td>{row.length}</td>
+							</tr>
+						))
+					}
+				</tbody>
+			</table>
+		</div>
+
+		<div class="size-dialog__field">
+			<p class="label">Size</p>
+			<div class="size-dialog__sizes" role="group" aria-label="Select size" data-size-options>
+				{
+					SIZES.map((size) => (
+						<button type="button" class="size-dialog__size" data-size-option={size}>
+							{size}
+						</button>
+					))
+				}
+			</div>
+		</div>
+
+		<div class="size-dialog__field">
+			<p class="label">Quantity</p>
+			<div class="size-dialog__stepper">
+				<button type="button" class="size-dialog__step" data-size-qty-decrease aria-label="Decrease quantity"
+					>&minus;</button
+				>
+				<span class="size-dialog__qty-value" data-size-qty-value aria-live="polite">1</span>
+				<button type="button" class="size-dialog__step" data-size-qty-increase aria-label="Increase quantity"
+					>&plus;</button
+				>
+			</div>
+		</div>
+
+		<button type="button" class="btn btn-primary size-dialog__confirm" data-size-confirm disabled>
+			Select a Size
+		</button>
+	</div>
+</dialog>
+
+<style is:global>
+	/* Same centered-modal pattern as the quickview dialog. */
+	.size-dialog {
+		position: fixed;
+		inset: 0;
+		margin: auto;
+		width: min(24rem, calc(100vw - 2rem));
+		max-height: calc(100vh - 3rem);
+		padding: 0;
+		border: none;
+		background: var(--color-paper);
+		box-shadow: var(--shadow-overlay);
+		overflow-y: auto;
+		scale: 0.96;
+		opacity: 0;
+		transition:
+			scale var(--duration-base) var(--ease-out-quart),
+			opacity var(--duration-base) var(--ease-out-quart),
+			overlay var(--duration-base) allow-discrete,
+			display var(--duration-base) allow-discrete;
+	}
+
+	.size-dialog[open] {
+		scale: 1;
+		opacity: 1;
+	}
+
+	@starting-style {
+		.size-dialog[open] {
+			scale: 0.96;
+			opacity: 0;
+		}
+	}
+
+	.size-dialog::backdrop {
+		background: rgba(20, 12, 12, 0.4);
+		backdrop-filter: blur(10px);
+		transition:
+			background var(--duration-base) var(--ease-out-quart),
+			backdrop-filter var(--duration-base) var(--ease-out-quart),
+			overlay var(--duration-base) allow-discrete,
+			display var(--duration-base) allow-discrete;
+	}
+
+	@starting-style {
+		.size-dialog[open]::backdrop {
+			background: rgba(20, 12, 12, 0);
+			backdrop-filter: blur(0px);
+		}
+	}
+
+	/* Same mobile Safari fix as the quickview dialog — blurred ::backdrop
+	   bleeds onto the dialog's own content on iOS. */
+	@media (max-width: 720px) {
+		.size-dialog[open]::backdrop {
+			background: rgba(20, 12, 12, 0.6);
+			backdrop-filter: none;
+		}
+
+		@starting-style {
+			.size-dialog[open]::backdrop {
+				background: rgba(20, 12, 12, 0);
+			}
+		}
+	}
+
+	.size-dialog__panel {
+		position: relative;
+		padding: var(--space-xl);
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-lg);
+	}
+
+	.size-dialog__close {
+		position: absolute;
+		top: var(--space-sm);
+		right: var(--space-sm);
+	}
+
+	.size-dialog__product {
+		display: flex;
+		align-items: center;
+		gap: var(--space-sm);
+		padding-right: var(--space-xl);
+	}
+
+	.size-dialog__image {
+		width: 3.5rem;
+		height: 4.4rem;
+		object-fit: cover;
+		filter: contrast(1.03) saturate(1.05);
+		flex-shrink: 0;
+	}
+
+	.size-dialog__name {
+		margin: 0 0 0.2em;
+	}
+
+	.size-dialog__price {
+		margin: 0;
+		color: var(--color-graphite);
+		font-size: var(--text-body);
+	}
+
+	.size-dialog__chart {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-2xs);
+	}
+
+	.size-dialog__chart table {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: var(--text-caption);
+	}
+
+	.size-dialog__chart th,
+	.size-dialog__chart td {
+		text-align: center;
+		padding: 0.4em;
+		border: 1px solid var(--color-border);
+	}
+
+	.size-dialog__chart th:first-child,
+	.size-dialog__chart td:first-child {
+		text-align: left;
+		font-weight: 500;
+	}
+
+	.size-dialog__chart th {
+		color: var(--color-graphite);
+		font-weight: 500;
+	}
+
+	.size-dialog__field {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-xs);
+	}
+
+	.size-dialog__sizes {
+		display: flex;
+		gap: var(--space-2xs);
+	}
+
+	.size-dialog__size {
+		width: 3rem;
+		height: 3rem;
+		border: 1px solid var(--color-border-strong);
+		background: var(--color-paper);
+		color: var(--color-ink);
+		cursor: pointer;
+		font-family: var(--font-body);
+		font-size: var(--text-body);
+		transition:
+			background-color var(--duration-fast) var(--ease-out-quart),
+			color var(--duration-fast) var(--ease-out-quart),
+			border-color var(--duration-fast) var(--ease-out-quart);
+	}
+
+	.size-dialog__size:hover {
+		border-color: var(--color-ink);
+	}
+
+	.size-dialog__size.is-selected {
+		background: var(--color-ink);
+		border-color: var(--color-ink);
+		color: var(--color-paper);
+	}
+
+	.size-dialog__stepper {
+		display: inline-flex;
+		align-items: center;
+		gap: var(--space-md);
+		border: 1px solid var(--color-border-strong);
+		padding: 0.4em 0.9em;
+		width: fit-content;
+	}
+
+	.size-dialog__step {
+		background: none;
+		border: none;
+		font-size: 1.1rem;
+		line-height: 1;
+		width: 20px;
+		cursor: pointer;
+		color: var(--color-ink);
+	}
+
+	.size-dialog__step:hover {
+		color: var(--color-accent);
+	}
+
+	.size-dialog__qty-value {
+		min-width: 1.5ch;
+		text-align: center;
+	}
+
+	.size-dialog__confirm {
+		width: 100%;
+	}
+</style>

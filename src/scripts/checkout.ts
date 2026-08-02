@@ -33,7 +33,7 @@ function renderSummary(): OrderItem[] {
 					<img src="${productImage(item.image)}" alt="" width="72" height="90" loading="lazy" />
 					<div class="checkout-item__body">
 						<p class="checkout-item__name">${item.name}</p>
-						<p class="checkout-item__meta">Qty ${item.qty}</p>
+						<p class="checkout-item__meta">Size ${item.size} &middot; Qty ${item.qty}</p>
 					</div>
 					<p class="checkout-item__price">${formatPrice(item.price * item.qty)}</p>
 				</li>`,

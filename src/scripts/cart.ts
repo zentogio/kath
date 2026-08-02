@@ -1,7 +1,8 @@
 import { products, productImage, formatPrice } from '../data/products';
 
-interface CartLine {
+export interface CartLine {
 	id: string;
+	size: string;
 	qty: number;
 }
 
@@ -15,7 +16,10 @@ function readCart(): CartLine[] {
 		if (!Array.isArray(parsed)) return [];
 		return parsed.filter(
 			(line): line is CartLine =>
-				typeof line?.id === 'string' && typeof line?.qty === 'number' && line.qty > 0,
+				typeof line?.id === 'string' &&
+				typeof line?.size === 'string' &&
+				typeof line?.qty === 'number' &&
+				line.qty > 0,
 		);
 	} catch {
 		return [];
@@ -27,23 +31,25 @@ function writeCart(cart: CartLine[]) {
 	window.dispatchEvent(new CustomEvent('cart:change', { detail: { cart } }));
 }
 
-function addToCart(id: string) {
+// Same product in a different size is a different line — matched on both
+// id and size, not id alone.
+function addToCart(id: string, size: string, qty: number) {
 	const cart = readCart();
-	const existing = cart.find((line) => line.id === id);
+	const existing = cart.find((line) => line.id === id && line.size === size);
 	if (existing) {
-		existing.qty += 1;
+		existing.qty += qty;
 	} else {
-		cart.push({ id, qty: 1 });
+		cart.push({ id, size, qty });
 	}
 	writeCart(cart);
 }
 
-function setQty(id: string, qty: number) {
+function setQty(id: string, size: string, qty: number) {
 	let cart = readCart();
 	if (qty <= 0) {
-		cart = cart.filter((line) => line.id !== id);
+		cart = cart.filter((line) => !(line.id === id && line.size === size));
 	} else {
-		const existing = cart.find((line) => line.id === id);
+		const existing = cart.find((line) => line.id === id && line.size === size);
 		if (existing) existing.qty = qty;
 	}
 	writeCart(cart);
@@ -98,14 +104,14 @@ function renderDrawer(cart: CartLine[]) {
 			<img class="cart-line__image" src="${productImage(product.image)}" alt="" width="72" height="90" loading="lazy" />
 			<div class="cart-line__body">
 				<p class="cart-line__name">${product.name}</p>
-				<p class="cart-line__price">${formatPrice(product.price)}</p>
-				<div class="cart-line__qty" role="group" aria-label="Quantity for ${product.name}">
-					<button type="button" class="cart-line__step" data-qty-decrease="${product.id}" aria-label="Decrease quantity">&minus;</button>
+				<p class="cart-line__price">${formatPrice(product.price)} &middot; Size ${line.size}</p>
+				<div class="cart-line__qty" role="group" aria-label="Quantity for ${product.name}, size ${line.size}">
+					<button type="button" class="cart-line__step" data-qty-decrease="${product.id}" data-qty-size="${line.size}" aria-label="Decrease quantity">&minus;</button>
 					<span class="cart-line__qty-value" aria-live="polite">${line.qty}</span>
-					<button type="button" class="cart-line__step" data-qty-increase="${product.id}" aria-label="Increase quantity">&plus;</button>
+					<button type="button" class="cart-line__step" data-qty-increase="${product.id}" data-qty-size="${line.size}" aria-label="Increase quantity">&plus;</button>
 				</div>
 			</div>
-			<button type="button" class="cart-line__remove" data-remove="${product.id}" aria-label="Remove ${product.name} from cart">Remove</button>
+			<button type="button" class="cart-line__remove" data-remove="${product.id}" data-remove-size="${line.size}" aria-label="Remove ${product.name} (size ${line.size}) from cart">Remove</button>
 		`;
 		list.appendChild(item);
 	}
@@ -121,41 +127,29 @@ function initCartInteractions() {
 	document.addEventListener('click', (event) => {
 		const target = event.target as HTMLElement;
 
-		const addTrigger = target.closest<HTMLElement>('[data-add-to-cart]');
-		if (addTrigger && !(addTrigger as HTMLButtonElement).disabled) {
-			addToCart(addTrigger.dataset.addToCart as string);
-			addTrigger.classList.add('is-added');
-			const label = addTrigger.querySelector('[data-add-label]');
-			const originalLabel = label?.textContent;
-			if (label) label.textContent = 'Added';
-			window.setTimeout(() => {
-				addTrigger.classList.remove('is-added');
-				if (label && originalLabel) label.textContent = originalLabel;
-			}, 1400);
-			return;
-		}
-
 		const increase = target.closest<HTMLElement>('[data-qty-increase]');
 		if (increase) {
 			const id = increase.dataset.qtyIncrease as string;
+			const size = increase.dataset.qtySize as string;
 			const cart = readCart();
-			const line = cart.find((l) => l.id === id);
-			setQty(id, (line?.qty ?? 0) + 1);
+			const line = cart.find((l) => l.id === id && l.size === size);
+			setQty(id, size, (line?.qty ?? 0) + 1);
 			return;
 		}
 
 		const decrease = target.closest<HTMLElement>('[data-qty-decrease]');
 		if (decrease) {
 			const id = decrease.dataset.qtyDecrease as string;
+			const size = decrease.dataset.qtySize as string;
 			const cart = readCart();
-			const line = cart.find((l) => l.id === id);
-			setQty(id, (line?.qty ?? 1) - 1);
+			const line = cart.find((l) => l.id === id && l.size === size);
+			setQty(id, size, (line?.qty ?? 1) - 1);
 			return;
 		}
 
 		const remove = target.closest<HTMLElement>('[data-remove]');
 		if (remove) {
-			setQty(remove.dataset.remove as string, 0);
+			setQty(remove.dataset.remove as string, remove.dataset.removeSize as string, 0);
 			return;
 		}
 	});
@@ -167,6 +161,13 @@ function initCartInteractions() {
 	window.addEventListener('storage', (event) => {
 		if (event.key === STORAGE_KEY) render();
 	});
+
+	// The size-select dialog performs the actual add — it dispatches this
+	// once the customer confirms a size and quantity.
+	window.addEventListener('cart:add', ((event: CustomEvent<{ id: string; size: string; qty: number }>) => {
+		const { id, size, qty } = event.detail;
+		addToCart(id, size, qty);
+	}) as EventListener);
 }
 
 function initCartDrawer() {

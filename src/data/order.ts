@@ -2,6 +2,7 @@ import { products, formatPrice } from './products';
 
 export interface CartLine {
 	id: string;
+	size: string;
 	qty: number;
 }
 
@@ -9,6 +10,7 @@ export interface OrderItem {
 	id: string;
 	name: string;
 	price: number;
+	size: string;
 	qty: number;
 	image: string;
 }
@@ -42,7 +44,10 @@ export function readCart(): CartLine[] {
 		if (!Array.isArray(parsed)) return [];
 		return parsed.filter(
 			(line): line is CartLine =>
-				typeof line?.id === 'string' && typeof line?.qty === 'number' && line.qty > 0,
+				typeof line?.id === 'string' &&
+				typeof line?.size === 'string' &&
+				typeof line?.qty === 'number' &&
+				line.qty > 0,
 		);
 	} catch {
 		return [];
@@ -58,6 +63,7 @@ export function cartToOrderItems(cart: CartLine[]): OrderItem[] {
 				id: product.id,
 				name: product.name,
 				price: product.price,
+				size: line.size,
 				qty: line.qty,
 				image: product.image,
 			};
