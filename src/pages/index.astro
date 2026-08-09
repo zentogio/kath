@@ -22,11 +22,24 @@ const scatterIds = [
 	title="Home"
 	description="Studio Kath — hand-cut, small-batch clothing made to last, not to trend."
 >
+	<Fragment slot="head">
+		<link
+			rel="preload"
+			as="image"
+			href={productImage('trousers-sand')}
+			imagesrcset={productSrcset('trousers-sand')}
+			imagesizes="100vw"
+			media="(max-width: 700px)"
+			fetchpriority="high"
+		/>
+	</Fragment>
 	<section class="hero">
 		<div class="hero__strip" aria-hidden="true">
 			<div class="hero__col" data-hero-col>
 				<img
 					src={productImage('trousers-sand')}
+					srcset={productSrcset('trousers-sand')}
+					sizes="(max-width: 700px) 100vw, 34vw"
 					alt=""
 					width={843}
 					height={1123}
@@ -34,8 +47,26 @@ const scatterIds = [
 					fetchpriority="high"
 					class="hero__slide is-active"
 				/>
-				<img src={productImage('crop-top-yellow-gingham')} alt="" width={1206} height={1809} loading="lazy" class="hero__slide" />
-				<img src={productImage('trousers-azure')} alt="" width={1206} height={1809} loading="lazy" class="hero__slide" />
+				<img
+					src={productImage('crop-top-yellow-gingham')}
+					srcset={productSrcset('crop-top-yellow-gingham')}
+					sizes="(max-width: 700px) 100vw, 34vw"
+					alt=""
+					width={1206}
+					height={1809}
+					loading="lazy"
+					class="hero__slide"
+				/>
+				<img
+					src={productImage('trousers-azure')}
+					srcset={productSrcset('trousers-azure')}
+					sizes="(max-width: 700px) 100vw, 34vw"
+					alt=""
+					width={1206}
+					height={1809}
+					loading="lazy"
+					class="hero__slide"
+				/>
 			</div>
 			<div class="hero__col" data-hero-col>
 				<img
