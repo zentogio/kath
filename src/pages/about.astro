@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { productImage } from '../data/products';
+import { productImage, productSrcset } from '../data/products';
 
 const steps = [
 	{
@@ -72,6 +72,8 @@ const steps = [
 			<div class="about-founding__media" data-reveal="right">
 				<img
 					src={productImage('blouse-lavender-puff')}
+					srcset={productSrcset('blouse-lavender-puff')}
+					sizes="(max-width: 767px) 90vw, 480px"
 					alt="A model in the lavender puff-sleeve blouse"
 					width={1206}
 					height={1809}
@@ -87,6 +89,8 @@ const steps = [
 			<div class="about-story__media" data-reveal>
 				<img
 					src={productImage('halter-top-ivory')}
+					srcset={productSrcset('halter-top-ivory')}
+					sizes="(max-width: 767px) 90vw, 480px"
 					alt="A model in the ivory linen halter top"
 					width={1206}
 					height={1508}
@@ -130,6 +134,8 @@ const steps = [
 		<figure class="detail-strip__item" data-reveal>
 			<img
 				src={productImage('trousers-indigo-gingham')}
+				srcset={productSrcset('trousers-indigo-gingham')}
+				sizes="(max-width: 767px) 90vw, 320px"
 				alt="A model in the indigo gingham wide-leg trousers"
 				width={1080}
 				height={1080}
@@ -139,6 +145,8 @@ const steps = [
 		<figure class="detail-strip__item" data-reveal style="--i: 1">
 			<img
 				src={productImage('crop-top-lime')}
+				srcset={productSrcset('crop-top-lime')}
+				sizes="(max-width: 767px) 90vw, 320px"
 				alt="A model in the lime cropped satin top"
 				width={1144}
 				height={1430}
@@ -148,6 +156,8 @@ const steps = [
 		<figure class="detail-strip__item" data-reveal style="--i: 2">
 			<img
 				src={productImage('trousers-mint')}
+				srcset={productSrcset('trousers-mint')}
+				sizes="(max-width: 767px) 90vw, 320px"
 				alt="A model in the mint pleated wide-leg trousers"
 				width={828}
 				height={1104}

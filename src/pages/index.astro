@@ -1,6 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { products, productImage } from '../data/products';
+import { products, productImage, productSrcset } from '../data/products';
 
 const tickerItems = [
 	{ label: 'Hand-Cut', key: 'home.ticker1' },
@@ -43,7 +43,7 @@ const scatterIds = [
 					alt=""
 					width={1206}
 					height={1508}
-					loading="eager"
+					loading="lazy"
 					class="hero__slide is-active"
 				/>
 				<img src={productImage('trousers-sage')} alt="" width={828} height={1104} loading="lazy" class="hero__slide" />
@@ -54,7 +54,7 @@ const scatterIds = [
 					alt=""
 					width={1206}
 					height={1608}
-					loading="eager"
+					loading="lazy"
 					class="hero__slide is-active"
 				/>
 				<img src={productImage('satin-set-powder-blue')} alt="" width={1080} height={1080} loading="lazy" class="hero__slide" />
@@ -82,6 +82,8 @@ const scatterIds = [
 	<section class="container flanked" data-reveal-group>
 		<img
 			src={productImage('trousers-indigo-gingham')}
+			srcset={productSrcset('trousers-indigo-gingham')}
+			sizes="(max-width: 859px) 90vw, 420px"
 			alt="A model in the indigo gingham wide-leg trousers"
 			width={1080}
 			height={1080}
@@ -99,6 +101,8 @@ const scatterIds = [
 		</div>
 		<img
 			src={productImage('satin-set-powder-blue')}
+			srcset={productSrcset('satin-set-powder-blue')}
+			sizes="(max-width: 859px) 90vw, 420px"
 			alt="A model in the powder blue satin shirt and trouser set"
 			width={1080}
 			height={1080}
@@ -164,6 +168,8 @@ const scatterIds = [
 							>
 								<img
 									src={productImage(product.image)}
+									srcset={productSrcset(product.image)}
+									sizes="(max-width: 700px) 90vw, 24rem"
 									alt={product.alt}
 									width={1206}
 									height={1508}
@@ -231,6 +237,17 @@ const scatterIds = [
 
 	.hero__col + .hero__col {
 		border-left: 1px solid color-mix(in oklch, var(--color-paper) 14%, transparent);
+	}
+
+	/* Mobile: show a single full-bleed column instead of three skinny strips —
+	   reads better on a narrow screen and, combined with loading="lazy" on the
+	   hidden columns' images below, keeps mobile from fetching the other two
+	   columns' photos at all (a display:none lazy image never loads). */
+	@media (max-width: 700px) {
+		.hero__col:nth-child(2),
+		.hero__col:nth-child(3) {
+			display: none;
+		}
 	}
 
 	.hero__slide {

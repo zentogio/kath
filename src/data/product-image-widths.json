@@ -1,0 +1,270 @@
+{
+	"blouse-green-mandarin": [
+		{
+			"width": 480,
+			"file": "blouse-green-mandarin-480w.webp"
+		},
+		{
+			"width": 800,
+			"file": "blouse-green-mandarin-800w.webp"
+		},
+		{
+			"width": 1206,
+			"file": "blouse-green-mandarin.webp"
+		}
+	],
+	"blouse-lavender-puff": [
+		{
+			"width": 480,
+			"file": "blouse-lavender-puff-480w.webp"
+		},
+		{
+			"width": 800,
+			"file": "blouse-lavender-puff-800w.webp"
+		},
+		{
+			"width": 1206,
+			"file": "blouse-lavender-puff.webp"
+		}
+	],
+	"blouse-papaya-puff": [
+		{
+			"width": 480,
+			"file": "blouse-papaya-puff-480w.webp"
+		},
+		{
+			"width": 800,
+			"file": "blouse-papaya-puff-800w.webp"
+		},
+		{
+			"width": 1206,
+			"file": "blouse-papaya-puff.webp"
+		}
+	],
+	"collar-set-peach": [
+		{
+			"width": 480,
+			"file": "collar-set-peach-480w.webp"
+		},
+		{
+			"width": 800,
+			"file": "collar-set-peach-800w.webp"
+		},
+		{
+			"width": 1206,
+			"file": "collar-set-peach.webp"
+		}
+	],
+	"collar-set-sky": [
+		{
+			"width": 480,
+			"file": "collar-set-sky-480w.webp"
+		},
+		{
+			"width": 800,
+			"file": "collar-set-sky-800w.webp"
+		},
+		{
+			"width": 1206,
+			"file": "collar-set-sky.webp"
+		}
+	],
+	"crop-top-lime": [
+		{
+			"width": 480,
+			"file": "crop-top-lime-480w.webp"
+		},
+		{
+			"width": 800,
+			"file": "crop-top-lime-800w.webp"
+		},
+		{
+			"width": 1144,
+			"file": "crop-top-lime.webp"
+		}
+	],
+	"crop-top-yellow-gingham": [
+		{
+			"width": 480,
+			"file": "crop-top-yellow-gingham-480w.webp"
+		},
+		{
+			"width": 800,
+			"file": "crop-top-yellow-gingham-800w.webp"
+		},
+		{
+			"width": 1206,
+			"file": "crop-top-yellow-gingham.webp"
+		}
+	],
+	"halter-top-ivory": [
+		{
+			"width": 480,
+			"file": "halter-top-ivory-480w.webp"
+		},
+		{
+			"width": 800,
+			"file": "halter-top-ivory-800w.webp"
+		},
+		{
+			"width": 1206,
+			"file": "halter-top-ivory.webp"
+		}
+	],
+	"satin-set-powder-blue": [
+		{
+			"width": 480,
+			"file": "satin-set-powder-blue-480w.webp"
+		},
+		{
+			"width": 800,
+			"file": "satin-set-powder-blue-800w.webp"
+		},
+		{
+			"width": 1080,
+			"file": "satin-set-powder-blue.webp"
+		}
+	],
+	"trousers-azure": [
+		{
+			"width": 480,
+			"file": "trousers-azure-480w.webp"
+		},
+		{
+			"width": 800,
+			"file": "trousers-azure-800w.webp"
+		},
+		{
+			"width": 1206,
+			"file": "trousers-azure.webp"
+		}
+	],
+	"trousers-floral-meadow-2": [
+		{
+			"width": 480,
+			"file": "trousers-floral-meadow-2-480w.webp"
+		},
+		{
+			"width": 800,
+			"file": "trousers-floral-meadow-2-800w.webp"
+		},
+		{
+			"width": 1206,
+			"file": "trousers-floral-meadow-2.webp"
+		}
+	],
+	"trousers-floral-meadow": [
+		{
+			"width": 480,
+			"file": "trousers-floral-meadow-480w.webp"
+		},
+		{
+			"width": 800,
+			"file": "trousers-floral-meadow-800w.webp"
+		},
+		{
+			"width": 1206,
+			"file": "trousers-floral-meadow.webp"
+		}
+	],
+	"trousers-indigo-gingham": [
+		{
+			"width": 480,
+			"file": "trousers-indigo-gingham-480w.webp"
+		},
+		{
+			"width": 800,
+			"file": "trousers-indigo-gingham-800w.webp"
+		},
+		{
+			"width": 1080,
+			"file": "trousers-indigo-gingham.webp"
+		}
+	],
+	"trousers-mint": [
+		{
+			"width": 480,
+			"file": "trousers-mint-480w.webp"
+		},
+		{
+			"width": 828,
+			"file": "trousers-mint.webp"
+		}
+	],
+	"trousers-papaya": [
+		{
+			"width": 480,
+			"file": "trousers-papaya-480w.webp"
+		},
+		{
+			"width": 800,
+			"file": "trousers-papaya-800w.webp"
+		},
+		{
+			"width": 1206,
+			"file": "trousers-papaya.webp"
+		}
+	],
+	"trousers-sage": [
+		{
+			"width": 480,
+			"file": "trousers-sage-480w.webp"
+		},
+		{
+			"width": 828,
+			"file": "trousers-sage.webp"
+		}
+	],
+	"trousers-sand": [
+		{
+			"width": 480,
+			"file": "trousers-sand-480w.webp"
+		},
+		{
+			"width": 843,
+			"file": "trousers-sand.webp"
+		}
+	],
+	"trousers-taupe-plaid": [
+		{
+			"width": 480,
+			"file": "trousers-taupe-plaid-480w.webp"
+		},
+		{
+			"width": 800,
+			"file": "trousers-taupe-plaid-800w.webp"
+		},
+		{
+			"width": 1206,
+			"file": "trousers-taupe-plaid.webp"
+		}
+	],
+	"vest-set-dusty-blue-2": [
+		{
+			"width": 480,
+			"file": "vest-set-dusty-blue-2-480w.webp"
+		},
+		{
+			"width": 800,
+			"file": "vest-set-dusty-blue-2-800w.webp"
+		},
+		{
+			"width": 1206,
+			"file": "vest-set-dusty-blue-2.webp"
+		}
+	],
+	"vest-set-dusty-blue": [
+		{
+			"width": 480,
+			"file": "vest-set-dusty-blue-480w.webp"
+		},
+		{
+			"width": 800,
+			"file": "vest-set-dusty-blue-800w.webp"
+		},
+		{
+			"width": 1206,
+			"file": "vest-set-dusty-blue.webp"
+		}
+	]
+}

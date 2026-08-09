@@ -1,5 +1,5 @@
 ---
-import { productImage, formatPrice, type Product } from '../data/products';
+import { productImage, productSrcset, formatPrice, type Product } from '../data/products';
 
 interface Props {
 	product: Product;
@@ -25,6 +25,10 @@ const { product, priority = false, lcp = false, index = 0, featured = false } = 
 	>
 		<img
 			src={productImage(product.image)}
+			srcset={productSrcset(product.image)}
+			sizes={featured
+				? '(max-width: 640px) 90vw, (max-width: 1024px) 90vw, 780px'
+				: '(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 380px'}
 			alt={product.alt}
 			width={featured ? 1200 : 760}
 			height={featured ? 1000 : 950}
