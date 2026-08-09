@@ -33,21 +33,33 @@ const { title, description } = Astro.props;
 		<slot name="head" />
 
 		<!-- Non-blocking font load: preload the CSS, swap it to a real
-		     stylesheet on load so first paint never waits on it (font-display:
-		     swap on both families means fallback text shows immediately either
-		     way). noscript covers the no-JS case. -->
+		     stylesheet only once the page has fully loaded (font-display:
+		     swap means fallback text shows immediately regardless). Swapping
+		     any earlier makes the browser discover the @font-face src files
+		     and fetch them at browser-assigned "VeryHigh" priority — which
+		     can't be lowered from HTML — starving the LCP image's fetch on a
+		     throttled connection. noscript covers the no-JS case. -->
+		<script is:inline>
+			function deferStylesheet(link) {
+				const swap = () => {
+					link.rel = 'stylesheet';
+				};
+				if (document.readyState === 'complete') swap();
+				else window.addEventListener('load', swap, { once: true });
+			}
+		</script>
 		<link
 			rel="preload"
 			as="style"
 			href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Taviraj:wght@400&family=Noto+Sans+Thai:wght@400;500;600&display=swap"
-			onload="this.onload=null;this.rel='stylesheet'"
+			onload="this.onload=null;deferStylesheet(this)"
 			fetchpriority="low"
 		/>
 		<link
 			rel="preload"
 			as="style"
 			href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600&display=swap"
-			onload="this.onload=null;this.rel='stylesheet'"
+			onload="this.onload=null;deferStylesheet(this)"
 			fetchpriority="low"
 		/>
 		<noscript>
