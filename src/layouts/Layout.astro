@@ -41,12 +41,14 @@ const { title, description } = Astro.props;
 			as="style"
 			href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Taviraj:wght@400&family=Noto+Sans+Thai:wght@400;500;600&display=swap"
 			onload="this.onload=null;this.rel='stylesheet'"
+			fetchpriority="low"
 		/>
 		<link
 			rel="preload"
 			as="style"
 			href="https://api.fontshare.com/v2/css?f[]=switzer@400,500,600&display=swap"
 			onload="this.onload=null;this.rel='stylesheet'"
+			fetchpriority="low"
 		/>
 		<noscript>
 			<link
