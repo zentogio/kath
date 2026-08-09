@@ -1,0 +1,229 @@
+{
+  "summary": {
+    "health_score": 42,
+    "business_type": "E-commerce (DTC fashion) — hybrid with a visitable physical studio; pre-launch, hosted on a *.vercel.app preview subdomain",
+    "top_findings": [
+      "About page contains fabricated 'bespoke tailoring, founded 2019' copy that contradicts the site's real small-batch ready-to-wear model — confirmed independently by two specialist audits (Content, GEO)",
+      "Zero structured data (JSON-LD) anywhere on the site — no Organization, LocalBusiness, Product, BreadcrumbList, or WebSite schema on any of the 5 indexable pages",
+      "No individual product page URLs — all 18 products live only as JS quick-view modals on one /collection page, blocking product-level ranking, Merchant Center eligibility, and deep-linking",
+      "No robots.txt, no sitemap.xml, no canonical tags anywhere, and a genuine duplicate-URL bug (/about and /about/ both serve identical 200s with no redirect)",
+      "Checkout funnel pages (/checkout, /checkout/payment, /checkout/complete) are fully indexable with no noindex, despite not being wired to real payment yet"
+    ],
+    "quick_wins": [
+      "Rewrite/delete the fabricated 'Founded in 2019... bespoke tailoring' paragraph in src/i18n/dict.ts (about.founding1-3) — a 10-minute content edit",
+      "Add public/robots.txt with Disallow rules for the three checkout routes and a Sitemap: reference",
+      "Add ClothingStore + WebSite JSON-LD site-wide in Layout.astro using the ready-to-use snippets in findings/schema.md — real business data already verified",
+      "Add <meta name=\"robots\" content=\"noindex, follow\"> to the three checkout routes",
+      "Fix the /about vs /about/ duplicate URL by setting trailingSlash in astro.config.mjs, and add self-referencing canonical tags",
+      "Give the home-page hero carousel's 8 product images real alt text (currently alt=\"\" on the site's most prominent visual)",
+      "Drop fetchpriority=\"high\" from all but one hero/product image per page to fix the Poor LCP (5.9-6.2s) on home and collection"
+    ]
+  },
+  "categories": [
+    {
+      "name": "Technical SEO",
+      "score": 46,
+      "what_works": [
+        "Static SSR output (Astro, is_spa:false) — full content visible to crawlers with no JS rendering dependency",
+        "HTTPS + HSTS present sitewide with proper HTTP->HTTPS 308 redirects",
+        "Clean, flat, hyphen-free URL structure with no broken redirect chains",
+        "Unique, descriptive title and meta description on every page",
+        "Correct mobile viewport meta and CLS-conscious image width/height attributes"
+      ],
+      "findings": [
+        {"title": "No robots.txt at all (404)", "severity": "Critical", "description": "https://kath-ebon.vercel.app/robots.txt returns HTTP 404 on all fallback paths checked; not present in the repo's public/ directory.", "recommendation": "Add public/robots.txt disallowing /checkout* and declaring the future sitemap."},
+        {"title": "No sitemap.xml / sitemap-index.xml", "severity": "Critical", "description": "All conventional sitemap paths 404; no @astrojs/sitemap integration configured; astro.config.mjs has no site URL set.", "recommendation": "Add @astrojs/sitemap, set site in astro.config.mjs, exclude /checkout* routes."},
+        {"title": "No canonical tags on any page", "severity": "Critical", "description": "Zero rel=canonical tags across all 8 routes, combined with an active duplicate-URL bug (see below).", "recommendation": "Add a canonical <link> in Layout.astro once astro.config.mjs's site is set."},
+        {"title": "/about and /about/ both serve 200 with identical content, no redirect", "severity": "High", "description": "Same ETag and Content-Length on both trailing-slash variants; astro.config.mjs has no trailingSlash setting.", "recommendation": "Set trailingSlash: 'never' (or 'always') explicitly in astro.config.mjs."},
+        {"title": "Checkout funnel pages fully indexable with zero noindex", "severity": "High", "description": "/checkout, /checkout/payment, /checkout/complete all return 200, unique titles, no meta robots or X-Robots-Tag, and aren't excluded anywhere — despite not being wired to real payment.", "recommendation": "Add noindex,follow to the three checkout routes and Disallow them in robots.txt."},
+        {"title": "Security headers absent site-wide", "severity": "High", "description": "No CSP, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, or Permissions-Policy on any route; only Vercel's default HSTS is present. No vercel.json exists.", "recommendation": "Add a vercel.json headers block; tune CSP against the Google Fonts/Fontshare origins in report-only mode first."},
+        {"title": "Zero structured data (JSON-LD) anywhere", "severity": "High", "description": "structured_data.block_count: 0 on every route checked.", "recommendation": "See dedicated Schema findings — Organization/ClothingStore + WebSite as the minimum viable first pass."},
+        {"title": "Thai-speaking primary audience gets no indexable Thai content", "severity": "Medium", "description": "Language toggle is entirely client-side (src/scripts/i18n.ts swaps innerHTML post-load); no /th/ URLs, no hreflang, <html lang> never changes server-side. PRODUCT.md states the primary audience is 'primarily in Thailand.'", "recommendation": "Ship real server-rendered /th/ routes with reciprocal hreflang once resourced; flagged Medium here on core-crawlability scope, follow up with a dedicated hreflang pass."},
+        {"title": "Site-wide cart/quickview/size-dialog boilerplate is injected as crawlable text on every page", "severity": "Medium", "description": "Layout.astro unconditionally mounts hidden CartDrawer/ProductQuickView/SizeSelectDialog on all 8 routes, diluting unique-content signal on thin pages like /privacy and /checkout/complete.", "recommendation": "Not urgent functionally; don't treat this boilerplate as a substitute for real unique copy on thin pages."},
+        {"title": "Deployed only on a *.vercel.app preview subdomain", "severity": "Medium", "description": "No custom production domain; no X-Robots-Tag noindex safeguard on the preview host, risking indexing the throwaway hostname before launch.", "recommendation": "Password-protect the preview subdomain or add a blanket noindex header until the production domain is live."},
+        {"title": "No IndexNow key file/integration", "severity": "Low", "description": "No IndexNow submission code anywhere in src/.", "recommendation": "Defer until production domain and sitemap exist, then wire up IndexNow via deploy hooks."},
+        {"title": "Render-blocking third-party font CSS on every page", "severity": "Low", "description": "Two synchronous stylesheets (Google Fonts + Fontshare) block first paint; homepage hero also eager-loads 3 fetchpriority=high images simultaneously.", "recommendation": "See Performance findings for the full fix — self-host fonts, preload critical weights, single high-priority hero image."}
+      ]
+    },
+    {
+      "name": "Content Quality",
+      "score": 54,
+      "what_works": [
+        "Privacy Notice is specific, PDPA-referenced, and non-generic — a genuine trust strength and tone model for the rest of the site",
+        "Genuine, specific process facts exist (4-step 'How a piece gets made', 'touched by hand at least three times') that are real E-E-A-T assets once surfaced better"
+      ],
+      "findings": [
+        {"title": "About page contains fabricated 'bespoke tailoring, founded 2019' block that contradicts the actual business model", "severity": "Critical", "description": "src/i18n/dict.ts (about.founding1-3) describes a made-to-measure bespoke commission business founded in 2019, directly contradicting the site's actual fixed-SKU, small-batch, S-XL ready-to-wear model described everywhere else. Confirmed independently by both the Content and GEO audits — reads as unedited template/AI-draft copy never reconciled with the real business.", "recommendation": "Delete or fully rewrite the block; do not publish an unverified founding date; align /contact's 'custom orders' framing with the actual cut-to-order-within-a-limited-run model."},
+        {"title": "No named founder/maker, no credentials, no process photography of a real person", "severity": "High", "description": "The entire brand promise rests on 'hand-cut by a person,' but no individual is named or shown anywhere on the site — the single biggest credibility gap for a craft-quality claim.", "recommendation": "Add a real maker/founder name and photo with a sentence of concrete experience."},
+        {"title": "Collection page has no per-product content beyond name + price", "severity": "Medium", "description": "18 SKUs share one page with a one-line blurb each; no fabric, care, sourcing, or run-number detail per item.", "recommendation": "Add 80-150 words of real content per SKU — fabric, sourcing, fit notes, run number."},
+        {"title": "Content depth is thin with near-verbatim repetition rather than elaboration", "severity": "Medium", "description": "The 'hand-cut/small-batch/made to last' triad is restated three times on the homepage before any new information appears.", "recommendation": "Replace repetition with elaboration — one strong statement per page, freed-up space for concrete provenance detail."},
+        {"title": "AI citation readiness undercut by buried facts and zero structured data", "severity": "Medium", "description": "Strong quotable facts exist but live only on /about, two clicks from the homepage, with no JSON-LD to confirm them machine-readably.", "recommendation": "Add Organization/LocalBusiness + Product JSON-LD; surface the strongest process facts on /collection too."},
+        {"title": "Contact email is a personal Gmail address, not a branded domain", "severity": "Low", "description": "info.studiokath@gmail.com used site-wide instead of a domain-matched address.", "recommendation": "Switch to a branded email once the custom domain migration happens."}
+      ]
+    },
+    {
+      "name": "On-Page SEO / Search Experience (SXO)",
+      "score": 38,
+      "what_works": [
+        "Unique, descriptive titles and meta descriptions on every page",
+        "/about is well-aligned to SERP expectations for brand/craft-story queries",
+        "/collection is structurally close to a proper category/listing page"
+      ],
+      "findings": [
+        {"title": "No individual product detail pages — critical page-type mismatch", "severity": "Critical", "description": "Product-specific queries expect a dedicated Product Page (unique URL, schema, purchase CTA); Studio Kath has none — all 18 products are JS modal triggers with no href, sharing one title/meta description for the whole catalog.", "recommendation": "Build /collection/[slug] routes from the existing product data; keep the quick-view modal as progressive enhancement, not the only path."},
+        {"title": "Target head-term keywords in original brief return B2B/manufacturer SERPs, not consumer shopping results", "severity": "High", "description": "WebSearch confirms 'hand-cut small batch clothing Bangkok' and 'small batch clothing brand Thailand' are currently interpreted by Google as sourcing/manufacturing intent, not shopping intent — Studio Kath would be competing in the wrong SERP.", "recommendation": "Reframe toward consumer-intent long-tail and editorial/PR-friendly phrasing ('limited edition clothing Bangkok' returns boutique/directory content, a more realistic near-term target)."},
+        {"title": "/collection under-delivers for category-level SERP expectations", "severity": "Medium", "description": "No ItemList/Product schema, no fabric/material info visible on the grid itself, no canonical tag.", "recommendation": "Add ItemList schema, one-line material/craft tags per card, self-referencing canonical."},
+        {"title": "No Open Graph or Twitter Card tags on any page", "severity": "Medium", "description": "Confirmed empty on all 5 indexable pages — affects how links render when shared to social or cited by AI chat tools.", "recommendation": "Add og:title/description/image/url and Twitter Card tags site-wide."}
+      ]
+    },
+    {
+      "name": "Schema / Structured Data",
+      "score": 8,
+      "what_works": [],
+      "findings": [
+        {"title": "Zero structured data site-wide — no Organization, LocalBusiness, Product, BreadcrumbList, or WebSite", "severity": "Critical", "description": "structured_data.block_count: 0 confirmed on all 5 indexable pages via direct fetch, no JS required. Layout.astro has no schema-injection logic at all.", "recommendation": "Implement ClothingStore + WebSite JSON-LD in Layout.astro (ready-to-use snippet in findings/schema.md using real verified NAP data)."},
+        {"title": "No LocalBusiness markup despite a real, appointment-visitable studio address", "severity": "Critical", "description": "The /contact page explicitly invites studio visits and publishes a specific Bangkok street address and phone number, making ClothingStore/LocalBusiness schema directly applicable, not just generic Organization.", "recommendation": "Use ClothingStore as a single-location entity; omit openingHoursSpecification until real hours or 'by appointment only' copy is published."},
+        {"title": "No WebSite schema", "severity": "Medium", "description": "No entity tying the domain to the brand name for Knowledge Graph/sitelinks purposes.", "recommendation": "Add WebSite JSON-LD referencing the ClothingStore entity as publisher; skip SearchAction until on-site search exists."},
+        {"title": "No BreadcrumbList on any interior page", "severity": "Medium", "description": "Flat, shallow site structure makes this a near-free addition.", "recommendation": "Add a reusable BreadcrumbList partial for the 4 interior pages."},
+        {"title": "Product/Offer schema should be deferred, not published yet", "severity": "Info", "description": "No individual product URLs exist yet and checkout isn't wired to real payment — publishing Offer schema with price/availability now would misrepresent purchasability.", "recommendation": "Add full Product/Offer schema once per-product pages and live checkout both exist."}
+      ]
+    },
+    {
+      "name": "Performance (Core Web Vitals)",
+      "score": 58,
+      "what_works": [
+        "CLS is a perfect 0 on all four pages tested",
+        "TTFB is excellent everywhere (30-227ms) — Vercel edge is not a bottleneck",
+        "JS payload (Lenis, QRCode) is lightweight — TBT 0-50ms, ~24KB total script weight, not a bottleneck"
+      ],
+      "findings": [
+        {"title": "LCP fails 'Good' on all four pages tested; home and collection land in the 'Poor' band", "severity": "High", "description": "Lab data (Lighthouse, mobile emulation): / 6.2s, /collection 5.9s (both Poor, >4.0s), /about 3.5s, /contact 3.2s (both Needs Improvement). Element render delay (1.2-2.2s) dominates on every page, including two with no LCP image at all.", "recommendation": "Fix render-blocking fonts and hero image priority contention (see next two findings) — both directly address the render-delay component."},
+        {"title": "Two render-blocking font providers (Google Fonts + Fontshare) cost ~2.2-2.3s per page", "severity": "High", "description": "Both font CSS requests block render with separate DNS/TLS chains; Lighthouse estimates 2.2-2.3s savings per page from fixing this.", "recommendation": "Self-host both font families, preload critical weights only, trim unused Switzer weights."},
+        {"title": "Hero/product images oversized, over-compressed, with competing fetchpriority=high", "severity": "High", "description": "Homepage: 1,006 KiB wasted across 3 simultaneously eager+high-priority hero images. Collection: 424KB wasted across 7 flagged images, several serving 1206-1608px sources for ~650px display sizes.", "recommendation": "Add responsive srcset/sizes via astro:assets; only the true above-fold LCP candidate should carry fetchpriority=high."},
+        {"title": "Lab data only — no CrUX/PSI field data available", "severity": "Info", "description": "No Google API credentials configured; PSI rate-limited. All numbers are single-run lab measurements, directional not final.", "recommendation": "Re-validate against CrUX field data once the site has real traffic."}
+      ]
+    },
+    {
+      "name": "AI Search Readiness (GEO)",
+      "score": 21,
+      "what_works": [
+        "Fully static/SSR, no JS-rendering dependency — technically accessible to GPTBot, ClaudeBot, PerplexityBot etc. today",
+        "Genuinely quotable process facts exist (hand-touched three times, 4-step numbered process) — a real citability asset once consolidated and marked up"
+      ],
+      "findings": [
+        {"title": "Same fabricated About-page content risks AI engines citing false facts", "severity": "Critical", "description": "If indexed, AI Overviews/ChatGPT/Perplexity could confidently state Studio Kath is a 'bespoke tailoring house founded in 2019' — wrong on both the founding year and business model.", "recommendation": "Fix before any AI-search visibility push — see Content Quality Finding 1, same underlying issue."},
+        {"title": "Zero JSON-LD blocks the machine-readable entity/shopping layer AI engines rely on", "severity": "High", "description": "No Organization/LocalBusiness/Product schema on any page; 19 real THB prices on /collection with no surrounding markup.", "recommendation": "Same fix as Schema category — sequence after the content-accuracy fix."},
+        {"title": "Brand mention/third-party authority signal is realistically at or near zero", "severity": "High", "description": "No YouTube, Reddit, Wikipedia, or LinkedIn presence; zero Common Crawl footprint; owned social channels aren't yet linked via sameAs.", "recommendation": "Do not expect AI Overview citations at launch; prioritize video content, sameAs structured data (free), and eventual local press."},
+        {"title": "Passage-level citability is fragmented into short fragments, not self-contained answer blocks", "severity": "Medium", "description": "No paragraph on the site reaches 100 words; 0 of ~30 headings are question-phrased.", "recommendation": "Consolidate accurate facts into 1-2 self-contained ~140-160 word passages once Finding 1 is fixed."},
+        {"title": "No FAQ or blog/article content anywhere", "severity": "Medium", "description": "5 short marketing/transactional pages only — no topical content ceiling to expand into for category-level AI queries.", "recommendation": "Post-launch: add a small 'Notes from the Studio' section, 3-5 short posts."},
+        {"title": "robots.txt and llms.txt both entirely absent", "severity": "Info", "description": "Ambiguous-by-omission rather than a deliberate AI-crawler policy.", "recommendation": "Add both once a deliberate AI-crawler stance is decided."}
+      ]
+    },
+    {
+      "name": "Images",
+      "score": 62,
+      "what_works": [
+        "Product photography is WebP, well-resolved (843x1123px+), and carries distinct, descriptive alt text throughout the collection grid and about page",
+        "Explicit width/height on all product and hero images — zero CLS from image loading"
+      ],
+      "findings": [
+        {"title": "Home page hero carousel (8 images) has empty alt=\"\" on the site's most prominent visual", "severity": "Medium", "description": "The same photos have good descriptive alt text elsewhere on the page (e.g. collection grid), proving the team already writes good alt copy — it just wasn't applied to the hero.", "recommendation": "Reuse the existing descriptive copy for the 8 hero__slide images."},
+        {"title": "Decorative nav/social icons use bare alt attribute (cosmetic, not a real issue)", "severity": "Info", "description": "A bare alt is spec-equivalent to alt=\"\" and the parent links already carry accessible names — this accounts for most of the raw 'missing alt' count originally flagged.", "recommendation": "Normalize to explicit alt=\"\" only to stop third-party scanners false-flagging it; no user-facing impact."},
+        {"title": "Hero and product images oversized/over-compressed for their display size", "severity": "High", "description": "See Performance findings — 1,006 KiB wasted on homepage, 424KB on /collection from serving full-resolution sources at small display sizes.", "recommendation": "Responsive srcset/sizes via astro:assets."}
+      ]
+    }
+  ],
+  "supplementary_categories": [
+    {
+      "name": "E-commerce SEO",
+      "note": "Not folded into the weighted health score (outside the standard 7-category framework) but material to the action plan.",
+      "findings": [
+        {"title": "No individual product page URLs (same structural gap as On-Page/SXO)", "severity": "Critical"},
+        {"title": "Near-duplicate templated descriptions across 5 trouser colorway variants — thin-content risk once separately indexable", "severity": "Medium"},
+        {"title": "Marketplace links (Shopee, Lazada) are storefront-level only, no per-product cross-linking possible", "severity": "Medium"},
+        {"title": "Inventory tracked at product level only, no per-size stock signal", "severity": "Medium"},
+        {"title": "No shipping/tax line in checkout total — fine pre-launch, close before going live", "severity": "Low"},
+        {"title": "No SKU/GTIN/MPN/brand fields in the product data model", "severity": "Low"}
+      ]
+    },
+    {
+      "name": "Local SEO",
+      "note": "Studio Kath is a hybrid DTC + appointment-visitable-studio business. Not folded into the weighted health score.",
+      "findings": [
+        {"title": "No visible Google Business Profile signals; existence of a GBP is unverified and unverifiable from this tool", "severity": "High"},
+        {"title": "NAP exists in exactly one unstructured on-page source, missing ', Thailand' in the visible address", "severity": "Medium"},
+        {"title": "No dedicated 'visit the studio' content beyond a single address line", "severity": "Medium"},
+        {"title": "Social/marketplace brand handles are inconsistent across platforms (studio.kath / kathh.studio / studiokath)", "severity": "Medium"},
+        {"title": "No reviews/reputation signals anywhere — expected pre-launch, plan the solicitation cadence ahead of time", "severity": "Low"}
+      ]
+    },
+    {
+      "name": "Backlinks",
+      "note": "Tier 0 (Common Crawl only, no Moz/Bing keys configured). Not folded into the weighted health score.",
+      "findings": [
+        {"title": "No backlink authority data exists yet — expected for a pre-launch site, not a red flag", "severity": "Info"},
+        {"title": "Site is on a *.vercel.app subdomain — any backlinks earned now won't transfer to a future custom domain", "severity": "High"}
+      ]
+    }
+  ],
+  "action_plan": {
+    "phases": [
+      {
+        "name": "Phase 1: Critical Fixes",
+        "timeframe": "Week 1",
+        "items": [
+          "Delete/rewrite the fabricated 'Founded in 2019... bespoke tailoring' block in src/i18n/dict.ts",
+          "Add public/robots.txt (Disallow /checkout*, declare future sitemap)",
+          "Add noindex,follow meta tag to /checkout, /checkout/payment, /checkout/complete",
+          "Fix the /about vs /about/ duplicate-URL bug via trailingSlash config in astro.config.mjs",
+          "Add self-referencing canonical tags site-wide (requires setting `site` in astro.config.mjs)",
+          "Add ClothingStore + WebSite JSON-LD site-wide in Layout.astro (ready-to-use snippet in findings/schema.md)"
+        ]
+      },
+      {
+        "name": "Phase 2: High-Impact Improvements",
+        "timeframe": "Weeks 2-3",
+        "items": [
+          "Build /collection/[slug] individual product page routes from existing product data",
+          "Add security headers via vercel.json (CSP, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy)",
+          "Fix LCP: drop fetchpriority=high to a single hero image per page, self-host/preload critical font weights",
+          "Add descriptive alt text to the 8 home-page hero carousel images",
+          "Add BreadcrumbList JSON-LD to the 4 interior pages",
+          "Add Open Graph and Twitter Card tags site-wide",
+          "Manually verify whether a Google Business Profile exists for Studio Kath; create/verify one with 'by appointment' hours if not",
+          "Add named founder/maker content with a real photo"
+        ]
+      },
+      {
+        "name": "Phase 3: Content & Authority",
+        "timeframe": "Month 2",
+        "items": [
+          "Add 80-150 words of real per-product content (fabric, sourcing, run number) once product pages exist",
+          "Add Product/Offer JSON-LD once product pages and live checkout both exist",
+          "Consolidate scattered process facts into 1-2 self-contained ~140-160 word answer passages with question-phrased subheadings",
+          "Align social/marketplace brand handles across Instagram, Facebook, Shopee, Lazada",
+          "Add the missing ', Thailand' to the visible on-page address",
+          "Expand the /contact 'visit the studio' section with real photos and Bangkok wayfinding notes",
+          "Migrate off the *.vercel.app subdomain to a custom production domain before any deliberate link-building/PR outreach begins"
+        ]
+      },
+      {
+        "name": "Phase 4: Monitoring & Iteration",
+        "timeframe": "Ongoing",
+        "items": [
+          "Re-run Lighthouse with a full trace post-fix to confirm LCP stabilizes",
+          "Add @astrojs/sitemap once product pages exist so it captures them automatically",
+          "Ship real server-rendered /th/ Thai-language routes with reciprocal hreflang",
+          "Add llms.txt and a deliberate AI-crawler policy in robots.txt",
+          "Plan a steady, non-batched review-solicitation flow once real customers exist post-launch",
+          "Re-run backlink and Common Crawl checks after the domain migration",
+          "Add Organization sameAs links pointing to Instagram/Facebook/Shopee/Lazada at zero incremental cost"
+        ]
+      }
+    ]
+  },
+  "artifacts": {
+    "findings_dir": "findings/",
+    "screenshots_dir": "screenshots/"
+  }
+}

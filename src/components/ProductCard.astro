@@ -4,11 +4,12 @@ import { productImage, formatPrice, type Product } from '../data/products';
 interface Props {
 	product: Product;
 	priority?: boolean;
+	lcp?: boolean;
 	index?: number;
 	featured?: boolean;
 }
 
-const { product, priority = false, index = 0, featured = false } = Astro.props;
+const { product, priority = false, lcp = false, index = 0, featured = false } = Astro.props;
 ---
 
 <li
@@ -28,7 +29,7 @@ const { product, priority = false, index = 0, featured = false } = Astro.props;
 			width={featured ? 1200 : 760}
 			height={featured ? 1000 : 950}
 			loading={priority ? 'eager' : 'lazy'}
-			fetchpriority={priority ? 'high' : 'auto'}
+			fetchpriority={lcp ? 'high' : 'auto'}
 			class="product-photo"
 		/>
 		{product.soldOut && <span class="product-card__badge">Sold Out</span>}

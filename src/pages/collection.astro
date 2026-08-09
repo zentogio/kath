@@ -21,7 +21,7 @@ import { products } from '../data/products';
 		<ul class="product-grid" data-reveal-group>
 			{
 				products.map((product, index) => (
-					<ProductCard product={product} index={index} priority={index < 4} />
+					<ProductCard product={product} index={index} priority={index < 4} lcp={index === 0} />
 				))
 			}
 		</ul>

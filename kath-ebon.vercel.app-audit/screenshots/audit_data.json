@@ -1,0 +1,1474 @@
+{
+  "home": {
+    "images": [
+      {
+        "src": "/_astro/studio-mark.DLYwsIqH_Z1lvihc.webp",
+        "alt": "Studio Kath",
+        "hasAlt": true,
+        "w": 498,
+        "h": 483,
+        "classes": "",
+        "parentClasses": "site-nav__logo"
+      },
+      {
+        "src": "/_astro/studio-mark.DLYwsIqH_Z1lvihc.webp",
+        "alt": "Studio Kath",
+        "hasAlt": true,
+        "w": 498,
+        "h": 483,
+        "classes": "brand-mark--invert menu-dialog__mark",
+        "parentClasses": "menu-dialog__top"
+      },
+      {
+        "src": "/_astro/line-mark.D6yvw2Qb_Z4KLqN.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 18,
+        "h": 17,
+        "classes": "brand-mark--invert",
+        "parentClasses": "menu-dialog__contact-link menu-dialog__contact-link--icon"
+      },
+      {
+        "src": "/_astro/instagram-mark.CGzf1DDl_Z2jaSmr.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 0,
+        "h": 0,
+        "classes": "social-links__icon brand-mark--invert",
+        "parentClasses": "social-links__icon-box"
+      },
+      {
+        "src": "/_astro/facebook-mark.CP055oJA_29c0vt.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 0,
+        "h": 0,
+        "classes": "social-links__icon brand-mark--invert",
+        "parentClasses": "social-links__icon-box"
+      },
+      {
+        "src": "/_astro/shopee-mark.BInW6fnI_Z1cWXoA.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 0,
+        "h": 0,
+        "classes": "social-links__icon brand-mark--invert",
+        "parentClasses": "social-links__icon-box"
+      },
+      {
+        "src": "/_astro/lazada-mark.B_T8WG39_jXEF0.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 0,
+        "h": 0,
+        "classes": "social-links__icon brand-mark--invert",
+        "parentClasses": "social-links__icon-box"
+      },
+      {
+        "src": "/products/trousers-sand.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 843,
+        "h": 1123,
+        "classes": "hero__slide",
+        "parentClasses": "hero__col"
+      },
+      {
+        "src": "/products/crop-top-yellow-gingham.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 1206,
+        "h": 1809,
+        "classes": "hero__slide is-active",
+        "parentClasses": "hero__col"
+      },
+      {
+        "src": "/products/trousers-azure.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 1206,
+        "h": 1809,
+        "classes": "hero__slide",
+        "parentClasses": "hero__col"
+      },
+      {
+        "src": "/products/blouse-papaya-puff.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 1206,
+        "h": 1508,
+        "classes": "hero__slide is-active",
+        "parentClasses": "hero__col"
+      },
+      {
+        "src": "/products/trousers-sage.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 828,
+        "h": 1104,
+        "classes": "hero__slide",
+        "parentClasses": "hero__col"
+      },
+      {
+        "src": "/products/vest-set-dusty-blue-2.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 1206,
+        "h": 1608,
+        "classes": "hero__slide is-active",
+        "parentClasses": "hero__col"
+      },
+      {
+        "src": "/products/satin-set-powder-blue.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 1080,
+        "h": 1080,
+        "classes": "hero__slide",
+        "parentClasses": "hero__col"
+      },
+      {
+        "src": "/products/trousers-taupe-plaid.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 1206,
+        "h": 1608,
+        "classes": "hero__slide",
+        "parentClasses": "hero__col"
+      },
+      {
+        "src": "/products/trousers-indigo-gingham.webp",
+        "alt": "A model in the indigo gingham wide-leg trousers",
+        "hasAlt": true,
+        "w": 1080,
+        "h": 1080,
+        "classes": "flanked__photo",
+        "parentClasses": "container flanked"
+      },
+      {
+        "src": "/products/satin-set-powder-blue.webp",
+        "alt": "A model in the powder blue satin shirt and trouser set",
+        "hasAlt": true,
+        "w": 1080,
+        "h": 1080,
+        "classes": "flanked__photo",
+        "parentClasses": "container flanked"
+      },
+      {
+        "src": "/products/trousers-papaya.webp",
+        "alt": "A model in bright papaya orange pleated wide-leg trousers with a white crop top",
+        "hasAlt": true,
+        "w": 1206,
+        "h": 1809,
+        "classes": "scatter-item__photo",
+        "parentClasses": "scatter-item__link"
+      },
+      {
+        "src": "/products/collar-set-sky.webp",
+        "alt": "A model in a sky blue oversized-collar puff-sleeve blouse with matching shorts",
+        "hasAlt": true,
+        "w": 1206,
+        "h": 1508,
+        "classes": "scatter-item__photo",
+        "parentClasses": "scatter-item__link"
+      },
+      {
+        "src": "/products/trousers-floral-meadow.webp",
+        "alt": "A model in meadow floral print pleated wide-leg trousers with a yellow top",
+        "hasAlt": true,
+        "w": 1206,
+        "h": 1404,
+        "classes": "scatter-item__photo",
+        "parentClasses": "scatter-item__link"
+      },
+      {
+        "src": "/products/blouse-green-mandarin.webp",
+        "alt": "A model in a bright green mandarin-collar blouse with a white mini skirt",
+        "hasAlt": true,
+        "w": 384,
+        "h": 480,
+        "classes": "scatter-item__photo",
+        "parentClasses": "scatter-item__link"
+      },
+      {
+        "src": "/products/vest-set-dusty-blue.webp",
+        "alt": "A model in a dusty blue linen vest over a paisley blouse with matching trousers",
+        "hasAlt": true,
+        "w": 384,
+        "h": 480,
+        "classes": "scatter-item__photo",
+        "parentClasses": "scatter-item__link"
+      },
+      {
+        "src": "/_astro/studio-mark.DLYwsIqH_Z1lvihc.webp",
+        "alt": "Studio Kath",
+        "hasAlt": true,
+        "w": 498,
+        "h": 483,
+        "classes": "brand-mark--invert",
+        "parentClasses": "site-footer__logo"
+      },
+      {
+        "src": "/_astro/instagram-mark.CGzf1DDl_Z2jaSmr.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 0,
+        "h": 0,
+        "classes": "social-links__icon brand-mark--invert",
+        "parentClasses": "social-links__icon-box"
+      },
+      {
+        "src": "/_astro/facebook-mark.CP055oJA_29c0vt.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 0,
+        "h": 0,
+        "classes": "social-links__icon brand-mark--invert",
+        "parentClasses": "social-links__icon-box"
+      },
+      {
+        "src": "/_astro/shopee-mark.BInW6fnI_Z1cWXoA.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 0,
+        "h": 0,
+        "classes": "social-links__icon brand-mark--invert",
+        "parentClasses": "social-links__icon-box"
+      },
+      {
+        "src": "/_astro/lazada-mark.B_T8WG39_jXEF0.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 0,
+        "h": 0,
+        "classes": "social-links__icon brand-mark--invert",
+        "parentClasses": "social-links__icon-box"
+      },
+      {
+        "src": "",
+        "alt": "",
+        "hasAlt": true,
+        "w": 0,
+        "h": 0,
+        "classes": "size-dialog__image",
+        "parentClasses": "size-dialog__product"
+      }
+    ],
+    "mobile_touch_targets": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "w": 138,
+        "h": 41,
+        "top": -812
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Open menu",
+        "w": 44,
+        "h": 44,
+        "top": 32
+      },
+      {
+        "tag": "A",
+        "text": "Studio Kath, home",
+        "w": 49,
+        "h": 48,
+        "top": 30
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Open cart",
+        "w": 44,
+        "h": 44,
+        "top": 32
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Close menu",
+        "w": 44,
+        "h": 44,
+        "top": 32
+      },
+      {
+        "tag": "BUTTON",
+        "text": "EN",
+        "w": 33,
+        "h": 26,
+        "top": 121
+      },
+      {
+        "tag": "BUTTON",
+        "text": "\u0e44\u0e17\u0e22",
+        "w": 37,
+        "h": 26,
+        "top": 121
+      },
+      {
+        "tag": "A",
+        "text": "Home",
+        "w": 69,
+        "h": 35,
+        "top": 196
+      },
+      {
+        "tag": "A",
+        "text": "Collection",
+        "w": 117,
+        "h": 35,
+        "top": 246
+      },
+      {
+        "tag": "A",
+        "text": "About",
+        "w": 71,
+        "h": 35,
+        "top": 297
+      },
+      {
+        "tag": "A",
+        "text": "Contact",
+        "w": 90,
+        "h": 35,
+        "top": 347
+      },
+      {
+        "tag": "A",
+        "text": "info.studiokath@gmail.com",
+        "w": 220,
+        "h": 29,
+        "top": 663
+      },
+      {
+        "tag": "A",
+        "text": "@studiokath",
+        "w": 132,
+        "h": 28,
+        "top": 700
+      },
+      {
+        "tag": "A",
+        "text": "Instagram",
+        "w": 32,
+        "h": 32,
+        "top": 748
+      },
+      {
+        "tag": "A",
+        "text": "Facebook",
+        "w": 32,
+        "h": 32,
+        "top": 748
+      },
+      {
+        "tag": "A",
+        "text": "Shopee",
+        "w": 32,
+        "h": 32,
+        "top": 748
+      },
+      {
+        "tag": "A",
+        "text": "Lazada",
+        "w": 32,
+        "h": 32,
+        "top": 748
+      },
+      {
+        "tag": "A",
+        "text": "EXPLORE THE COLLECTION",
+        "w": 236,
+        "h": 47,
+        "top": 593
+      },
+      {
+        "tag": "A",
+        "text": "ABOUT THE STUDIO",
+        "w": 187,
+        "h": 47,
+        "top": 656
+      }
+    ],
+    "viewport_meta": "width=device-width, initial-scale=1",
+    "mobile_scroll_check": {
+      "docWidth": 388,
+      "clientWidth": 375
+    },
+    "mobile_base_font": "16px",
+    "mobile_h1": {
+      "text": "Cut by hand.\nMade in small batches.",
+      "top": 305,
+      "bottom": 448,
+      "visible": true
+    },
+    "mobile_cta": {
+      "text": "Shopee",
+      "top": 748,
+      "bottom": 780,
+      "visible": true
+    }
+  },
+  "collection": {
+    "images": [
+      {
+        "src": "/_astro/studio-mark.DLYwsIqH_Z1lvihc.webp",
+        "alt": "Studio Kath",
+        "hasAlt": true,
+        "w": 498,
+        "h": 483,
+        "classes": "",
+        "parentClasses": "site-nav__logo"
+      },
+      {
+        "src": "/_astro/studio-mark.DLYwsIqH_Z1lvihc.webp",
+        "alt": "Studio Kath",
+        "hasAlt": true,
+        "w": 498,
+        "h": 483,
+        "classes": "brand-mark--invert menu-dialog__mark",
+        "parentClasses": "menu-dialog__top"
+      },
+      {
+        "src": "/_astro/line-mark.D6yvw2Qb_Z4KLqN.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 18,
+        "h": 17,
+        "classes": "brand-mark--invert",
+        "parentClasses": "menu-dialog__contact-link menu-dialog__contact-link--icon"
+      },
+      {
+        "src": "/_astro/instagram-mark.CGzf1DDl_Z2jaSmr.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 120,
+        "h": 120,
+        "classes": "social-links__icon brand-mark--invert",
+        "parentClasses": "social-links__icon-box"
+      },
+      {
+        "src": "/_astro/facebook-mark.CP055oJA_29c0vt.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 67,
+        "h": 120,
+        "classes": "social-links__icon brand-mark--invert",
+        "parentClasses": "social-links__icon-box"
+      },
+      {
+        "src": "/_astro/shopee-mark.BInW6fnI_Z1cWXoA.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 106,
+        "h": 120,
+        "classes": "social-links__icon brand-mark--invert",
+        "parentClasses": "social-links__icon-box"
+      },
+      {
+        "src": "/_astro/lazada-mark.B_T8WG39_jXEF0.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 149,
+        "h": 120,
+        "classes": "social-links__icon brand-mark--invert",
+        "parentClasses": "social-links__icon-box"
+      },
+      {
+        "src": "/products/trousers-sand.webp",
+        "alt": "A model in sand-colored pleated wide-leg trousers with a black graphic crop top",
+        "hasAlt": true,
+        "w": 843,
+        "h": 1123,
+        "classes": "product-photo",
+        "parentClasses": "product-card__media"
+      },
+      {
+        "src": "/products/trousers-papaya.webp",
+        "alt": "A model in bright papaya orange pleated wide-leg trousers with a white crop top",
+        "hasAlt": true,
+        "w": 1206,
+        "h": 1809,
+        "classes": "product-photo",
+        "parentClasses": "product-card__media"
+      },
+      {
+        "src": "/products/trousers-indigo-gingham.webp",
+        "alt": "A model in indigo gingham check wide-leg trousers with a white tank top",
+        "hasAlt": true,
+        "w": 1080,
+        "h": 1080,
+        "classes": "product-photo",
+        "parentClasses": "product-card__media"
+      },
+      {
+        "src": "/products/crop-top-yellow-gingham.webp",
+        "alt": "A model in a yellow gingham tie-back crop top with white wide-leg trousers",
+        "hasAlt": true,
+        "w": 1206,
+        "h": 1809,
+        "classes": "product-photo",
+        "parentClasses": "product-card__media"
+      },
+      {
+        "src": "/products/trousers-mint.webp",
+        "alt": "A model in mint green pleated wide-leg trousers with a mustard sleeveless top",
+        "hasAlt": true,
+        "w": 828,
+        "h": 1104,
+        "classes": "product-photo",
+        "parentClasses": "product-card__media"
+      },
+      {
+        "src": "/products/collar-set-sky.webp",
+        "alt": "A model in a sky blue oversized-collar puff-sleeve blouse with matching shorts",
+        "hasAlt": true,
+        "w": 1206,
+        "h": 1508,
+        "classes": "product-photo",
+        "parentClasses": "product-card__media"
+      },
+      {
+        "src": "/products/crop-top-lime.webp",
+        "alt": "A model in a lime green cropped satin top with green wide-leg trousers",
+        "hasAlt": true,
+        "w": 1144,
+        "h": 1430,
+        "classes": "product-photo",
+        "parentClasses": "product-card__media"
+      },
+      {
+        "src": "/products/halter-top-ivory.webp",
+        "alt": "A model in an ivory linen halter top with mint pleated shorts",
+        "hasAlt": true,
+        "w": 1206,
+        "h": 1508,
+        "classes": "product-photo",
+        "parentClasses": "product-card__media"
+      },
+      {
+        "src": "/products/trousers-floral-meadow.webp",
+        "alt": "A model in meadow floral print pleated wide-leg trousers with a yellow top",
+        "hasAlt": true,
+        "w": 1206,
+        "h": 1404,
+        "classes": "product-photo",
+        "parentClasses": "product-card__media"
+      },
+      {
+        "src": "/products/blouse-green-mandarin.webp",
+        "alt": "A model in a bright green mandarin-collar blouse with a white mini skirt",
+        "hasAlt": true,
+        "w": 1206,
+        "h": 1287,
+        "classes": "product-photo",
+        "parentClasses": "product-card__media"
+      },
+      {
+        "src": "/products/blouse-papaya-puff.webp",
+        "alt": "A model in a papaya-colored puff-sleeve blouse with lavender shorts",
+        "hasAlt": true,
+        "w": 1206,
+        "h": 1508,
+        "classes": "product-photo",
+        "parentClasses": "product-card__media"
+      },
+      {
+        "src": "/products/satin-set-powder-blue.webp",
+        "alt": "A model in a powder blue satin shirt and trouser set, loungewear style",
+        "hasAlt": true,
+        "w": 1080,
+        "h": 1080,
+        "classes": "product-photo",
+        "parentClasses": "product-card__media"
+      },
+      {
+        "src": "/products/trousers-taupe-plaid.webp",
+        "alt": "A model in taupe plaid wide-leg trousers with a white corset top",
+        "hasAlt": true,
+        "w": 1206,
+        "h": 1608,
+        "classes": "product-photo",
+        "parentClasses": "product-card__media"
+      },
+      {
+        "src": "/products/blouse-lavender-puff.webp",
+        "alt": "A model in a lavender puff-sleeve blouse with pale blue trousers",
+        "hasAlt": true,
+        "w": 1206,
+        "h": 1809,
+        "classes": "product-photo",
+        "parentClasses": "product-card__media"
+      },
+      {
+        "src": "/products/vest-set-dusty-blue.webp",
+        "alt": "A model in a dusty blue linen vest over a paisley blouse with matching trousers",
+        "hasAlt": true,
+        "w": 1206,
+        "h": 1608,
+        "classes": "product-photo",
+        "parentClasses": "product-card__media"
+      },
+      {
+        "src": "/products/trousers-sage.webp",
+        "alt": "A model in pale sage pleated wide-leg trousers with a mustard sleeveless top",
+        "hasAlt": true,
+        "w": 828,
+        "h": 1104,
+        "classes": "product-photo",
+        "parentClasses": "product-card__media"
+      },
+      {
+        "src": "/products/trousers-azure.webp",
+        "alt": "A model in azure blue pleated wide-leg trousers with a white crop top",
+        "hasAlt": true,
+        "w": 1206,
+        "h": 1809,
+        "classes": "product-photo",
+        "parentClasses": "product-card__media"
+      },
+      {
+        "src": "/products/collar-set-peach.webp",
+        "alt": "A model in a peach oversized-collar shirt with matching pleated shorts",
+        "hasAlt": true,
+        "w": 1206,
+        "h": 1508,
+        "classes": "product-photo",
+        "parentClasses": "product-card__media"
+      },
+      {
+        "src": "/_astro/studio-mark.DLYwsIqH_Z1lvihc.webp",
+        "alt": "Studio Kath",
+        "hasAlt": true,
+        "w": 498,
+        "h": 483,
+        "classes": "brand-mark--invert",
+        "parentClasses": "site-footer__logo"
+      },
+      {
+        "src": "/_astro/instagram-mark.CGzf1DDl_Z2jaSmr.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 120,
+        "h": 120,
+        "classes": "social-links__icon brand-mark--invert",
+        "parentClasses": "social-links__icon-box"
+      },
+      {
+        "src": "/_astro/facebook-mark.CP055oJA_29c0vt.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 67,
+        "h": 120,
+        "classes": "social-links__icon brand-mark--invert",
+        "parentClasses": "social-links__icon-box"
+      },
+      {
+        "src": "/_astro/shopee-mark.BInW6fnI_Z1cWXoA.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 106,
+        "h": 120,
+        "classes": "social-links__icon brand-mark--invert",
+        "parentClasses": "social-links__icon-box"
+      },
+      {
+        "src": "/_astro/lazada-mark.B_T8WG39_jXEF0.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 149,
+        "h": 120,
+        "classes": "social-links__icon brand-mark--invert",
+        "parentClasses": "social-links__icon-box"
+      },
+      {
+        "src": "",
+        "alt": "",
+        "hasAlt": true,
+        "w": 0,
+        "h": 0,
+        "classes": "size-dialog__image",
+        "parentClasses": "size-dialog__product"
+      }
+    ],
+    "mobile_touch_targets": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "w": 138,
+        "h": 41,
+        "top": -812
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Open menu",
+        "w": 44,
+        "h": 44,
+        "top": 32
+      },
+      {
+        "tag": "A",
+        "text": "Studio Kath, home",
+        "w": 49,
+        "h": 48,
+        "top": 30
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Open cart",
+        "w": 44,
+        "h": 44,
+        "top": 32
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Close menu",
+        "w": 44,
+        "h": 44,
+        "top": 32
+      },
+      {
+        "tag": "BUTTON",
+        "text": "EN",
+        "w": 33,
+        "h": 26,
+        "top": 121
+      },
+      {
+        "tag": "BUTTON",
+        "text": "\u0e44\u0e17\u0e22",
+        "w": 37,
+        "h": 26,
+        "top": 121
+      },
+      {
+        "tag": "A",
+        "text": "Home",
+        "w": 69,
+        "h": 35,
+        "top": 196
+      },
+      {
+        "tag": "A",
+        "text": "Collection",
+        "w": 117,
+        "h": 35,
+        "top": 246
+      },
+      {
+        "tag": "A",
+        "text": "About",
+        "w": 71,
+        "h": 35,
+        "top": 297
+      },
+      {
+        "tag": "A",
+        "text": "Contact",
+        "w": 90,
+        "h": 35,
+        "top": 347
+      },
+      {
+        "tag": "A",
+        "text": "info.studiokath@gmail.com",
+        "w": 220,
+        "h": 29,
+        "top": 663
+      },
+      {
+        "tag": "A",
+        "text": "@studiokath",
+        "w": 132,
+        "h": 28,
+        "top": 700
+      },
+      {
+        "tag": "A",
+        "text": "Instagram",
+        "w": 32,
+        "h": 32,
+        "top": 748
+      },
+      {
+        "tag": "A",
+        "text": "Facebook",
+        "w": 32,
+        "h": 32,
+        "top": 748
+      },
+      {
+        "tag": "A",
+        "text": "Shopee",
+        "w": 32,
+        "h": 32,
+        "top": 748
+      },
+      {
+        "tag": "A",
+        "text": "Lazada",
+        "w": 32,
+        "h": 32,
+        "top": 748
+      },
+      {
+        "tag": "BUTTON",
+        "text": "View Pleated Wide-Leg Trousers, Sand",
+        "w": 335,
+        "h": 419,
+        "top": 523
+      }
+    ],
+    "viewport_meta": "width=device-width, initial-scale=1",
+    "mobile_scroll_check": {
+      "docWidth": 375,
+      "clientWidth": 375
+    },
+    "mobile_base_font": "16px",
+    "mobile_h1": {
+      "text": "Cut in limited numbers.",
+      "top": 220,
+      "bottom": 315,
+      "visible": true
+    },
+    "mobile_cta": {
+      "text": "Shopee",
+      "top": 748,
+      "bottom": 780,
+      "visible": true
+    }
+  },
+  "about": {
+    "images": [
+      {
+        "src": "/_astro/studio-mark.DLYwsIqH_Z1lvihc.webp",
+        "alt": "Studio Kath",
+        "hasAlt": true,
+        "w": 498,
+        "h": 483,
+        "classes": "",
+        "parentClasses": "site-nav__logo"
+      },
+      {
+        "src": "/_astro/studio-mark.DLYwsIqH_Z1lvihc.webp",
+        "alt": "Studio Kath",
+        "hasAlt": true,
+        "w": 498,
+        "h": 483,
+        "classes": "brand-mark--invert menu-dialog__mark",
+        "parentClasses": "menu-dialog__top"
+      },
+      {
+        "src": "/_astro/line-mark.D6yvw2Qb_Z4KLqN.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 18,
+        "h": 17,
+        "classes": "brand-mark--invert",
+        "parentClasses": "menu-dialog__contact-link menu-dialog__contact-link--icon"
+      },
+      {
+        "src": "/_astro/instagram-mark.CGzf1DDl_Z2jaSmr.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 120,
+        "h": 120,
+        "classes": "social-links__icon brand-mark--invert",
+        "parentClasses": "social-links__icon-box"
+      },
+      {
+        "src": "/_astro/facebook-mark.CP055oJA_29c0vt.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 67,
+        "h": 120,
+        "classes": "social-links__icon brand-mark--invert",
+        "parentClasses": "social-links__icon-box"
+      },
+      {
+        "src": "/_astro/shopee-mark.BInW6fnI_Z1cWXoA.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 106,
+        "h": 120,
+        "classes": "social-links__icon brand-mark--invert",
+        "parentClasses": "social-links__icon-box"
+      },
+      {
+        "src": "/_astro/lazada-mark.B_T8WG39_jXEF0.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 149,
+        "h": 120,
+        "classes": "social-links__icon brand-mark--invert",
+        "parentClasses": "social-links__icon-box"
+      },
+      {
+        "src": "/products/blouse-lavender-puff.webp",
+        "alt": "A model in the lavender puff-sleeve blouse",
+        "hasAlt": true,
+        "w": 1206,
+        "h": 1809,
+        "classes": "about-founding__image",
+        "parentClasses": "about-founding__media is-visible"
+      },
+      {
+        "src": "/products/halter-top-ivory.webp",
+        "alt": "A model in the ivory linen halter top",
+        "hasAlt": true,
+        "w": 1206,
+        "h": 1508,
+        "classes": "about-story__image",
+        "parentClasses": "about-story__media"
+      },
+      {
+        "src": "/products/trousers-indigo-gingham.webp",
+        "alt": "A model in the indigo gingham wide-leg trousers",
+        "hasAlt": true,
+        "w": 1080,
+        "h": 1080,
+        "classes": "",
+        "parentClasses": "detail-strip__item"
+      },
+      {
+        "src": "/products/crop-top-lime.webp",
+        "alt": "A model in the lime cropped satin top",
+        "hasAlt": true,
+        "w": 1144,
+        "h": 1430,
+        "classes": "",
+        "parentClasses": "detail-strip__item"
+      },
+      {
+        "src": "/products/trousers-mint.webp",
+        "alt": "A model in the mint pleated wide-leg trousers",
+        "hasAlt": true,
+        "w": 828,
+        "h": 1104,
+        "classes": "",
+        "parentClasses": "detail-strip__item"
+      },
+      {
+        "src": "/_astro/studio-mark.DLYwsIqH_Z1lvihc.webp",
+        "alt": "Studio Kath",
+        "hasAlt": true,
+        "w": 498,
+        "h": 483,
+        "classes": "brand-mark--invert",
+        "parentClasses": "site-footer__logo"
+      },
+      {
+        "src": "/_astro/instagram-mark.CGzf1DDl_Z2jaSmr.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 120,
+        "h": 120,
+        "classes": "social-links__icon brand-mark--invert",
+        "parentClasses": "social-links__icon-box"
+      },
+      {
+        "src": "/_astro/facebook-mark.CP055oJA_29c0vt.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 67,
+        "h": 120,
+        "classes": "social-links__icon brand-mark--invert",
+        "parentClasses": "social-links__icon-box"
+      },
+      {
+        "src": "/_astro/shopee-mark.BInW6fnI_Z1cWXoA.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 106,
+        "h": 120,
+        "classes": "social-links__icon brand-mark--invert",
+        "parentClasses": "social-links__icon-box"
+      },
+      {
+        "src": "/_astro/lazada-mark.B_T8WG39_jXEF0.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 149,
+        "h": 120,
+        "classes": "social-links__icon brand-mark--invert",
+        "parentClasses": "social-links__icon-box"
+      },
+      {
+        "src": "",
+        "alt": "",
+        "hasAlt": true,
+        "w": 0,
+        "h": 0,
+        "classes": "size-dialog__image",
+        "parentClasses": "size-dialog__product"
+      }
+    ],
+    "mobile_touch_targets": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "w": 138,
+        "h": 41,
+        "top": -812
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Open menu",
+        "w": 44,
+        "h": 44,
+        "top": 32
+      },
+      {
+        "tag": "A",
+        "text": "Studio Kath, home",
+        "w": 49,
+        "h": 48,
+        "top": 30
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Open cart",
+        "w": 44,
+        "h": 44,
+        "top": 32
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Close menu",
+        "w": 44,
+        "h": 44,
+        "top": 32
+      },
+      {
+        "tag": "BUTTON",
+        "text": "EN",
+        "w": 33,
+        "h": 26,
+        "top": 121
+      },
+      {
+        "tag": "BUTTON",
+        "text": "\u0e44\u0e17\u0e22",
+        "w": 37,
+        "h": 26,
+        "top": 121
+      },
+      {
+        "tag": "A",
+        "text": "Home",
+        "w": 69,
+        "h": 35,
+        "top": 196
+      },
+      {
+        "tag": "A",
+        "text": "Collection",
+        "w": 117,
+        "h": 35,
+        "top": 246
+      },
+      {
+        "tag": "A",
+        "text": "About",
+        "w": 71,
+        "h": 35,
+        "top": 297
+      },
+      {
+        "tag": "A",
+        "text": "Contact",
+        "w": 90,
+        "h": 35,
+        "top": 347
+      },
+      {
+        "tag": "A",
+        "text": "info.studiokath@gmail.com",
+        "w": 220,
+        "h": 29,
+        "top": 663
+      },
+      {
+        "tag": "A",
+        "text": "@studiokath",
+        "w": 132,
+        "h": 28,
+        "top": 700
+      },
+      {
+        "tag": "A",
+        "text": "Instagram",
+        "w": 32,
+        "h": 32,
+        "top": 748
+      },
+      {
+        "tag": "A",
+        "text": "Facebook",
+        "w": 32,
+        "h": 32,
+        "top": 748
+      },
+      {
+        "tag": "A",
+        "text": "Shopee",
+        "w": 32,
+        "h": 32,
+        "top": 748
+      },
+      {
+        "tag": "A",
+        "text": "Lazada",
+        "w": 32,
+        "h": 32,
+        "top": 748
+      }
+    ],
+    "viewport_meta": "width=device-width, initial-scale=1",
+    "mobile_scroll_check": {
+      "docWidth": 388,
+      "clientWidth": 375
+    },
+    "mobile_base_font": "16px",
+    "mobile_h1": {
+      "text": "Slow, on purpose.",
+      "top": 220,
+      "bottom": 267,
+      "visible": true
+    },
+    "mobile_cta": {
+      "text": "Shopee",
+      "top": 748,
+      "bottom": 780,
+      "visible": true
+    }
+  },
+  "contact": {
+    "images": [
+      {
+        "src": "/_astro/studio-mark.DLYwsIqH_Z1lvihc.webp",
+        "alt": "Studio Kath",
+        "hasAlt": true,
+        "w": 498,
+        "h": 483,
+        "classes": "",
+        "parentClasses": "site-nav__logo"
+      },
+      {
+        "src": "/_astro/studio-mark.DLYwsIqH_Z1lvihc.webp",
+        "alt": "Studio Kath",
+        "hasAlt": true,
+        "w": 498,
+        "h": 483,
+        "classes": "brand-mark--invert menu-dialog__mark",
+        "parentClasses": "menu-dialog__top"
+      },
+      {
+        "src": "/_astro/line-mark.D6yvw2Qb_Z4KLqN.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 18,
+        "h": 17,
+        "classes": "brand-mark--invert",
+        "parentClasses": "menu-dialog__contact-link menu-dialog__contact-link--icon"
+      },
+      {
+        "src": "/_astro/instagram-mark.CGzf1DDl_Z2jaSmr.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 120,
+        "h": 120,
+        "classes": "social-links__icon brand-mark--invert",
+        "parentClasses": "social-links__icon-box"
+      },
+      {
+        "src": "/_astro/facebook-mark.CP055oJA_29c0vt.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 67,
+        "h": 120,
+        "classes": "social-links__icon brand-mark--invert",
+        "parentClasses": "social-links__icon-box"
+      },
+      {
+        "src": "/_astro/shopee-mark.BInW6fnI_Z1cWXoA.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 106,
+        "h": 120,
+        "classes": "social-links__icon brand-mark--invert",
+        "parentClasses": "social-links__icon-box"
+      },
+      {
+        "src": "/_astro/lazada-mark.B_T8WG39_jXEF0.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 149,
+        "h": 120,
+        "classes": "social-links__icon brand-mark--invert",
+        "parentClasses": "social-links__icon-box"
+      },
+      {
+        "src": "/_astro/line-mark.D6yvw2Qb_Z28xAym.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 20,
+        "h": 19,
+        "classes": "contact-channel__icon brand-mark--invert",
+        "parentClasses": "btn btn-primary contact-channel__cta"
+      },
+      {
+        "src": "/_astro/instagram-mark.CGzf1DDl_Z2jaSmr.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 120,
+        "h": 120,
+        "classes": "social-links__icon",
+        "parentClasses": "social-links__icon-box"
+      },
+      {
+        "src": "/_astro/facebook-mark.CP055oJA_29c0vt.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 67,
+        "h": 120,
+        "classes": "social-links__icon",
+        "parentClasses": "social-links__icon-box"
+      },
+      {
+        "src": "/_astro/shopee-mark.BInW6fnI_Z1cWXoA.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 106,
+        "h": 120,
+        "classes": "social-links__icon",
+        "parentClasses": "social-links__icon-box"
+      },
+      {
+        "src": "/_astro/lazada-mark.B_T8WG39_jXEF0.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 149,
+        "h": 120,
+        "classes": "social-links__icon",
+        "parentClasses": "social-links__icon-box"
+      },
+      {
+        "src": "/_astro/studio-mark.DLYwsIqH_Z1lvihc.webp",
+        "alt": "Studio Kath",
+        "hasAlt": true,
+        "w": 498,
+        "h": 483,
+        "classes": "brand-mark--invert",
+        "parentClasses": "site-footer__logo"
+      },
+      {
+        "src": "/_astro/instagram-mark.CGzf1DDl_Z2jaSmr.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 120,
+        "h": 120,
+        "classes": "social-links__icon brand-mark--invert",
+        "parentClasses": "social-links__icon-box"
+      },
+      {
+        "src": "/_astro/facebook-mark.CP055oJA_29c0vt.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 67,
+        "h": 120,
+        "classes": "social-links__icon brand-mark--invert",
+        "parentClasses": "social-links__icon-box"
+      },
+      {
+        "src": "/_astro/shopee-mark.BInW6fnI_Z1cWXoA.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 106,
+        "h": 120,
+        "classes": "social-links__icon brand-mark--invert",
+        "parentClasses": "social-links__icon-box"
+      },
+      {
+        "src": "/_astro/lazada-mark.B_T8WG39_jXEF0.webp",
+        "alt": "",
+        "hasAlt": true,
+        "w": 149,
+        "h": 120,
+        "classes": "social-links__icon brand-mark--invert",
+        "parentClasses": "social-links__icon-box"
+      },
+      {
+        "src": "",
+        "alt": "",
+        "hasAlt": true,
+        "w": 0,
+        "h": 0,
+        "classes": "size-dialog__image",
+        "parentClasses": "size-dialog__product"
+      }
+    ],
+    "mobile_touch_targets": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "w": 138,
+        "h": 41,
+        "top": -812
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Open menu",
+        "w": 44,
+        "h": 44,
+        "top": 32
+      },
+      {
+        "tag": "A",
+        "text": "Studio Kath, home",
+        "w": 49,
+        "h": 48,
+        "top": 30
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Open cart",
+        "w": 44,
+        "h": 44,
+        "top": 32
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Close menu",
+        "w": 44,
+        "h": 44,
+        "top": 32
+      },
+      {
+        "tag": "BUTTON",
+        "text": "EN",
+        "w": 33,
+        "h": 26,
+        "top": 121
+      },
+      {
+        "tag": "BUTTON",
+        "text": "\u0e44\u0e17\u0e22",
+        "w": 37,
+        "h": 26,
+        "top": 121
+      },
+      {
+        "tag": "A",
+        "text": "Home",
+        "w": 69,
+        "h": 35,
+        "top": 196
+      },
+      {
+        "tag": "A",
+        "text": "Collection",
+        "w": 117,
+        "h": 35,
+        "top": 246
+      },
+      {
+        "tag": "A",
+        "text": "About",
+        "w": 71,
+        "h": 35,
+        "top": 297
+      },
+      {
+        "tag": "A",
+        "text": "Contact",
+        "w": 90,
+        "h": 35,
+        "top": 347
+      },
+      {
+        "tag": "A",
+        "text": "info.studiokath@gmail.com",
+        "w": 220,
+        "h": 29,
+        "top": 663
+      },
+      {
+        "tag": "A",
+        "text": "@studiokath",
+        "w": 132,
+        "h": 28,
+        "top": 700
+      },
+      {
+        "tag": "A",
+        "text": "Instagram",
+        "w": 32,
+        "h": 32,
+        "top": 748
+      },
+      {
+        "tag": "A",
+        "text": "Facebook",
+        "w": 32,
+        "h": 32,
+        "top": 748
+      },
+      {
+        "tag": "A",
+        "text": "Shopee",
+        "w": 32,
+        "h": 32,
+        "top": 748
+      },
+      {
+        "tag": "A",
+        "text": "Lazada",
+        "w": 32,
+        "h": 32,
+        "top": 748
+      },
+      {
+        "tag": "A",
+        "text": "+66 8 1563 8883",
+        "w": 197,
+        "h": 28,
+        "top": 598
+      },
+      {
+        "tag": "A",
+        "text": "info.studiokath@gmail.com",
+        "w": 273,
+        "h": 29,
+        "top": 747
+      }
+    ],
+    "viewport_meta": "width=device-width, initial-scale=1",
+    "mobile_scroll_check": {
+      "docWidth": 375,
+      "clientWidth": 375
+    },
+    "mobile_base_font": "16px",
+    "mobile_h1": {
+      "text": "Let's talk about a piece.",
+      "top": 220,
+      "bottom": 315,
+      "visible": true
+    },
+    "mobile_cta": {
+      "text": "Shopee",
+      "top": 748,
+      "bottom": 780,
+      "visible": true
+    }
+  },
+  "cart_drawer": {
+    "desktop": {
+      "triggered": true,
+      "screenshot": "Z:\\kath\\kath-ebon.vercel.app-audit\\screenshots\\cart-drawer-desktop.png"
+    },
+    "mobile": {
+      "triggered": true,
+      "screenshot": "Z:\\kath\\kath-ebon.vercel.app-audit\\screenshots\\cart-drawer-mobile.png"
+    }
+  }
+}
